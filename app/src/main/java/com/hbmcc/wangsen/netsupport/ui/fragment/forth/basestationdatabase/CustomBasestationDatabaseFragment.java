@@ -186,7 +186,7 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                             @Override
                             public void run() {
                                 progressDialog.dismiss();//导入完成后，取消进度对话框显示
-                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                                Toast.makeText(App.getContext(), "共导入"+ cellNums + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
                             }
                         });
                     }

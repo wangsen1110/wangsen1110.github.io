@@ -12,6 +12,7 @@ import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -198,7 +199,7 @@ public class MainActivity extends SupportActivity {
         mLocationClient.setLocOption(option);
     }
 
-    private class MyLocationListener implements BDLocationListener {
+    private class MyLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(final BDLocation location) {
 
