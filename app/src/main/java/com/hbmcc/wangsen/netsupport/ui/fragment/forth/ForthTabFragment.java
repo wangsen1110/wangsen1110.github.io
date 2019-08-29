@@ -27,12 +27,8 @@ public class ForthTabFragment extends BaseMainFragment {
     private Button btnFragmentForthTabBasestationDataTrack;
     private Button btnFragmentForthTabBasestationDataGrid;
 
-
-
     public static ForthTabFragment newInstance() {
-
         Bundle args = new Bundle();
-
         ForthTabFragment fragment = new ForthTabFragment();
         fragment.setArguments(args);
         return fragment;

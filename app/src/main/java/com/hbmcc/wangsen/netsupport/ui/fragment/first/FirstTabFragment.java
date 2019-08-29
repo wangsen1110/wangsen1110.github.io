@@ -184,9 +184,7 @@ public class FirstTabFragment extends BaseMainFragment {
                         .lteNeighbourCellTowers);
                 litepalLteBasestationCellList = LitePal.where("eci = ?", updateUEStatusEvent.ueStatus
                         .networkStatus
-                        .lteServingCellTower.cellId + "").find
-                        (LteBasestationCell
-                                .class);
+                        .lteServingCellTower.cellId + "").find(LteBasestationCell.class);
                 _mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

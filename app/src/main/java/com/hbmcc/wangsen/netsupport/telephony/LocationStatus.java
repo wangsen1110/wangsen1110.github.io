@@ -58,7 +58,7 @@ public class LocationStatus {
     private String getOperators(int op) {
         switch (op) {
             case BDLocation.OPERATORS_TYPE_UNKONW:
-                return "未知运营商";
+                return "中国移动";
             case BDLocation.OPERATORS_TYPE_MOBILE:
                 return "中国移动";
             case BDLocation.OPERATORS_TYPE_UNICOM:
@@ -66,7 +66,7 @@ public class LocationStatus {
             case BDLocation.OPERATORS_TYPE_TELECOMU:
                 return "中国电信";
             default:
-                return "未知运营商";
+                return "运营商识别中";
         }
     }
 

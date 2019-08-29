@@ -1,14 +1,14 @@
 package com.hbmcc.wangsen.netsupport.database;
 
-import org.litepal.crud.LitePalSupport;
-import org.litepal.annotation.Column;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.litepal.annotation.Column;
+import org.litepal.crud.LitePalSupport;
+
 public class LteBasesTrack extends LitePalSupport implements Parcelable {
 
-    @Column(defaultValue = "基站数据库未定义")
+    @Column(defaultValue = "库中无此站")
     private String name;
     @Column(defaultValue = "9999")
     private float lng;

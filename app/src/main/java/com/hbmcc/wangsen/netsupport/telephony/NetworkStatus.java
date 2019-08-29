@@ -1,8 +1,11 @@
 package com.hbmcc.wangsen.netsupport.telephony;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.CellIdentityGsm;
 import android.telephony.CellIdentityLte;
 import android.telephony.CellInfoGsm;
@@ -27,7 +30,7 @@ public class NetworkStatus {
     public static final int NETWORK_STATUS_ERROR = 9999;
 
     TelephonyManager mTelephonyManager;
-
+    static public String phonenumber;
     static public int RSRP;
     static public int RSRQ;
     static public int SINR;
@@ -45,9 +48,25 @@ public class NetworkStatus {
     public String androidVersion;
     public String hardwareModel;
 
+    //获取电话号码
     public NetworkStatus() {
+        if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+        }
+        //获取电话号码
+        phonenumber = mTelephonyManager.getLine1Number();
+
         mTelephonyManager = (TelephonyManager) App.getContext().getSystemService(Context
                 .TELEPHONY_SERVICE);
+
         if (mTelephonyManager == null) {
             Toast.makeText(App.getContext(), "获取手机网络存在问题", Toast.LENGTH_SHORT).show();
         }
@@ -56,6 +75,16 @@ public class NetworkStatus {
         time = sDateFormat.format(new java.util.Date());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return ;
+            }
             imei = mTelephonyManager.getImei();
         } else {
             imei = mTelephonyManager.getDeviceId();
@@ -83,6 +112,7 @@ public class NetworkStatus {
                     tower.cellId = cellIdentityLte.getCi();
 
                     tower.timingAdvance = ((CellInfoLte) i).getCellSignalStrength().getTimingAdvance();
+
                     if (Build.VERSION.SDK_INT >= 24) {
                         tower.lteEarFcn = cellIdentityLte.getEarfcn();
                     } else {
@@ -95,6 +125,7 @@ public class NetworkStatus {
                             e.printStackTrace();
                         }
                     }
+
 
                     tower.signalStrength = ((CellInfoLte) i).getCellSignalStrength().getDbm();
                     if (tower.signalStrength > 0) {
@@ -116,7 +147,7 @@ public class NetworkStatus {
                         }
                     }
 
-                    if (tower.sinr == Integer.MAX_VALUE) {
+                    if (tower.sinr == Float.MAX_VALUE) {
                         tower.sinr = NetworkStatus.NETWORK_STATUS_ERROR;
                     }
                     if (tower.rsrq == Integer.MAX_VALUE) {
@@ -225,6 +256,16 @@ public class NetworkStatus {
     }
 
     private void getServerCellInfoOnOlderDevices() {
+        if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getCellLocation();
         if (ratType == CellInfo.TYPE_LTE) {
             lteServingCellTower.cellId = location.getCid();

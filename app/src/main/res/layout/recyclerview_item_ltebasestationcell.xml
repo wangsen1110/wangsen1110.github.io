@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
+            android:textColor="#070404"
             android:gravity="center"
             android:hint="武汉"/>
 
@@ -24,7 +24,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-
             android:gravity="center"
             android:hint="3G实验室-HLW-1"/>
 
@@ -40,25 +39,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
             android:gravity="center"
-            android:hint="123456-1"/>
+            android:hint="123456-1"
+            android:textColor="#070404"/>
 
         <TextView
             android:id="@+id/textview_recyclerview_item_ltebasestationcell_tac"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
             android:gravity="center"
-            android:hint="12345"/>
+            android:hint="12345"
+            android:textColor="#070404"/>
 
         <TextView
             android:id="@+id/textview_recyclerview_item_ltebasestationcell_pci"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
+            android:textColor="#070404"
             android:gravity="center"
             android:hint="123"/>
 
@@ -67,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
+            android:textColor="#070404"
             android:gravity="center"
             android:hint="38400"/>
     </LinearLayout>

@@ -2,6 +2,7 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -22,7 +23,9 @@
         android:id="@+id/textView_fragment_second_tab_clicked_cell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="当前未点击小区" />
+        android:text="当前未点击小区"
+        android:onClick="true"
+        tools:ignore="OnClick" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -55,30 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="10dp" />
-
-        <CheckBox
-            android:id="@+id/checkBox_fragment_second_tab_traffic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="60dip"
-            android:checked="false"
-            android:text="路况图" />
-
-        <CheckBox
-            android:id="@+id/checkbox_fragment_second_tab_baidu_heat_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="90dip"
-            android:checked="false"
-            android:text="热力图" />
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="0dp" />
 
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_LTE_cell"
@@ -86,21 +67,36 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="21dp"
-            android:layout_marginTop="120dip"
+            android:layout_marginEnd="17dp"
+            android:layout_marginTop="52dip"
             android:checked="false"
-            android:text="4G小区" />
-
+            android:text="4G小区"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <CheckBox
+            android:id="@+id/checkbox_fragment_second_tab_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="85dip"
+            android:checked="false"
+            android:text="栅格图"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_project"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="150dip"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="120dip"
             android:checked="false"
-            android:text="规划图" />
+            android:text="规划图"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
 
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_track"
@@ -108,24 +104,49 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="180dip"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="155dip"
             android:checked="false"
-            android:text="轨迹图" />
-
+            android:text="轨迹图"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
         <CheckBox
-            android:id="@+id/checkbox_fragment_second_tab_grid"
+            android:id="@+id/checkbox_fragment_second_tab_baidu_heat_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="210dip"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="190dip"
             android:checked="false"
-            android:text="栅格图" />
+            android:text="热点区"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+       <!-- <Button
+            android:id="@+id/btn_fragment_second_tab_refresh"
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="230dip"
+            android:text="刷新"
+             />-->
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="150dp"
+            android:layout_height="12dp"
+            android:background="@drawable/colorbar"/>
+        <TextView
+            android:id="@+id/textView_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     -75     -85       -95    -105  -115  -125"
+            android:textSize="10dp"
+            android:textColor="#1C1C1C"/>
 
     </RelativeLayout>
-
 
 </LinearLayout>
 

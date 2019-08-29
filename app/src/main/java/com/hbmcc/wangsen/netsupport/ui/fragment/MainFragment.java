@@ -103,7 +103,7 @@ public class MainFragment extends SupportFragment {
                 .addItem(new BottomNavigationItem(R.drawable.ic_location_on_white_24dp,
                         "地图").setActiveColorResource(R.color.orange))
                 .addItem(new BottomNavigationItem(R.drawable.ic_find_replace_white_24dp,
-                        "待定").setActiveColorResource(R.color.orange))
+                        "指标").setActiveColorResource(R.color.orange))
                 .addItem(new BottomNavigationItem(R.drawable.ic_settings_grey_500_24dp,
                         "管理").setActiveColorResource(R.color.orange))
                 .setFirstSelectedPosition(0)

@@ -30,6 +30,17 @@ public class FileUtils {
     private static String lteBasestationDataGridTemplate = App.getContext().getString(R.string
             .lteBasestationDataGridTemplate);
 
+
+    private static String lteWirelessTemplate = App.getContext().getString(R.string
+            .lteWirelessTemplate);
+    private static String lteFailureTemplate = App.getContext().getString(R.string
+            .lteFailureTemplate);
+    private static String lteComplainTemplate = App.getContext().getString(R.string
+            .lteComplainTemplate);
+    private static String lteDetailTemplate = App.getContext().getString(R.string
+            .lteDetailTemplate);
+
+
     public static String getSDPATH() {
         return SDPath;
     }
@@ -65,7 +76,6 @@ public class FileUtils {
         return file.exists();
     }
 
-
     //将一个InputStream里面的数据写入到SD卡中
     //将input写到path这个目录中的fileName文件上
     private File write2SDFromInput(String path, String fileName, InputStream input) {
@@ -95,7 +105,6 @@ public class FileUtils {
 
     public static int initialStorage() {
         if (!FileUtils.isFileExist(FileUtils.getAppPath())) {
-
             FileUtils.createSDDirs(FileUtils.getAppPath());
         }
 
@@ -131,6 +140,19 @@ public class FileUtils {
     public static String getLteInputFileGrid() {
         return FileUtils.getAppPath() + lteBasestationDataGridTemplate;
     }
+    public static String getLteInputwrieless() {
+        return FileUtils.getAppPath() + lteWirelessTemplate;
+    }
+    public static String getLteInputFailure() {
+        return FileUtils.getAppPath() + lteFailureTemplate;
+    }
+    public static String getLteInputComplain() {
+        return FileUtils.getAppPath() + lteComplainTemplate;
+    }
+    public static String getLteInputDetail() {
+        return FileUtils.getAppPath() + lteDetailTemplate;
+    }
+
 
     public static boolean initFile(InputStream fileInputStream, String newPath$Name) {
         try {

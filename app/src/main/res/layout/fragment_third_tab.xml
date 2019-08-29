@@ -1,16 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Third Tab"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/rectangles_with_corners"
+        android:divider="@drawable/divider_line"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        tools:ignore="MissingConstraints">  <!-- 无线指标版块-->
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">   <!--标题--><!--margintop 上面距离-->
+            <TextView
+                android:id="@+id/textView_fragment_thrid_tab_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:onClick="true"
+                android:text="无线指标"
+                android:textColor="#1F1F1F"
+                android:textSize="14sp"
+                tools:ignore="OnClick"
+                android:textStyle="bold"/>
+        </RelativeLayout>
 
-    
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/linearlayout_fragment_thrid_tab_recent_wireless1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">  <!-- 无线指标版块-->
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="小区"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="接通率"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="掉线率"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="MR覆盖率"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="干扰"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_fragment_third_tab_recent_record1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>  <!-- 无线指标板块 -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/rectangles_with_corners"
+        android:divider="@drawable/divider_line"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="240dp">   <!--标题-->
+            <!--margintop 上面距离-->
+            <TextView
+                android:id="@+id/textView_fragment_thrid_tab_shebei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="设备状态"
+                android:textColor="#1F1F1F"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_fragment_thrid_tab_recent_shebei"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">  <!-- 设备状态-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="小区"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <!--<TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="是否告警"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />-->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="是否告警/告警码"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="告警发生时间"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_fragment_third_tab_recent_record2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>  <!-- 告警指标版快 -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/rectangles_with_corners"
+        android:divider="@drawable/divider_line"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="470dp">   <!--标题-->
+            <!--margintop 上面距离-->
+            <TextView
+                android:id="@+id/textView_fragment_thrid_tab_complain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="用户投诉"
+                android:textColor="#1F1F1F"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_fragment_thrid_tab_recent_complain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">  <!-- 投诉板块-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="投诉位置"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="投诉用户"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="投诉类别"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="投诉日期"
+                    android:textColor="#0A0A0A"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_fragment_third_tab_recent_complain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>  <!-- 投诉板块 -->
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

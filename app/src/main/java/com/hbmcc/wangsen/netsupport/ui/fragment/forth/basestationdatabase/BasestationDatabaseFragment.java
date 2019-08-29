@@ -130,6 +130,7 @@ public class BasestationDatabaseFragment extends BaseBackFragment {
             }
         });
     }
+
     //导入工参
     public boolean importLteDatabase() {
         startTime = System.currentTimeMillis();
@@ -161,35 +162,84 @@ public class BasestationDatabaseFragment extends BaseBackFragment {
 
                             if (i > 2) {
                                 lteBasestationCell = new LteBasestationCell();
-                                lteBasestationCell.setEci(Long.parseLong(inStringSplit[0]));
-                                lteBasestationCell.setName(inStringSplit[1]);
-                                lteBasestationCell.setCity(inStringSplit[2]);
-                                lteBasestationCell.setLng(Float.parseFloat(inStringSplit[3]));
-                                lteBasestationCell.setLat(Float.parseFloat
-                                        (inStringSplit[4]));
-                                lteBasestationCell.setAntennaHeight(Float.parseFloat(inStringSplit[5]));
-                                lteBasestationCell.setAltitude(Float.parseFloat
-                                        (inStringSplit[6]));
-                                lteBasestationCell.setIndoorOrOutdoor(Integer.parseInt
-                                        (inStringSplit[7]));
-                                lteBasestationCell.setCoverageType(Integer.parseInt
-                                        (inStringSplit[8]));
-                                lteBasestationCell.setCoverageScene(Integer.parseInt
-                                        (inStringSplit[9]));
-                                lteBasestationCell.setEnbCellAzimuth(Float.parseFloat
-                                        (inStringSplit[10]));
-                                lteBasestationCell.setMechanicalDipAngle(Float.parseFloat
-                                        (inStringSplit[11]));
-                                lteBasestationCell.setElectronicDipAngle(Float.parseFloat
-                                        (inStringSplit[12]));
-                                lteBasestationCell.setCounty(inStringSplit[13]);
-                                lteBasestationCell.setManufactoryName(inStringSplit[14]);
-                                lteBasestationCell.setTac(Integer.parseInt
-                                        (inStringSplit[15]));
-                                lteBasestationCell.setPci(Integer.parseInt
-                                        (inStringSplit[16]));
-                                lteBasestationCell.setLteEarFcn(Integer.parseInt
-                                        (inStringSplit[17]));
+                                if (inStringSplit[0].length() > 0) {
+                                    lteBasestationCell.setEci(Long.parseLong(inStringSplit[0]));
+                                }
+                                if (inStringSplit[1].length() > 0) {
+                                    lteBasestationCell.setName(inStringSplit[1]);
+                                }
+                                if (inStringSplit[2].length() > 0) {
+
+                                    lteBasestationCell.setCity(inStringSplit[2]);
+                                }
+                                if (inStringSplit[3].length() > 0) {
+
+                                    lteBasestationCell.setLng(Float.parseFloat(inStringSplit[3]));
+                                }
+                                if (inStringSplit[4].length() > 0) {
+
+                                    lteBasestationCell.setLat(Float.parseFloat
+                                            (inStringSplit[4]));
+                                }
+                                if (inStringSplit[5].length() > 0) {
+
+                                    lteBasestationCell.setAntennaHeight(Float.parseFloat(inStringSplit[5]));
+                                }
+                                if (inStringSplit[6].length() > 0) {
+
+                                    lteBasestationCell.setAltitude(Float.parseFloat
+                                            (inStringSplit[6]));
+                                }
+                                if (inStringSplit[7].length() > 0) {
+
+                                    lteBasestationCell.setIndoorOrOutdoor(Integer.parseInt
+                                            (inStringSplit[7]));
+                                }
+                                if (inStringSplit[8].length() > 0) {
+                                    lteBasestationCell.setCoverageType(Integer.parseInt
+                                            (inStringSplit[8]));
+                                }
+                                if (inStringSplit[9].length() > 0) {
+
+                                    lteBasestationCell.setCoverageScene(Integer.parseInt
+                                            (inStringSplit[9]));
+                                }
+                                if (inStringSplit[10].length() > 0) {
+                                    lteBasestationCell.setEnbCellAzimuth(Float.parseFloat
+                                            (inStringSplit[10]));
+
+                                }
+                                if (inStringSplit[11].length() > 0) {
+
+                                    lteBasestationCell.setMechanicalDipAngle(Float.parseFloat
+                                            (inStringSplit[11]));
+                                }
+                                if (inStringSplit[12].length() > 0) {
+
+                                    lteBasestationCell.setElectronicDipAngle(Float.parseFloat
+                                            (inStringSplit[12]));
+                                }
+                                if (inStringSplit[13].length() > 0) {
+
+                                    lteBasestationCell.setCounty(inStringSplit[13]);
+                                }
+                                if (inStringSplit[14].length() > 0) {
+
+                                    lteBasestationCell.setManufactoryName(inStringSplit[14]);
+                                }
+                                if (inStringSplit[15].length() > 0) {
+                                    lteBasestationCell.setTac(Integer.parseInt
+                                            (inStringSplit[15]));
+                                }
+                                if (inStringSplit[16].length() > 0) {
+                                    lteBasestationCell.setPci(Integer.parseInt
+                                            (inStringSplit[16]));
+                                }
+                                if (inStringSplit[17].length() > 0) {
+                                    lteBasestationCell.setLteEarFcn(Integer.parseInt
+                                            (inStringSplit[17]));
+                                }
+
                                 lteBasestationCell.setEnbId((int) (lteBasestationCell.getEci() / 256));
                                 lteBasestationCell.setEnbCellId((int) (lteBasestationCell.getEci() %
                                         256));

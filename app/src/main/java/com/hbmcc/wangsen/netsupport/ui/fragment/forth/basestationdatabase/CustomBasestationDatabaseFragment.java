@@ -18,6 +18,11 @@ import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.base.BaseBackFragment;
 import com.hbmcc.wangsen.netsupport.database.LteBasesCustom;
+import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridComplainData;
+import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridDetailData;
+import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridFailureData;
+import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridWirelessData;
+import com.hbmcc.wangsen.netsupport.util.FileUtils;
 
 import org.litepal.LitePal;
 
@@ -45,6 +50,7 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
     AlertDialog.Builder alertDialog;
     private long startTime; //起始时间
     private long endTime;//结束时间
+   private Button btnThirdWrielessImport;
 
     public static CustomBasestationDatabaseFragment newInstance(String title) {
 
@@ -76,7 +82,7 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
     private void initView(View view) {
         mViewPager = view.findViewById(R.id.viewpager_fragment_basestastion_custom);
         btnFragmentBasestionDatabaseImportDataCustom = view.findViewById(R.id.btn_fragment_basestion_database_import_custom);
-
+        btnThirdWrielessImport = view.findViewById(R.id.btn_fragment_forth_tab_test);
     }
 
     /**
@@ -101,6 +107,7 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 progressDialog = ProgressDialog.show(_mActivity, "提示", "规划自定义数据导入中，请稍等...",
                                         true, false);
                                 importLteDatabase();
@@ -115,8 +122,39 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                 alertDialog.show();
             }
         });
+
+
+        btnThirdWrielessImport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog = new AlertDialog.Builder(_mActivity);
+                alertDialog.setTitle("提示")
+                        .setMessage("该操作为开发测试专用，将持续50分钟，非开发人员请勿使用，是否继续")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                progressDialog = ProgressDialog.show(_mActivity, "提示", "请稍等...",
+                                        true, false);
+                                importthirdetail();
+                                importthirdwrieless();
+                                importthirdcomplain();
+                                importthirdfailure();
+                            }
+                        });
+                alertDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+        });
     }
-    //导入工参
+
+
+
+
     public boolean importLteDatabase() {
         startTime = System.currentTimeMillis();
         if (com.hbmcc.wangsen.netsupport.util.FileUtils.isFileExist(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom())) {
@@ -147,12 +185,22 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
 
                             if (i > 2) {
                                 lteBasesCustom = new LteBasesCustom();
-                                lteBasesCustom.setName(inStringSplit[0]);
-                                lteBasesCustom.setCity(inStringSplit[1]);
-                                lteBasesCustom.setLng(Float.parseFloat(inStringSplit[2]));
-                                lteBasesCustom.setLat(Float.parseFloat
-                                        (inStringSplit[3]));
-                                lteBasesCustom.setRemark(inStringSplit[4]);
+                                if (inStringSplit[0].length() > 0 ) {
+                                    lteBasesCustom.setName(inStringSplit[0]);
+                                }
+                                if (inStringSplit[1].length() > 0 ) {
+                                    lteBasesCustom.setCity(inStringSplit[1]);
+                                }
+                                if (inStringSplit[2].length() > 0 ) {
+                                    lteBasesCustom.setLng(Float.parseFloat(inStringSplit[2]));
+                                }
+                                if (inStringSplit[3].length() > 0 ) {
+                                    lteBasesCustom.setLat(Float.parseFloat
+                                            (inStringSplit[3]));
+                                }
+                                if (inStringSplit[4].length() > 0 ) {
+                                    lteBasesCustom.setRemark(inStringSplit[4]);
+                                }
                                 lteBasesCustomList.add(lteBasesCustom);
                             }
                         }
@@ -166,7 +214,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                             });
                             return;
                         }
-                        LitePal.saveAll(lteBasesCustomList);
                         reader.close();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -179,6 +226,7 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                             }
                         });
                     } finally {
+                        LitePal.saveAll(lteBasesCustomList);
                         endTime = System.currentTimeMillis();
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
@@ -186,7 +234,7 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                             @Override
                             public void run() {
                                 progressDialog.dismiss();//导入完成后，取消进度对话框显示
-                                Toast.makeText(App.getContext(), "共导入"+ cellNums + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -199,5 +247,348 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
         }
         return true;
     }
+
+
+
+    public boolean importthirdwrieless() {
+        startTime = System.currentTimeMillis();
+        if (FileUtils.isFileExist(FileUtils.getLteInputwrieless())) {
+            newCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    File lteDatabaseFile = new File(FileUtils.getLteInputwrieless());//获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
+                    ThridWirelessData thridWirelessData;//获取工参实体类的实例
+                    List<ThridWirelessData> thridWirelessDataList = new ArrayList<>();//创建实体类列表
+                    String inString;
+                    int i = 0;
+                    try {
+                        LitePal.deleteAll(ThridWirelessData.class);//删除LteBasestationCell数据表
+                        BufferedReader reader =
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                        while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
+                            String[] inStringSplit = inString.split(",");
+
+                            i++;
+                            if (i > 1) {
+                                thridWirelessData = new ThridWirelessData();
+                                if (inStringSplit[1].length() > 0) {
+                                    thridWirelessData.setEci(Long.valueOf(inStringSplit[1]));
+                                }
+                                if (inStringSplit[2].length() > 0) {
+                                    thridWirelessData.setCellname(inStringSplit[2]);
+                                }
+                                if (inStringSplit[3].length() > 0) {
+                                    thridWirelessData.setLon(Double.parseDouble(inStringSplit[3]));
+                                }
+                                if (inStringSplit[4].length() > 0) {
+                                    thridWirelessData.setLat(Double.parseDouble(inStringSplit[4]));
+                                }
+                                if (inStringSplit[5].length() > 0) {
+                                    thridWirelessData.setConnected(Float.parseFloat(inStringSplit[5]));
+                                }
+                                if (inStringSplit[6].length() > 0) {
+                                    thridWirelessData.setRelease(Float.parseFloat(inStringSplit[6]));
+                                }
+                                if (inStringSplit[7].length() > 0) {
+                                    thridWirelessData.setMrcover(Float.parseFloat(inStringSplit[7]));
+                                }
+                                if (inStringSplit[8].length() > 0) {
+                                    thridWirelessData.setPrbdisturb(Float.parseFloat(inStringSplit[8]));
+                                }
+                                thridWirelessDataList.add(thridWirelessData);
+                            }
+                        }
+
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
+                    } finally {
+                        LitePal.saveAll(thridWirelessDataList);
+                        endTime = System.currentTimeMillis();
+                        final long usedTime = (int) ((endTime - startTime) / 1000);
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
+                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
+                                        ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
+            Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean importthirdfailure() {
+        startTime = System.currentTimeMillis();
+        if (FileUtils.isFileExist(FileUtils.getLteInputFailure())) {
+            newCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    File lteDatabaseFile = new File(FileUtils.getLteInputFailure());//获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
+                    ThridFailureData thridFailureData;//获取工参实体类的实例
+                    List<ThridFailureData> thridFailureDataList = new ArrayList<>();//创建实体类列表
+                    String inString;
+                    int i = 0;
+                    try {
+                        LitePal.deleteAll(ThridFailureData.class);//删除LteBasestationCell数据表
+                        BufferedReader reader =
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                        while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
+                            String[] inStringSplit = inString.split(",");
+
+                            i++;
+                            if (i > 1) {
+                                thridFailureData = new ThridFailureData();
+                                if (inStringSplit[0].length() > 0) {
+                                    thridFailureData.setName(inStringSplit[0]);
+                                }
+                                if (inStringSplit[1].length() > 0) {
+                                    thridFailureData.setEci(Long.parseLong(inStringSplit[1]));
+                                }
+                                if (inStringSplit[2].length() > 0) {
+                                    thridFailureData.setAlarmvalve(inStringSplit[2]);
+                                }
+                                if (inStringSplit[3].length() > 0) {
+                                    thridFailureData.setTime(inStringSplit[3]);
+                                }
+
+                                thridFailureDataList.add(thridFailureData);
+                            }
+                        }
+
+
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
+                    } finally {
+                        LitePal.saveAll(thridFailureDataList);
+                        endTime = System.currentTimeMillis();
+                        final long usedTime = (int) ((endTime - startTime) / 1000);
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
+                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
+                                        ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
+            Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+
+    }
+
+    public boolean importthirdcomplain() {
+        startTime = System.currentTimeMillis();
+        if (FileUtils.isFileExist(FileUtils.getLteInputComplain())) {
+            newCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    File lteDatabaseFile = new File(FileUtils.getLteInputComplain());//获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
+                    ThridComplainData thridComplainData;//获取工参实体类的实例
+                    List<ThridComplainData> thridComplainDataList = new ArrayList<>();//创建实体类列表
+                    String inString;
+                    int i = 0;
+                    try {
+//                        LitePal.deleteAll(ThridComplainData.class);//删除LteBasestationCell数据表
+                        BufferedReader reader =
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                        while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
+                            String[] inStringSplit = inString.split(",");
+
+                            i++;
+                            if (i > 1) {
+                                thridComplainData = new ThridComplainData();
+                                if (inStringSplit[1].length() > 0) {
+                                    thridComplainData.setAddress(inStringSplit[0]);
+                                }
+                                if (inStringSplit[1].length() > 0) {
+                                    thridComplainData.setUserid(inStringSplit[1]);
+                                }
+                                if (inStringSplit[2].length() > 0) {
+                                    thridComplainData.setCategory(inStringSplit[2]);
+                                }
+                                if (inStringSplit[3].length() > 0) {
+                                    thridComplainData.setLon(Double.parseDouble(inStringSplit[3]));
+                                }
+                                if (inStringSplit[4].length() > 0) {
+                                    thridComplainData.setLat(Double.parseDouble(inStringSplit[4]));
+                                }
+                                if (inStringSplit[5].length() > 0) {
+                                    thridComplainData.setTime(inStringSplit[5]);
+                                }
+
+                                thridComplainDataList.add(thridComplainData);
+                            }
+                        }
+
+
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
+                    } finally {
+                        LitePal.saveAll(thridComplainDataList);
+                        endTime = System.currentTimeMillis();
+                        final long usedTime = (int) ((endTime - startTime) / 1000);
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
+                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
+                                        ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
+            Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean importthirdetail() {
+        startTime = System.currentTimeMillis();
+        if (FileUtils.isFileExist(FileUtils.getLteInputDetail())) {
+            newCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    File lteDatabaseFile = new File(FileUtils.getLteInputDetail());//获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
+                    ThridDetailData thridDetailData;//获取工参实体类的实例
+                    List<ThridDetailData> thridDetailDataList = new ArrayList<>();//创建实体类列表
+                    String inString;
+                    int i = 0;
+                    try {
+//                        LitePal.deleteAll(ThridDetailData.class);
+                        BufferedReader reader =
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                        while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
+                            String[] inStringSplit = inString.split(",");
+                            i++;
+                            if (i > 1) {
+                                thridDetailData = new ThridDetailData();
+                                if (inStringSplit[0].length() > 0) {
+                                    thridDetailData.setTime(inStringSplit[0]);
+                                }
+                                if (inStringSplit[1].length() > 0) {
+                                    thridDetailData.setEci(Long.valueOf(inStringSplit[1]));
+                                }
+                                if (inStringSplit[2].length() > 0) {
+                                    thridDetailData.setName(inStringSplit[2]);
+                                }
+                                if (inStringSplit[3].length() > 0) {
+                                    thridDetailData.setConnected(Float.parseFloat(inStringSplit[3]));
+                                }
+                                if (inStringSplit[4].length() > 0) {
+                                    thridDetailData.setPaging(Float.parseFloat(inStringSplit[4]));
+                                }
+                                if (inStringSplit[5].length() > 0) {
+                                    thridDetailData.setHandover(Float.parseFloat(inStringSplit[5]));
+                                }
+                                if (inStringSplit[6].length() > 0) {
+                                    thridDetailData.setRelease(Float.parseFloat(inStringSplit[6]));
+                                }
+                                if (inStringSplit[7].length() > 0) {
+                                    thridDetailData.setCover(Float.parseFloat(inStringSplit[7]));
+                                }
+                                if (inStringSplit[8].length() > 0) {
+                                    thridDetailData.setUsercount(Integer.valueOf(inStringSplit[8]));
+                                }
+                                if (inStringSplit[9].length() > 0) {
+                                    thridDetailData.setPrbuseup(Float.parseFloat(inStringSplit[9]));
+                                }
+                                if (inStringSplit[10].length() > 0) {
+                                    thridDetailData.setPrbusedown(Float.parseFloat(inStringSplit[10]));
+                                }
+                                if (inStringSplit[11].length() > 0) {
+                                    thridDetailData.setVoconnected(Float.parseFloat(inStringSplit[11]));
+                                }
+                                if (inStringSplit[12].length() > 0) {
+                                    thridDetailData.setVoerabconnet(Float.parseFloat(inStringSplit[12]));
+                                }
+                                if (inStringSplit[13].length() > 0) {
+                                    thridDetailData.setVodelay(Float.parseFloat(inStringSplit[13]));
+                                }
+                                thridDetailDataList.add(thridDetailData);
+                            }
+                        }
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
+                    } finally {
+                        LitePal.saveAll(thridDetailDataList);
+                        endTime = System.currentTimeMillis();
+                        final long usedTime = (int) ((endTime - startTime) / 1000);
+                        final int cellNums = i;
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
+                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
+                                        ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
+            Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+
 
 }

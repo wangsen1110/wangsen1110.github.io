@@ -13,7 +13,7 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 
 public class App extends Application {
-    private static Context context;
+    public static Context context;
 
     public static Context getContext() {
         return context;

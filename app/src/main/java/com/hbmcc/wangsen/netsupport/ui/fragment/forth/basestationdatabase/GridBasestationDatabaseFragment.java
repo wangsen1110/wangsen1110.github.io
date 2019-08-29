@@ -178,7 +178,6 @@ public class GridBasestationDatabaseFragment extends BaseBackFragment {
                             return;
                         }
 
-                        LitePal.saveAll(lteBasesGridList);
                         reader.close();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -191,6 +190,7 @@ public class GridBasestationDatabaseFragment extends BaseBackFragment {
                             }
                         });
                     } finally {
+                        LitePal.saveAll(lteBasesGridList);
                         endTime = System.currentTimeMillis();
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;

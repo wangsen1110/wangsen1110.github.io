@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
+
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.hbmcc.wangsen.netsupport.event.UpdateUeStatusEvent;
@@ -75,7 +75,6 @@ public class MainActivity extends SupportActivity {
         if (findFragment(MainFragment.class) == null) {
             loadRootFragment(R.id.framelayout_mainactivity_container, MainFragment.newInstance());
         }
-
         List<String> permissionList = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
@@ -207,7 +206,6 @@ public class MainActivity extends SupportActivity {
                 newCachedThreadPool.execute(new Runnable() {
                     @Override
                     public void run() {
-
                         //收到百度定位的回调后，开始获取NetworkStatus并在EventBus中广播
                         networkStatus = new NetworkStatus();
 
@@ -237,19 +235,20 @@ public class MainActivity extends SupportActivity {
             if (NetworkStatus.ratType == com.hbmcc.wangsen.netsupport.telephony.cellinfo
                     .CellInfo.TYPE_LTE) {
                 try {
-                    NetworkStatus.SINR = (int) signalStrength.getClass()
+                    /*NetworkStatus.SINR = (int) signalStrength.getClass()
                             .getMethod
-                                    ("getLteRssnr").invoke(signalStrength);
-                    NetworkStatus.RSRP = (int) signalStrength.getClass()
+                                    ("getLteRssnr").invoke(signalStrength);*/
+                    NetworkStatus.SINR = (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
+                    NetworkStatus.RSRP = (Integer) signalStrength.getClass()
                             .getMethod
                                     ("getLteRsrp").invoke(signalStrength);
-                    NetworkStatus.RSRQ = (int) signalStrength.getClass()
+                    NetworkStatus.RSRQ = (Integer) signalStrength.getClass()
                             .getMethod
                                     ("getLteRsrq").invoke(signalStrength);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (NetworkStatus.ratType == com.hbmcc.wangsen.netsupport.telephony.cellinfo
+            } /*else if (NetworkStatus.ratType == com.hbmcc.wangsen.netsupport.telephony.cellinfo
                     .CellInfo.TYPE_GSM) {
                 try {
                     NetworkStatus.RSRP = (int) signalStrength.getClass()
@@ -273,7 +272,7 @@ public class MainActivity extends SupportActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
         }
     }
 }

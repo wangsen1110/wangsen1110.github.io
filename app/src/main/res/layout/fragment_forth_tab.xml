@@ -43,10 +43,8 @@
         android:id="@+id/btn_fragment_forth_tab_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="450sp"
         android:text="关于"
-        app:layout_constraintTop_toBottomOf="@id/btn_fragment_forth_tab_basestation_database" />
-
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

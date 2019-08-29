@@ -1,99 +1,73 @@
-# 优易-让优化更简单
+优易-让优化更简单
 
-简介：
 
-​    优易是湖北移动网优中心自主研发的移动端优化软件，提供小区名称、TAC、PCI、CGI、频点、Band、频率、RSRP、RSRQ、SINR及邻区等实时测试信息，提供百度地图、热力图、4G小区图、规划图、测试log轨迹图等图层生成功能。便于前台人员脱离笨重、耗电的电脑，携带手机即可完成现场查勘、优化等工作。
 
-1、首页：
+简介
 
-##### 1)       当前服务小区、邻区基本信息获取
+优易是Android端优化软件，提供小区名称、TAC、PCI、CGI、频点、频率、RSRP、RSRQ、SINR及邻区等等实时网络侧信息，提供基于百度GIS地图、热力图、卫星图，自定义的基站扇区、规划、测试log轨迹、大数据栅格图层智能生成功能，支持基站数据模糊查找。便于优化人员脱离笨重、耗电的电脑，持手机即可完成现场查勘、分析、优化等工作。
 
-如图所示：优易APP运行在支持4G的安卓手机上。在手机开机、插上SIM卡并且注册到4G网络之后，该APP通过调用安卓手机Telepphony API，可以获取到目前使用的的运营商、IMSI、IMEI、手机型号、安卓版本、当前手机所在的市县街道、经度、纬度、高度，占用的小区名称、TAC、PCI、CGI、频点、Band、频率、RSRP、RSRQ、SINR，最近占用的小区记录。
+优易APP结合大数据，提供更加高效、灵活的移动端分析解决方案，傻瓜式结构设计，高度化功能及字义结合，为网优人员提供优化支持的同时，软件开发也在朝着全智能、自动、”一站式”优化解决方向发展。推动传统优化向智能、自动方向升级。
 
-![../AndroidP/NetSupport/app/release/ScreenShot/主界面.jpg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image002.png)
 
- 
 
-##### 2)       当前邻区信息
 
-![../AndroidP/NetSupport/app/release/ScreenShot/邻区的副本%202.jpg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image004.png)
 
-2、地图GIS：
+首页
 
-##### 1)       4G小区、规划图、轨迹图、珊格图
+如下图所示，优易APP可以运行在支持4G的安卓手机上。在手机开机、插上SIM卡并且注册到4G网络之后，该APP通过调用安卓手机底层API，实时获取并显示当前使用的的运营商、IMSI、IMEI、手机型号、安卓版本，手机所在的市县街道、经度、纬度、高度、占用的小区名称、TAC、PCI、CGI、频点、Band、频率、RSRP、RSRQ、SINR及邻区RSRP等等信息，并使用列表3秒刷新显示最近占用的小区及网络记录。并自动统计本次测试的平均RSRP，对于判断乒乓切换、邻区漏配、持续弱覆盖非常便利。
 
-可以显示用户当前所在位置及周围4G小区，并将当前占用的主服务小区用红色的线条标记出来。测试log轨迹图层生成功能，具体业务区间设定值为：rsrp > -75dbm  深蓝色，rsrp > -85dbm  浅蓝色，rsrp > -95dbm  绿色，rsrp > -105dbm  黄色，rsrp > -115dbm  红色，rsrp > -125dbm  灰色，rsrp <= -125dbm  黑色。
 
-![../../Pictures/优易/4G小区规划图轨迹图.png](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image006.png)
 
-##### 2)       二维地图、卫星图、热力图。
+| 首页-当前小区无线侧信息 | 首页-邻区 |
+| ----------------------- | --------- |
+|                         |           |
 
-能切换普通地图、卫星地图、热力图、路况显示，支持放大缩小和旋转；
 
-![../AndroidP/NetSupport/app/release/ScreenShot/热力图、路况图.jpg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image008.png)
 
- 
+地图
 
-3、待定（此模块预留）：
+地图页面提供基于百度GIS地图、热点区、卫星图图，自定义的基站扇区图、规划图、测试log轨迹图、大数据栅格图层，支持地图缩放、比例尺、当前位置锁定跟踪，各个图层之间显示互不干扰，支持透明化图层显示。支持当前位置标记与当前占用的主服务小区用红色的连线标记显示。点击地图上的小区后，可以弹出该小区的详情。支持地图任意两点间距离测试，长按屏幕选区起点，再次长按屏幕选区终点即可完成测距，单位米。
 
- 
 
- 
 
-4、管理：
+| 地图-栅格、基站、规划、轨迹图层 | 地图-距离测试（米） |
+| ------------------------------- | ------------------- |
+|                                 |                     |
+| 地图-热点区                     | 地图-小区详细信息   |
+|                                 |                     |
 
-如图所示，此模块提供数据导入功能及关于app版本等功能管理。
+​		热点区，人流量越大的区域越红，为规划新站址，解决高负荷提供了非常直观的解决方案。
 
-![../../Pictures/优易/管理.png](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image010.png)
 
-##### 1)       基站数据库导入
 
-可以将指定格式的基站数据库，以文件的形式放到手机SD卡-优易目录中（注：当插入SD卡时，优先在SD卡生成-优易目录和目录下相关CSV格式模版，当无SD卡时，会在内置存储卡生成-优易目录和目录下相关CSV格式模版），APP可以识别优易目录下的工参文件中的内容并将基站信息导入到数据库中，完成基站数据库的导入。
+指标
 
-可以将文件导入到LitePal数据库中。
+​		指标页面使用表格样式，将列表显示以地图屏幕中心为中心点，实时显示中心点附近的小区MR覆盖、驻留比、干扰、投诉等分析指标及基站设备告警状态信息。
 
-可 在线 下载 优易各种数据模版：永久链接: https://pan.baidu.com/s/11w2SVMphQv6yf2oFfr48SA 提取码: ffcr
+| 指标-无线指标、设备状态、投诉 | 指标-小区小时粒度详细指标 |
+| ----------------------------- | ------------------------- |
+|                               |                           |
 
-![../AndroidP/NetSupport/app/release/ScreenShot/文件读取中.jpg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image012.png)
 
-##### 2)       基站数据模版“4G工参(模板)”
 
-如下图所示：
+管理
 
-![img](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image014.png)
+​		管理页面提供基站数据库、规划站、测试log轨迹、大数据栅格数据导入管理，提供app内软件自动更新提示，支持扫码下载，提供二维码扫描预览软件操作指导手册。
 
-##### 3)       基站数据存放路径：SDK卡或内置存储卡下“优易”目录下“4G工参(模板)”表。此模版文件在导入基站数据功能使用一次之后会自动生成。
+​		通过输入小区名称、TAC、ENBID等信息查询符合条件的小区（支持模糊查询），并在界面上显示符合条件的小区的地市、CGI、小区名称、EARFCN、TAC、PCI等基本信息信息。
 
-![../../Pictures/优易/Screenshot_20190506-191744.png](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image016.png)
+| 管理-各类数据库管理 | 管理-数据查询    |
+| ------------------- | ---------------- |
+|                     |                  |
+| 内存卡自动生成模板  | 软件自动更新提示 |
+|                     |                  |
 
-##### 4)       基站数据查询：
+基站数据存放路径：SDK卡或内置存储卡下“优易”目录下“4G工参(模板)”表。此模版文件在导入基站数据功能使用一次之后会自动生成。
 
-通过输入小区名称、TAC、ENBID等信息查询符合条件的小区（支持模糊查询），并在界面上显示符合条件的小区的地市、CGI、小区名称、EARFCN、TAC、PCI等基本信息信息。
+可以将指定格式的各类数据库，以CSV文件的形式放到手机SD卡-《优易》目录中（注：当插入SD卡时，优先在SD卡生成-《优易》目录和目录下相关CSV格式模版，当无SD卡时，会在内置存储卡上生成-《优易》目录和相关CSV格式模版）。
 
-![../AndroidP/NetSupport/app/release/ScreenShot/基站数据库查询.png](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image018.png)
+APP可以自动识别优易目录下的工参文件中的内容并将基站信息导入到数据库中，完成基站数据库的导入。
 
-##### 5)       关于：提供说明书及下载渠道
 
- 
 
-##### 6)       更新
-
-获取网络侧该App的最新版本
-
-如果网络侧版本比本地新，则会提示用户更新
-
-![../AndroidP/NetSupport/app/release/ScreenShot/提示更新.jpg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image020.png)
-
- 
-
-##### 7)       下载完成后弹出安装界面
-
-![../AndroidP/NetSupport/app/release/ScreenShot/下载完成后自动安装.jpg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image022.png)
-
- 
-
-5、进优易内部需求沟通群，请扫码添加时备注“优易”添加后邀请入群。（由于微信群时限7天，将群二维码更换为群主二维码）
-
- 
-
-![../../Pictures/WechatIMG11.jpeg](file:////Users/sen/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image024.png)
+在线下载优易各种数据模版：永久链接: https://pan.baidu.com/s/11w2SVMphQv6yf2oFfr48SA 提取码: ffcr

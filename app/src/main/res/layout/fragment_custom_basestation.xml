@@ -11,17 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/btn_fragment_forth_tab_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0sp"
+        android:text="开发专用"
+        android:textColor="#AAAAA8"
+        android:visibility="invisible" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_fragment_basestastion_custom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-
     <Button
         android:id="@+id/btn_fragment_basestion_database_import_custom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30sp"
         android:text="导入规划自定义数据" />
 
 </LinearLayout>

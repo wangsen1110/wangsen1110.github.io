@@ -22,6 +22,7 @@
         android:id="@+id/btn_fragment_basestion_database_import_track"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30sp"
         android:text="导入测试log轨迹数据" />
 
 </LinearLayout>

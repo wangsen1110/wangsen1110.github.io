@@ -133,7 +133,7 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
                     try {
                         LitePal.deleteAll(LteBasesTrack.class);//删除LteBasestationCell数据表
                         BufferedReader reader =
-                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "UTF-8"));//获得输入流
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
                             String[] inStringSplit = inString.split(",");
                             if (inStringSplit.length != 4) {
@@ -167,7 +167,6 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
                             });
                             return;
                         }
-                        LitePal.saveAll(lteBasesTrackList);
                         reader.close();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -180,6 +179,7 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
                             }
                         });
                     } finally {
+                        LitePal.saveAll(lteBasesTrackList);
                         endTime = System.currentTimeMillis();
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;

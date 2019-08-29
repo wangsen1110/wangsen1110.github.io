@@ -51,6 +51,8 @@ public class LteBasestationCell extends LitePalSupport implements Parcelable {
     @Column(defaultValue = "9999")
     private int enbCellId;
 
+
+
     public LteBasestationCell(long eci, String name, String city, float lng, float lat, float antennaHeight, float altitude, int indoorOrOutdoor, int coverageType, int coverageScene, float enbCellAzimuth, float mechanicalDipAngle, float electronicDipAngle, String county, String manufactoryName, int tac, int pci, int lteEarFcn) {
         this.eci = eci;
         this.name = name;

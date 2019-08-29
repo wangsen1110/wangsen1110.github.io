@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/recangle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#2E3030"/>
 
     <TextView
         android:id="@+id/textview_recyclerview_item_ltebasestationcell_earfcn"
@@ -18,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/recangle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#070404"/>
 
     <TextView
         android:id="@+id/textview_recyclerview_item_ltebasestationcell_pci"
@@ -26,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/recangle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#070404"/>
 
     <TextView
         android:id="@+id/textview_recyclerview_item_neighbourcellinfo_rsrp"
@@ -34,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/recangle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#070404"/>
 
     <TextView
         android:id="@+id/textview_recyclerview_item_neighbourcellinfo_band"
@@ -42,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/recangle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#070404"/>
 
     <TextView
         android:id="@+id/textview_recyclerview_item_neighbourcellinfo_freq"
@@ -50,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:background="@drawable/recangle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#070404"/>
 
 </LinearLayout>

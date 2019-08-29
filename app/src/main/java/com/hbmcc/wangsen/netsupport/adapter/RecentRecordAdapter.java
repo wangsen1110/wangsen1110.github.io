@@ -19,6 +19,7 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
         this.recentNetworkStatusRecordList = recentNetworkStatusRecordList;
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         NetworkStatus networkStatus = recentNetworkStatusRecordList.get(position);
@@ -58,8 +59,7 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
             textViewTAC = itemView.findViewById(R.id.textview_recyclerview_item_recent_record_tac);
             textViewPCI = itemView.findViewById(R.id.textview_recyclerview_item_recent_record_pci);
             textViewEnb = itemView.findViewById(R.id.textview_recyclerview_item_recent_record_enbid);
-            textViewEnbCellId = itemView.findViewById(R.id
-                    .textview_recyclerview_item_recent_record_enbcellid);
+            textViewEnbCellId = itemView.findViewById(R.id.textview_recyclerview_item_recent_record_enbcellid);
             textViewRSRP = itemView.findViewById(R.id.textview_recyclerview_item_recent_record_rsrp);
             textViewSINR = itemView.findViewById(R.id.textview_recyclerview_item_recent_record_sinr);
         }

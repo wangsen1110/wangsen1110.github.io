@@ -25,9 +25,7 @@ import com.loveplusplus.update.UpdateChecker;
 public class AboutFragment extends BaseBackFragment {
     private ImageView img_show;
     private Bitmap bitmap;
-
     private static final String TAG = "AboutFragment";
-
     private static final String ARG_TITLE = "arg_title";
     private String mTitle;
 
