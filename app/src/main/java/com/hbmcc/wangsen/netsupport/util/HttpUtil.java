@@ -37,7 +37,6 @@ public  class HttpUtil {
 
 
     public String postJsonRequet(String jsonlaln,String url) {
-
         // 1.拿到okhttpClient对象
         OkHttpClient okHttpClient = new OkHttpClient();
         //2.创建 RequestBody 设置提交类型MediaType+json字符串

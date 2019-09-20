@@ -19,17 +19,16 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
         this.recentNetworkStatusRecordList = recentNetworkStatusRecordList;
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        NetworkStatus networkStatus = recentNetworkStatusRecordList.get(position);
-        holder.textViewTime.setText(networkStatus.time + "");
-        holder.textViewTAC.setText(networkStatus.lteServingCellTower.tac + "");
-        holder.textViewPCI.setText(networkStatus.lteServingCellTower.pci + "");
-        holder.textViewEnb.setText(networkStatus.lteServingCellTower.enbId + "");
-        holder.textViewEnbCellId.setText(networkStatus.lteServingCellTower.enbCellId + "");
-        holder.textViewRSRP.setText(networkStatus.lteServingCellTower.signalStrength + "");
-        holder.textViewSINR.setText(networkStatus.lteServingCellTower.sinr + "");
+            NetworkStatus networkStatus = recentNetworkStatusRecordList.get(position);
+            holder.textViewTime.setText(networkStatus.time + "");
+            holder.textViewTAC.setText(networkStatus.lteServingCellTower.tac + "");
+            holder.textViewPCI.setText(networkStatus.lteServingCellTower.pci + "");
+            holder.textViewEnb.setText(networkStatus.lteServingCellTower.enbId + "");
+            holder.textViewEnbCellId.setText(networkStatus.lteServingCellTower.enbCellId + "");
+            holder.textViewRSRP.setText(networkStatus.lteServingCellTower.signalStrength + "");
+            holder.textViewSINR.setText(networkStatus.lteServingCellTower.sinr + "");
     }
 
     @Override

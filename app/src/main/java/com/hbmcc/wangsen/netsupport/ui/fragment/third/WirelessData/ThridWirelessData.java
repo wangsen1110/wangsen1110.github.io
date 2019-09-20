@@ -202,4 +202,5 @@ public class ThridWirelessData extends LitePalSupport implements Parcelable {
             return new ThridWirelessData[size];
         }
     };
+
 }

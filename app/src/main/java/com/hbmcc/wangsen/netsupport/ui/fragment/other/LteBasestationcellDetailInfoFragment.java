@@ -41,14 +41,12 @@ public class LteBasestationcellDetailInfoFragment extends BaseBackFragment {
     private String mTitle="小区详情";
 
     public static LteBasestationcellDetailInfoFragment newInstance(LteBasestationCell lteBasestationCell) {
-
         Bundle args = new Bundle();
         args.putParcelable(ARG_MSG, lteBasestationCell);
         LteBasestationcellDetailInfoFragment fragment = new LteBasestationcellDetailInfoFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Nullable
     @Override

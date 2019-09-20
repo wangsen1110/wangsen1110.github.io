@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.telephony.CellIdentityGsm;
 import android.telephony.CellIdentityLte;
 import android.telephony.CellInfoGsm;
@@ -26,15 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkStatus {
+    protected FragmentActivity _mActivity;
     private static final String TAG = "NetworkStatus";
     public static final int NETWORK_STATUS_ERROR = 9999;
-
     TelephonyManager mTelephonyManager;
-    static public String phonenumber;
-    static public int RSRP;
-    static public int RSRQ;
-    static public int SINR;
-    static public int ASULEVEL;
+    static public String phonenumber = "1234567890";
+    static public int RSRP = 0;
+    static public int RSRQ= 0;
+    static public int RSRI= 0;
+    static public int SINR= 0;
+    static public int ASULEVEL= 0;
     static public int ratType = determineNetworkType(App.getContext());
 
     public String time;
@@ -50,27 +52,11 @@ public class NetworkStatus {
 
     //获取电话号码
     public NetworkStatus() {
-        if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-        }
-        //获取电话号码
-        phonenumber = mTelephonyManager.getLine1Number();
-
         mTelephonyManager = (TelephonyManager) App.getContext().getSystemService(Context
                 .TELEPHONY_SERVICE);
-
         if (mTelephonyManager == null) {
             Toast.makeText(App.getContext(), "获取手机网络存在问题", Toast.LENGTH_SHORT).show();
         }
-
         SimpleDateFormat sDateFormat = new SimpleDateFormat("HH:mm:ss ");
         time = sDateFormat.format(new java.util.Date());
 
@@ -83,7 +69,6 @@ public class NetworkStatus {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-                return ;
             }
             imei = mTelephonyManager.getImei();
         } else {
@@ -117,15 +102,11 @@ public class NetworkStatus {
                         tower.lteEarFcn = cellIdentityLte.getEarfcn();
                     } else {
                         try {
-                            Class<?> cellIdentityLteClass = cellIdentityLte.getClass();
-                            Method methodGetEarFcn = cellIdentityLteClass.getDeclaredMethod
-                                    ("getEarfcn");
-                            tower.lteEarFcn = (int) methodGetEarFcn.invoke(cellIdentityLte);
+                           tower.lteEarFcn = (int)cellIdentityLte.getClass().getDeclaredMethod("getEarfcn").invoke(cellIdentityLte);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-
 
                     tower.signalStrength = ((CellInfoLte) i).getCellSignalStrength().getDbm();
                     if (tower.signalStrength > 0) {
@@ -193,12 +174,26 @@ public class NetworkStatus {
                         gsmNeighbourCellTowers.add(tower);
                     }
                 } else {
-                    Log.i(TAG, "未知基站");
+                    Log.i(TAG, "基站库中无此小区");
                 }
             }
         } else {
             getServerCellInfoOnOlderDevices();
         }
+
+        if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+        }
+        //获取电话号码
+        phonenumber = mTelephonyManager.getLine1Number();
     }
 
     private static int determineNetworkType(Context context) {
@@ -264,26 +259,28 @@ public class NetworkStatus {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getCellLocation();
-        if (ratType == CellInfo.TYPE_LTE) {
-            lteServingCellTower.cellId = location.getCid();
-            lteServingCellTower.rsrq = RSRQ;
-            lteServingCellTower.sinr = SINR;
-            lteServingCellTower.signalStrength = RSRP;
-            lteServingCellTower.cellType = CellInfo.STRING_TYPE_LTE;
-            lteServingCellTower.enbCellId = lteServingCellTower.cellId % 256;
-            lteServingCellTower.enbId = lteServingCellTower.cellId / 256;
-            lteServingCellTower.isRegitered = true;
-            lteServingCellTower.tac = location.getLac();
-        }else if(ratType == CellInfo.TYPE_GSM){
-            gsmServingCellTower.gsmCellId = location.getCid();
-            gsmServingCellTower.asu = ASULEVEL;
-            gsmServingCellTower.signalStrength = RSRP;
-            gsmServingCellTower.cellType = CellInfo.STRING_TYPE_GSM;
-            gsmServingCellTower.isRegitered = true;
-            gsmServingCellTower.locationAreaCode = location.getLac();
+        }try {
+            GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getCellLocation();
+            if (ratType == CellInfo.TYPE_LTE) {
+                lteServingCellTower.cellId = location.getCid();
+                lteServingCellTower.rsrq = RSRQ;
+                lteServingCellTower.sinr = SINR;
+                lteServingCellTower.signalStrength = RSRP;
+                lteServingCellTower.cellType = CellInfo.STRING_TYPE_LTE;
+                lteServingCellTower.enbCellId = lteServingCellTower.cellId % 256;
+                lteServingCellTower.enbId = lteServingCellTower.cellId / 256;
+                lteServingCellTower.isRegitered = true;
+                lteServingCellTower.tac = location.getLac();
+            } else if (ratType == CellInfo.TYPE_GSM) {
+                gsmServingCellTower.gsmCellId = location.getCid();
+                gsmServingCellTower.asu = ASULEVEL;
+                gsmServingCellTower.signalStrength = RSRP;
+                gsmServingCellTower.cellType = CellInfo.STRING_TYPE_GSM;
+                gsmServingCellTower.isRegitered = true;
+                gsmServingCellTower.locationAreaCode = location.getLac();
+            }
+        }catch(Exception e){
+            Toast.makeText(App.getContext(), "getServerCellInfoOnOlderDevices", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -169,29 +169,22 @@ public class BasestationDatabaseFragment extends BaseBackFragment {
                                     lteBasestationCell.setName(inStringSplit[1]);
                                 }
                                 if (inStringSplit[2].length() > 0) {
-
                                     lteBasestationCell.setCity(inStringSplit[2]);
                                 }
                                 if (inStringSplit[3].length() > 0) {
-
                                     lteBasestationCell.setLng(Float.parseFloat(inStringSplit[3]));
                                 }
                                 if (inStringSplit[4].length() > 0) {
-
-                                    lteBasestationCell.setLat(Float.parseFloat
-                                            (inStringSplit[4]));
+                                    lteBasestationCell.setLat(Float.parseFloat(inStringSplit[4]));
                                 }
                                 if (inStringSplit[5].length() > 0) {
-
                                     lteBasestationCell.setAntennaHeight(Float.parseFloat(inStringSplit[5]));
                                 }
                                 if (inStringSplit[6].length() > 0) {
-
                                     lteBasestationCell.setAltitude(Float.parseFloat
                                             (inStringSplit[6]));
                                 }
                                 if (inStringSplit[7].length() > 0) {
-
                                     lteBasestationCell.setIndoorOrOutdoor(Integer.parseInt
                                             (inStringSplit[7]));
                                 }
@@ -200,31 +193,25 @@ public class BasestationDatabaseFragment extends BaseBackFragment {
                                             (inStringSplit[8]));
                                 }
                                 if (inStringSplit[9].length() > 0) {
-
                                     lteBasestationCell.setCoverageScene(Integer.parseInt
                                             (inStringSplit[9]));
                                 }
                                 if (inStringSplit[10].length() > 0) {
                                     lteBasestationCell.setEnbCellAzimuth(Float.parseFloat
                                             (inStringSplit[10]));
-
                                 }
                                 if (inStringSplit[11].length() > 0) {
-
                                     lteBasestationCell.setMechanicalDipAngle(Float.parseFloat
                                             (inStringSplit[11]));
                                 }
                                 if (inStringSplit[12].length() > 0) {
-
                                     lteBasestationCell.setElectronicDipAngle(Float.parseFloat
                                             (inStringSplit[12]));
                                 }
                                 if (inStringSplit[13].length() > 0) {
-
                                     lteBasestationCell.setCounty(inStringSplit[13]);
                                 }
                                 if (inStringSplit[14].length() > 0) {
-
                                     lteBasestationCell.setManufactoryName(inStringSplit[14]);
                                 }
                                 if (inStringSplit[15].length() > 0) {

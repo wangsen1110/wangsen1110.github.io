@@ -172,15 +172,15 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                                 new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
                             String[] inStringSplit = inString.split(",");
-                            if (inStringSplit.length != 5) {
-                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                return;
-                            }
+//                            if (inStringSplit.length != 5) {
+//                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                                return;
+//                            }
                             i++;
 
                             if (i > 2) {
@@ -200,6 +200,8 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                                 }
                                 if (inStringSplit[4].length() > 0 ) {
                                     lteBasesCustom.setRemark(inStringSplit[4]);
+                                }else {
+                                    lteBasesCustom.setRemark(" ");
                                 }
                                 lteBasesCustomList.add(lteBasesCustom);
                             }
@@ -294,6 +296,8 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                                 }
                                 if (inStringSplit[8].length() > 0) {
                                     thridWirelessData.setPrbdisturb(Float.parseFloat(inStringSplit[8]));
+                                }else {
+                                    thridWirelessData.setPrbdisturb((float)-120);
                                 }
                                 thridWirelessDataList.add(thridWirelessData);
                             }
@@ -430,8 +434,8 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                             i++;
                             if (i > 1) {
                                 thridComplainData = new ThridComplainData();
-                                if (inStringSplit[1].length() > 0) {
-                                    thridComplainData.setAddress(inStringSplit[0]);
+                                if (inStringSplit[0].length() > 0) {
+                                    thridComplainData.setTime(inStringSplit[0]);
                                 }
                                 if (inStringSplit[1].length() > 0) {
                                     thridComplainData.setUserid(inStringSplit[1]);
@@ -446,13 +450,11 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                                     thridComplainData.setLat(Double.parseDouble(inStringSplit[4]));
                                 }
                                 if (inStringSplit[5].length() > 0) {
-                                    thridComplainData.setTime(inStringSplit[5]);
+                                    thridComplainData.setAddress(inStringSplit[5]);
                                 }
-
                                 thridComplainDataList.add(thridComplainData);
                             }
                         }
-
 
                         reader.close();
                     } catch (Exception e) {

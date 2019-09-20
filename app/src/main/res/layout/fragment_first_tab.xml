@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -66,7 +67,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:hint="123456789012345"
-                                android:textColor="#070404"/>
+                                android:textColor="#070404"
+                                android:textSize="13sp"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -85,7 +87,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:hint="123456789012345"
-                                android:textColor="#070404"/>
+                                android:textColor="#070404"
+                                android:textSize="13sp"/>
 
                         </LinearLayout>
 
@@ -135,6 +138,32 @@
 
                         </LinearLayout>
                     </LinearLayout>  <!-- 运营商版块3 -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">   <!-- 运营商版块2 -->
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="8dp"
+                                android:text="电话号码:"
+                                android:textColor="#0C0505"/>
+
+                            <TextView
+                                android:id="@+id/textView_fragment_first_tab_phonenumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="01234567890"
+                                android:textColor="#070404"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout> <!-- 运营商版块 -->
 
@@ -447,11 +476,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="9.0"
                                 android:textColor="#070404"/>
-
                         </LinearLayout>
-
                     </LinearLayout> <!-- 当前小区版块4 -->
-
                 </LinearLayout><!-- 当前小区版块 -->
 
                 <LinearLayout
@@ -469,11 +495,21 @@
                         android:layout_height="wrap_content">   <!--标题-->
 
                         <TextView
+                            android:id="@+id/textView_fragment_first_tab_recent_export"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 导出LOG"
+                            android:textColor="#3F51B5"
+                            android:textSize="14sp"
+                            android:onClick="true"
+                            tools:ignore="OnClick" />
+
+                        <TextView
                             android:id="@+id/textView_fragment_first_tab_recent_avg_signal_strength"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:text="最近0条记录，平均信号强度 0 dbm"
+                            android:text="记录 平均电平"
                             android:textColor="#1F1F1F"
                             android:textStyle="bold"
                             android:textSize="14sp"/>
@@ -488,16 +524,18 @@
                             android:textStyle="bold"
                             android:visibility="gone" />
 
-                        <Button
-                            android:id="@+id/btn_fragment_first_tab_convert"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
+                        <TextView
+                            android:id="@+id/textView_btn_fragment_first_tab_convert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/ic_convert" />
-                    </RelativeLayout>
+                            android:text="切换邻区 "
+                            android:textColor="#3F51B5"
+                            android:textSize="14sp"
+                            android:onClick="true"
+                            tools:ignore="OnClick" />
 
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/linearlayout_fragment_first_tab_recent_record"
@@ -523,7 +561,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
+                                android:layout_weight="2.5"
                                 android:background="@drawable/recangle"
                                 android:gravity="center"
                                 android:text="TAC"
@@ -532,7 +570,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
+                                android:layout_weight="1.5"
                                 android:background="@drawable/recangle"
                                 android:gravity="center"
                                 android:text="PCI"
@@ -541,7 +579,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="3"
+                                android:layout_weight="2.5"
                                 android:background="@drawable/recangle"
                                 android:gravity="center"
                                 android:text="eNB"
@@ -550,7 +588,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
+                                android:layout_weight="1.8"
                                 android:background="@drawable/recangle"
                                 android:gravity="center"
                                 android:text="cellid"
@@ -568,7 +606,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
+                                android:layout_weight="1.7"
                                 android:background="@drawable/recangle"
                                 android:gravity="center"
                                 android:text="SINR"

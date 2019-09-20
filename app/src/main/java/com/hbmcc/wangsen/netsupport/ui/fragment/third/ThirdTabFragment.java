@@ -51,7 +51,7 @@ public class ThirdTabFragment extends BaseMainFragment {
     String jsonlaln;
     UserInfo userInfo;
     Gson gson = new Gson();
-    DecimalFormat df = new DecimalFormat("#.00");
+    public static DecimalFormat df = new DecimalFormat("#.00");
     private boolean isGetData = false;
     public static int ID = 0;
     public static String detailname;
@@ -119,7 +119,6 @@ public class ThirdTabFragment extends BaseMainFragment {
     }
 
     public void initRecyclerView() {
-
         NetworkStatus networkStatus = new NetworkStatus();
 //        方式一
 //        String latLngstring = thirdlatLng.toString();
@@ -142,15 +141,14 @@ public class ThirdTabFragment extends BaseMainFragment {
         String url = "http://192.168.1.133:8081/query";
         String qpresult = httpUtil.postJsonRequet(jsonlaln, url);
 
-
         LocatonConverter.MyLatLng myLatLngWgs84 = LocatonConverter.bd09ToWgs84(new LocatonConverter
                 .MyLatLng(thirdlatLng.latitude, thirdlatLng.longitude));//09经纬度转为s84
 
         thridWirelessdatalistquery = LitePal.where("lon<? and " +
-                "lon>? and lat<? and lat >?", myLatLngWgs84.longitude + DISTANCE_OFFSET
+                "lon>? and lat<? and lat >?", myLatLngWgs84.longitude + 0.006
                 + "", myLatLngWgs84
-                .longitude - DISTANCE_OFFSET + "", myLatLngWgs84.latitude + DISTANCE_OFFSET + "", myLatLngWgs84
-                .latitude - DISTANCE_OFFSET + "").find(ThridWirelessData.class);
+                .longitude - 0.006 + "", myLatLngWgs84.latitude + 0.006 + "", myLatLngWgs84
+                .latitude - 0.006 + "").find(ThridWirelessData.class);
 
         if (thridWirelessdatalistquery.size() > 0) {
             for (int j = 0; j < thridWirelessdatalistquery.size(); j++) {
@@ -161,7 +159,8 @@ public class ThirdTabFragment extends BaseMainFragment {
                         Float.parseFloat(df.format(thridWirelessdata.getMrcover() * 100)),
                         Float.parseFloat(df.format(thridWirelessdata.getPrbdisturb()))));
 
-                thridFailureDatalistquery = LitePal.where("eci = ?", thridWirelessdata.getEci() + "").find(ThridFailureData.class);
+                thridFailureDatalistquery = LitePal.where("eci = ?",
+                        thridWirelessdata.getEci() + "").find(ThridFailureData.class);
                 if (thridFailureDatalistquery.size() > 0) {
                     for (int i = 0; i < thridFailureDatalistquery.size(); i++) {
                         thridFailureData = thridFailureDatalistquery.get(i);
@@ -174,16 +173,17 @@ public class ThirdTabFragment extends BaseMainFragment {
             }
         }
         thirdComplainDatalistquery = LitePal.where("lon<? and " +
-                "lon>? and lat<? and lat >?", myLatLngWgs84.longitude + 0.03
+                "lon>? and lat<? and lat >?", myLatLngWgs84.longitude + 0.006
                 + "", myLatLngWgs84
-                .longitude - 0.03 + "", myLatLngWgs84.latitude + 0.03 + "", myLatLngWgs84
-                .latitude - 0.03 + "").find(ThridComplainData.class);
+                .longitude - 0.006 + "", myLatLngWgs84.latitude + 0.006 + "", myLatLngWgs84
+                .latitude - 0.006 + "").find(ThridComplainData.class);
 
         if (thirdComplainDatalistquery.size() > 0) {
             for (int j = 0; j < thirdComplainDatalistquery.size(); j++) {
                 thirdComplainData = thirdComplainDatalistquery.get(j);
-                thirdComplainDatalist.add(new ThridComplainData(thirdComplainData.getTime(),
-                        NetworkStatus.phonenumber, thirdComplainData.getCategory(), qpresult));
+                thirdComplainDatalist.add(new ThridComplainData( thirdComplainData.getTime()+"",
+                        thirdComplainData.getUserid(), thirdComplainData.getCategory(),
+                        thirdComplainData.getAddress()));
             }
         }
 

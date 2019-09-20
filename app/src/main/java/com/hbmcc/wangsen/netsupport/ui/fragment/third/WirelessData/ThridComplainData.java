@@ -9,7 +9,7 @@ import org.litepal.crud.LitePalSupport;
 public class ThridComplainData extends LitePalSupport implements Parcelable {
 
     @Column(defaultValue = "0")
-    private String time;
+    private String address;
     @Column(defaultValue = "0")
     private String userid;
     @Column(defaultValue = "0")
@@ -19,26 +19,21 @@ public class ThridComplainData extends LitePalSupport implements Parcelable {
     @Column(defaultValue = "0")
     private double lat;
     @Column(defaultValue = "0")
-    private String address;
+    private String time;
 
     public ThridComplainData(Parcel in){
 
     }
 
-    public ThridComplainData(String time, String userid, String category, String address) {
-        this.time = time;
+    public ThridComplainData(String address, String userid, String category, String time) {
+        this.address = address;
         this.userid = userid;
         this.category = category;
-        this.address = address;
+        this.time = time;
     }
 
     public ThridComplainData() {
-        this.time = time;
-        this.userid = userid;
-        this.category = category;
-        this.lon = lon;
-        this.lat = lat;
-        this.address = address;
+
     }
 
 

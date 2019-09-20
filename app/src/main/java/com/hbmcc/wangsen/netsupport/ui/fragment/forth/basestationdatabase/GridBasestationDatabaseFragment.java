@@ -118,6 +118,7 @@ public class GridBasestationDatabaseFragment extends BaseBackFragment {
             }
         });
     }
+
     //导入工参
     public boolean importLteDatabase() {
         startTime = System.currentTimeMillis();
@@ -136,34 +137,65 @@ public class GridBasestationDatabaseFragment extends BaseBackFragment {
                                 new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
                             String[] inStringSplit = inString.split(",");
-                            if (inStringSplit.length != 15) {
-                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                return;
-                            }
+//                            if (inStringSplit.length != 15) {
+//                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                                return;
+//                            }
                             i++;
 
                             if (i > 2) {
                                 lteBasesGrid = new LteBasesGrid();
-                                lteBasesGrid.setGrid_name(inStringSplit[0]);
-                                lteBasesGrid.setGrid_id(inStringSplit[1]);
-                                lteBasesGrid.setLng(Float.parseFloat(inStringSplit[2]));
-                                lteBasesGrid.setLat(Float.parseFloat(inStringSplit[3]));
-                                lteBasesGrid.setLng1(Float.parseFloat(inStringSplit[4]));
-                                lteBasesGrid.setLat1(Float.parseFloat(inStringSplit[5]));
-                                lteBasesGrid.setLng2(Float.parseFloat(inStringSplit[6]));
-                                lteBasesGrid.setLat2(Float.parseFloat(inStringSplit[7]));
-                                lteBasesGrid.setLng3(Float.parseFloat(inStringSplit[8]));
-                                lteBasesGrid.setLat3(Float.parseFloat(inStringSplit[9]));
-                                lteBasesGrid.setLng4(Float.parseFloat(inStringSplit[10]));
-                                lteBasesGrid.setLat4(Float.parseFloat(inStringSplit[11]));
-                                lteBasesGrid.setRsrp(Float.parseFloat(inStringSplit[12]));
-                                lteBasesGrid.setGridcount(Integer.parseInt(inStringSplit[13]));
-                                lteBasesGrid.setGrid_call(inStringSplit[14]);
+                                if (inStringSplit[0].length() > 0) {
+                                    lteBasesGrid.setGrid_name(inStringSplit[0]);
+                                }
+                                if (inStringSplit[1].length() > 0) {
+                                    lteBasesGrid.setGrid_id(inStringSplit[1]);
+                                }
+                                if (inStringSplit[2].length() > 0) {
+                                    lteBasesGrid.setLng(Float.parseFloat(inStringSplit[2]));
+
+                                }
+                                if (inStringSplit[3].length() > 0) {
+                                    lteBasesGrid.setLat(Float.parseFloat(inStringSplit[3]));
+                                }
+                                if (inStringSplit[4].length() > 0) {
+                                    lteBasesGrid.setLng1(Float.parseFloat(inStringSplit[4]));
+                                }
+                                if (inStringSplit[5].length() > 0) {
+                                    lteBasesGrid.setLat1(Float.parseFloat(inStringSplit[5]));
+                                }
+                                if (inStringSplit[6].length() > 0) {
+                                    lteBasesGrid.setLng2(Float.parseFloat(inStringSplit[6]));
+                                }
+                                if (inStringSplit[7].length() > 0) {
+                                    lteBasesGrid.setLat2(Float.parseFloat(inStringSplit[7]));
+                                }
+                                if (inStringSplit[8].length() > 0) {
+                                    lteBasesGrid.setLng3(Float.parseFloat(inStringSplit[8]));
+                                }
+                                if (inStringSplit[9].length() > 0) {
+                                    lteBasesGrid.setLat3(Float.parseFloat(inStringSplit[9]));
+                                }
+                                if (inStringSplit[10].length() > 0) {
+                                    lteBasesGrid.setLng4(Float.parseFloat(inStringSplit[10]));
+                                }
+                                if (inStringSplit[11].length() > 0) {
+                                    lteBasesGrid.setLat4(Float.parseFloat(inStringSplit[11]));
+                                }
+                                if (inStringSplit[12].length() > 0) {
+                                    lteBasesGrid.setRsrp(Float.parseFloat(inStringSplit[12]));
+                                }
+                                if (inStringSplit[13].length() > 0) {
+                                    lteBasesGrid.setGridcount(Integer.parseInt(inStringSplit[13]));
+                                }
+                                if (inStringSplit[14].length() > 0 && !inStringSplit[14].isEmpty()) {
+                                    lteBasesGrid.setGrid_call(inStringSplit[14]);
+                                }
                                 lteBasesGridList.add(lteBasesGrid);
                             }
                         }

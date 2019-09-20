@@ -14,7 +14,7 @@ public class CellInfo {
     public static final String STRING_TYPE_TDSCDMA = "TDSCDMA";
 
     public String cellType;
-    public int cellId;
+    public int cellId = 0;
 
     //（必填）：GSM 和 WCDMA 网络的位置区域代码 (LAC)。CDMA 网络的网络 ID (NID)。
     public int locationAreaCode;

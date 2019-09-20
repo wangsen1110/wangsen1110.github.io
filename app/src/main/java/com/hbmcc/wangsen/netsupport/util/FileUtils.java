@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-
 public class FileUtils {
     private static final String TAG = "FileUtils";
     private static String appName = App.getContext().getApplicationInfo().loadLabel(App.getContext()
@@ -30,7 +29,6 @@ public class FileUtils {
     private static String lteBasestationDataGridTemplate = App.getContext().getString(R.string
             .lteBasestationDataGridTemplate);
 
-
     private static String lteWirelessTemplate = App.getContext().getString(R.string
             .lteWirelessTemplate);
     private static String lteFailureTemplate = App.getContext().getString(R.string
@@ -39,7 +37,6 @@ public class FileUtils {
             .lteComplainTemplate);
     private static String lteDetailTemplate = App.getContext().getString(R.string
             .lteDetailTemplate);
-
 
     public static String getSDPATH() {
         return SDPath;
@@ -78,7 +75,7 @@ public class FileUtils {
 
     //将一个InputStream里面的数据写入到SD卡中
     //将input写到path这个目录中的fileName文件上
-    private File write2SDFromInput(String path, String fileName, InputStream input) {
+    private static File write2SDFromInput(String path, String fileName, InputStream input) {
         File file = null;
         OutputStream output = null;
         try {
@@ -86,7 +83,7 @@ public class FileUtils {
             file = createSDFile(path + fileName);
             //FileInputStream是读取数据，FileOutputStream是写入数据，写入到file这个文件上去
             output = new FileOutputStream(file);
-            byte buffer[] = new byte[4 * 1024];
+            byte buffer[] = new byte[2 * 1024];
             while ((input.read(buffer)) != -1) {
                 output.write(buffer);
             }
@@ -102,6 +99,33 @@ public class FileUtils {
         }
         return file;
     }
+
+
+    //将input写到path这个目录中的fileName文件上
+    public static File writeFromOutput( String fileName, InputStream input) {
+        File file = null;
+        OutputStream output = null;
+        try {
+            file = createSDFile(fileName);
+            //FileInputStream是读取数据，FileOutputStream是写入数据，写入到file这个文件上去
+            output = new FileOutputStream(file);
+            byte buffer[] = new byte[2 * 1024];
+            while ((input.read(buffer)) != -1) {
+                output.write(buffer);
+            }
+            output.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                output.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
 
     public static int initialStorage() {
         if (!FileUtils.isFileExist(FileUtils.getAppPath())) {
@@ -157,7 +181,7 @@ public class FileUtils {
     public static boolean initFile(InputStream fileInputStream, String newPath$Name) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(newPath$Name);
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[2*1024];
             int byteRead;
             while (-1 != (byteRead = fileInputStream.read(buffer))) {
                 fileOutputStream.write(buffer, 0, byteRead);
@@ -194,15 +218,11 @@ public class FileUtils {
                 return false;
             }
 
-            /* 如果不需要打log，可以使用下面的语句
-            if (!oldFile.exists() || !oldFile.isFile() || !oldFile.canRead()) {
-                return false;
-            }
-            */
+
 
             FileInputStream fileInputStream = new FileInputStream(oldPath$Name);
             FileOutputStream fileOutputStream = new FileOutputStream(newPath$Name);
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[2*1024];
             int byteRead;
             while (-1 != (byteRead = fileInputStream.read(buffer))) {
                 fileOutputStream.write(buffer, 0, byteRead);
@@ -258,7 +278,7 @@ public class FileUtils {
                 } else {
                     FileInputStream fileInputStream = new FileInputStream(temp);
                     FileOutputStream fileOutputStream = new FileOutputStream(newPath + "/" + temp.getName());
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[2*1024];
                     int byteRead;
                     while ((byteRead = fileInputStream.read(buffer)) != -1) {
                         fileOutputStream.write(buffer, 0, byteRead);
@@ -291,5 +311,6 @@ public class FileUtils {
             return false;
         }
     }
+
 
 }

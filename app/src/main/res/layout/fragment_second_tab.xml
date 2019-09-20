@@ -123,16 +123,17 @@
             android:textStyle="bold"
             android:textSize="15sp"/>
 
-       <!-- <Button
-            android:id="@+id/btn_fragment_second_tab_refresh"
-            android:layout_width="60sp"
+        <Button
+            android:id="@+id/btn_fragment_second_tab_dot"
+            android:layout_width="55sp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="230dip"
-            android:text="刷新"
-             />-->
+            android:text="打点"
+            android:visibility="gone"
+             />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="150dp"
@@ -142,7 +143,7 @@
             android:id="@+id/textView_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="     -75     -85       -95    -105  -115  -125"
+            android:text="     -75     -85      -95   -105  -115  -125"
             android:textSize="10dp"
             android:textColor="#1C1C1C"/>
 

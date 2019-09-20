@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.loveplusplus.update"
-    android:versionCode="1"
-    android:versionName="1" >
+    android:versionCode="20190910"
+    android:versionName="20190910" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="20"
         android:targetSdkVersion="28" />
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -4,10 +4,10 @@
     <string name="baiduMapIdOffice">I63S9uWI97VK6vYvAz2gFvo6dG8uLutf</string>
 
     <string name="baiduMapIdHome">Q4ZVG0EPmnGobZYGoFNOXOYWpQ7Dtfuj</string>
-    <string name="lteBasestationDatabaseTemplate">4G工参(模板).csv</string>
-    <string name="lteBasestationDataCustomTemplate">规划自定义(模板).csv</string>
-    <string name="lteBasestationDataTrackTemplate">测试log轨迹(模板).csv</string>
-    <string name="lteBasestationDataGridTemplate">栅格数据(模板).csv</string>
+    <string name="lteBasestationDatabaseTemplate">4G工参.csv</string>
+    <string name="lteBasestationDataCustomTemplate">规划自定义.csv</string>
+    <string name="lteBasestationDataTrackTemplate">测试log.csv</string>
+    <string name="lteBasestationDataGridTemplate">栅格数据.csv</string>
     <string name="lteWirelessTemplate">LTE感知指标.csv</string>
     <string name="lteFailureTemplate">设备告警.csv</string>
     <string name="lteComplainTemplate">用户投诉.csv</string>

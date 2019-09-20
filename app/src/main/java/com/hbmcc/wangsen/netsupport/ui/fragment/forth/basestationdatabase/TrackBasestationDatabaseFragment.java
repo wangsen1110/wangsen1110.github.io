@@ -1,8 +1,12 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,12 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.base.BaseBackFragment;
 import com.hbmcc.wangsen.netsupport.database.LteBasesTrack;
+import com.hbmcc.wangsen.netsupport.util.FileUtils;
 
 import org.litepal.LitePal;
 
@@ -33,17 +39,21 @@ import java.util.concurrent.Executors;
 public class TrackBasestationDatabaseFragment extends BaseBackFragment {
     private static final String TAG = "BasestationDatabaseFrag";
     ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
-
+    private String logChooicePath = "null";
+    private String youyiDir;
     private static final String ARG_TITLE = "arg_title";
     private String mTitle;
     private TabLayout mTab;
     private Toolbar mToolbar;
     private ViewPager mViewPager;
+    private TextView trackChoose;
+    private TextView trackPath;
     private Button btnFragmentBasestionDatabaseImportDataTrack;
-    ProgressDialog progressDialog;
-    AlertDialog.Builder alertDialog;
+    private ProgressDialog progressDialog;
+    private AlertDialog.Builder alertDialog;
     private long startTime; //起始时间
     private long endTime;//结束时间
+    private File lteDatabaseFile;
 
     public static TrackBasestationDatabaseFragment newInstance(String title) {
 
@@ -77,7 +87,8 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
 //        mTab = view.findViewById(R.id.tab_fragment_basestastion_custom);
         mViewPager = view.findViewById(R.id.viewpager_fragment_basestastion_track);
         btnFragmentBasestionDatabaseImportDataTrack = view.findViewById(R.id.btn_fragment_basestion_database_import_track);
-
+        trackChoose = view.findViewById(R.id.text_fragment_basestion_track_choose);
+        trackPath = view.findViewById(R.id.text_fragment_basestion_track_path);
     }
 
     /**
@@ -93,6 +104,27 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
     }
 
     private void initDelayView() {
+        trackChoose.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                   intent.setType("*/*.csv");//设置类型，我这里是任意类型，任意后缀的可以这样写。
+                   intent.addCategory(Intent.CATEGORY_OPENABLE);
+                   startActivityForResult(intent, 1);
+
+//                   //getUrl()获取文件目录，例如返回值为/storage/sdcard1/MIUI/music/mp3_hd/单色冰淇凌_单色凌.mp3
+//                   File file = new File("/storage/emulated/0/优易");
+//                    //获取父目录
+//                   File parentFlie = new File(file.getParent());
+//                   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                   intent.setDataAndType(Uri.fromFile(parentFlie), "*/*");
+//                   intent.addCategory(Intent.CATEGORY_OPENABLE);
+//                   startActivity(intent);
+
+
+               }
+           }
+        );
 
         btnFragmentBasestionDatabaseImportDataTrack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +150,26 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
             }
         });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 1) {
+                Uri uri = data.getData();
+                youyiDir = uri.getPath().split("/")[2];
+                logChooicePath = uri.getPath().split("/")[3];
+                if (!logChooicePath.contains(".csv")) {
+                    Toast.makeText(App.getContext(), "请选择正确的测试log文件，否则无法正常导入", Toast.LENGTH_SHORT).show();
+                }else {
+                    trackPath.setText("/"+youyiDir+"/"+logChooicePath);
+                }
+            }
+        } else {
+            Toast.makeText(App.getContext(), "未正确选择文件，请重新选择文件", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     //导入工参
     public boolean importLteDatabase() {
         startTime = System.currentTimeMillis();
@@ -125,7 +177,11 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
             newCachedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFiletrack());//获得文件对象规划自定义(模板).csv
+                    if (logChooicePath == "null"){
+                        lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFiletrack());//获得文件对象规划自定义(模板).csv
+                    }else {
+                        lteDatabaseFile = new File(FileUtils.getAppPath()+logChooicePath);
+                    }
                     LteBasesTrack lteBasesTrack;//获取工参实体类的实例
                     List<LteBasesTrack> lteBasesTrackList = new ArrayList<>();//创建实体类集合
                     String inString;
@@ -136,24 +192,21 @@ public class TrackBasestationDatabaseFragment extends BaseBackFragment {
                                 new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "UTF-8"));//获得输入流
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
                             String[] inStringSplit = inString.split(",");
-                            if (inStringSplit.length != 4) {
-                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                return;
-                            }
                             i++;
-
                             if (i > 2) {
                                 lteBasesTrack = new LteBasesTrack();
-                                lteBasesTrack.setName(inStringSplit[0]);
-                                lteBasesTrack.setLng(Float.parseFloat(inStringSplit[1]));
-                                lteBasesTrack.setLat(Float.parseFloat
-                                        (inStringSplit[2]));
-                                lteBasesTrack.setRsrp(Float.parseFloat(inStringSplit[3]));
+                                if (inStringSplit[0].length() > 0) {
+                                    lteBasesTrack.setName(inStringSplit[0]);
+                                }
+                                if (inStringSplit[1].length() > 0) {
+                                    lteBasesTrack.setLng(Float.parseFloat(inStringSplit[1]));
+                                }
+                                if (inStringSplit[2].length() > 0) {
+                                    lteBasesTrack.setLat(Float.parseFloat(inStringSplit[2]));
+                                }
+                                if (inStringSplit[3].length() > 1) {
+                                    lteBasesTrack.setRsrp(Float.parseFloat(inStringSplit[3]));
+                                }
                                 lteBasesTrackList.add(lteBasesTrack);
                             }
                         }

@@ -30,7 +30,7 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
         ThridComplainData complainAdapteData = complainAdapterslist.get(position);
         holder.textViewname.setText(complainAdapteData.getAddress()+"");
         holder.textViewuser.setText(complainAdapteData.getUserid()+"");
-        holder.textViewid.setText(complainAdapteData.getCategory()+"");
+        holder.textViewtype.setText(complainAdapteData.getCategory()+"");
         holder.textViewtime.setText(complainAdapteData.getTime()+"");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -49,13 +49,13 @@ public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textViewname;
         TextView textViewuser;
-        TextView textViewid;
+        TextView textViewtype;
         TextView textViewtime;
         public ViewHolder(View itemView) {
             super(itemView);
             textViewname = itemView.findViewById(R.id.textview_recyclerview_item_complain_name);
             textViewuser = itemView.findViewById(R.id.textview_recyclerview_item_complain_user);
-            textViewid = itemView.findViewById(R.id.textview_recyclerview_item_complain_id);
+            textViewtype = itemView.findViewById(R.id.textview_recyclerview_item_complain_id);
             textViewtime = itemView.findViewById(R.id.textview_recyclerview_item_complain_time);
         }
     }

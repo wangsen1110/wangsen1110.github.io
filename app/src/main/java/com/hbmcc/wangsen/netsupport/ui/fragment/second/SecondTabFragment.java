@@ -58,7 +58,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
@@ -66,9 +65,9 @@ import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import static android.content.Context.SENSOR_SERVICE;
 
 public class SecondTabFragment extends BaseMainFragment implements SensorEventListener {
-    public static final double DISTANCE_OFFSET = 0.01;//半径1公里
+    public static final double DISTANCE_OFFSET = 0.0105;//半径1公里
     public static final float MARKER_ALPHA = 0.7f;
-    public static final double MAPDISTANCE = 1200;
+    public static final double MAPDISTANCE = 1300;
     private static final String TAG = "SecondTabFragment";
     private LatLng ll;
     LteBasestationCell lteBasestationCell;
@@ -82,6 +81,8 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
     // UI相关
     private Button btnChangeMapType;
     private Button btnLocation;
+    private Button btnDot;
+    private int dotType = 1;
     private CheckBox checkBoxBaiduHeatMap;
     private CheckBox checkboxFragmentSecondTabDisplayLTECell;//4G小区复选框
     private CheckBox checkboxFragmentSecondCustom; //规划图复选框
@@ -114,10 +115,10 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
     private PolygonOptions mPolygonOptions1;
 
     private Marker lastSelectedMarker;
-    private List<Marker> markerList = new ArrayList<>();
+    private List<Marker> markerList = new ArrayList<Marker>();
     private List<MarkerOptions> markerListcustom = new ArrayList<>();
     private List<MarkerOptions> markerListtrack = new ArrayList<>();
-    private HashSet<PolygonOptions> markerListgrid = new HashSet<>();
+    private List<PolygonOptions> markerListgrid = new ArrayList<>();
     // 主服务小区的连接线
     private Polyline mPolyline;
     private LatLng startlatlng;
@@ -174,7 +175,7 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second_tab, container,
                 false);
-        mapstatusdistance.add(new LatLng(114.45703,31.788457));
+        mapstatusdistance.add(new LatLng(114.45703, 31.788457));
         initView(view);
         return view;
     }
@@ -238,7 +239,7 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
         textViewFragmentSecondTabClickedCell = view.findViewById(R.id.textView_fragment_second_tab_clicked_cell);
         btnChangeMapType = view.findViewById(R.id.btn_fragment_second_tab_change_map_type);
         btnLocation = view.findViewById(R.id.btn_fragment_second_tab_location);
-        //checkBoxTraffic = view.findViewById(R.id.checkBox_fragment_second_tab_traffic);
+//        checkBoxTraffic = view.findViewById(R.id.checkBox_fragment_second_tab_traffic);
         //热力图绑定
         checkBoxBaiduHeatMap = view.findViewById(R.id.checkbox_fragment_second_tab_baidu_heat_map);
         //4G小区绑定
@@ -250,6 +251,8 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
         checkboxFragmentSecondTrack = view.findViewById(R.id.checkbox_fragment_second_tab_track);
         //绑定珊格
         checkboxFragmentSecondGrid = view.findViewById(R.id.checkbox_fragment_second_tab_grid);
+
+        btnDot = view.findViewById(R.id.btn_fragment_second_tab_dot);
 
         //获取传感器管理服务
         mSensorManager = (SensorManager) _mActivity.getSystemService(SENSOR_SERVICE);
@@ -283,6 +286,22 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                 }
             }
         });
+
+        btnDot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (dotType) {
+                    case 1:
+                        btnDot.setText("停止");
+                        dotType = 2;
+                    case 2:
+                        btnDot.setText("打点");
+                        dotType = 1;
+                }
+            }
+        });
+
+
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,7 +316,6 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
             }
         });
 
-
         mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {//设置监听事件
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {//地图状态改变结束后的地图状态
@@ -306,7 +324,7 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                 mapstatusdistance.add(ll);
                 if (mapstatusdistance.size() >= 2) {
                     final double mapdistance = DistanceUtil.getDistance(mapstatusdistance.get(0),
-                            mapstatusdistance.get(mapstatusdistance.size()-1));
+                            mapstatusdistance.get(mapstatusdistance.size() - 1));
                     if (mapdistance > MAPDISTANCE) {
                         bmapMarkerLoad();
                         mapstatusdistance.clear();
@@ -317,7 +335,11 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
 
             @Override
             public void onMapStatusChange(MapStatus mapStatus) {
-
+                if (dotType == 2) {
+                    MarkerOptions markerOptionsttrackresult;
+//                    markerOptionsttrackresult = lteTrackLoad(mapStatus.target);
+//                    mBaiduMap.addOverlay(markerOptionsttrackresult);
+                }
             }
 
             @Override
@@ -339,15 +361,15 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                     textViewFragmentSecondTabClickedCell.setText(lteBasestationCellList.get(marker
                             .getZIndex())
                             .getName());
-                    if (marker != null) {
-                        if (marker.getIcon() == markerLteFDD900OutsideSelected) {
-                            marker.setIcon(markerLteFDD900Outside);
-                        } else if (marker.getIcon() == markerLteFDD1800OutsideSelected) {
-                            marker.setIcon(markerLteFDD1800Outside);
-                        } else if (marker.getIcon() == markerLteTDDOutsideSelected) {
-                            marker.setIcon(markerLteTDDOutside);
-                        } else if (marker.getIcon() == markerLteTDDIndoorSelected) {
-                            marker.setIcon(markerLteTDDIndoor);
+                    if (lastSelectedMarker != null) {
+                        if (lastSelectedMarker.getIcon() == markerLteFDD900OutsideSelected) {
+                            lastSelectedMarker.setIcon(markerLteFDD900Outside);
+                        } else if (lastSelectedMarker.getIcon() == markerLteFDD1800OutsideSelected) {
+                            lastSelectedMarker.setIcon(markerLteFDD1800Outside);
+                        } else if (lastSelectedMarker.getIcon() == markerLteTDDOutsideSelected) {
+                            lastSelectedMarker.setIcon(markerLteTDDOutside);
+                        } else if (lastSelectedMarker.getIcon() == markerLteTDDIndoorSelected) {
+                            lastSelectedMarker.setIcon(markerLteTDDIndoor);
                         }
                     }
                     marker.setToTop();
@@ -360,25 +382,22 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                     } else if (marker.getIcon() == markerLteTDDIndoor) {
                         marker.setIcon(markerLteTDDIndoorSelected);
                     }
-
                 } catch (Exception e) {
-                    Toast.makeText(App.getContext(), "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(App.getContext(), " ", Toast.LENGTH_LONG).show();
                 }
-                return false;
+                lastSelectedMarker = marker;
+                return true;
             }
-
         });
-
 
         textViewFragmentSecondTabClickedCell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //lteBasestationCellList.get(marker.getZIndex()).getName();
                 ((MainFragment) getParentFragment()).startBrotherFragment(LteBasestationcellDetailInfoFragment
-                        .newInstance(lteBasestationCellList.get(marker.getZIndex())));
+                        .newInstance(lteBasestationCellList.get(lastSelectedMarker.getZIndex())));
             }
         });
-
 
         mBaiduMap.setOnMapLongClickListener(new BaiduMap.OnMapLongClickListener() {
             @Override
@@ -411,7 +430,7 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
 
                     //构建文字Option对象，用于在地图上添加文字
                     OverlayOptions textOption1 = new TextOptions()
-                            .fontSize(50) //字号
+                            .fontSize(55) //字号
                             .fontColor(0xAA000000) //文字颜色
                             .rotate(0) //旋转角度
                             .text("\t \t        距离 " + (int) distance_util + "米")
@@ -511,8 +530,7 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                 .append(",")
                 .append
                         (NumberFormat.doubleFormat(locationStatus.latitudeWgs84, 6)).append("," +
-                "高度:").append
-                (locationStatus.altitude);
+                "高度:").append((int) (locationStatus.altitude));
         textViewCurrentPositionLonLat.setText(currentPostion);
         textViewCurrentPositionDefinition.setText("详细地址" + locationStatus.addrStr);
     }
@@ -524,7 +542,7 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
 
-    private void bmapMarkerLoad(){
+    private void bmapMarkerLoad() {
         if ((int) mBaiduMap.getMapStatus().zoom >= 13) {
             if (checkboxFragmentSecondTabDisplayLTECell.isChecked()) {
                 displayMyOverlay(ll);
@@ -628,7 +646,6 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
     }
 
 
-
     //4G工参添加marker
     public void displayMyOverlay(LatLng latLngBd09) {
         LocatonConverter.MyLatLng myLatLngWgs84 = LocatonConverter.bd09ToWgs84(new LocatonConverter
@@ -675,10 +692,8 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                             .zIndex(i)
                             .draggable(false).alpha(MARKER_ALPHA).perspective(true);
                 }
-                if (!markerList.contains(markerOptions)) {
-                    marker = (Marker) (mBaiduMap.addOverlay(markerOptions));
-                    markerList.add(marker);
-                }
+                marker = (Marker) (mBaiduMap.addOverlay(markerOptions));
+                markerList.add(marker);
             }
         }
     }
@@ -717,14 +732,9 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                         .text(lteBasesCustom.getName())
                         .position(ll);
 
-                if (!markerListcustom.contains(markerOptionscustom)) {
-                    //在地图上添加该文字对象并显示
-                    mBaiduMap.addOverlay(textOption);
-                    markerListcustom.add(markerOptionscustom);
-                    mBaiduMap.addOverlay(markerOptionscustom);
-                }
+                mBaiduMap.addOverlay(textOption);
+                mBaiduMap.addOverlay(markerOptionscustom);
             }
-
         }
     }
 
@@ -739,72 +749,58 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                 .latitude - DISTANCE_OFFSET + "").find(LteBasesTrack.class);
         // add marker overlay
         if (lteBasesTrackList.size() > 0) {
-            for (int k = 0; k < lteBasesTrackList.size(); k++) {
-                lteBasesTrack = lteBasesTrackList.get(k);
-                //这里需要将数据库中查出来的每个站点均进行wgs84 to bd09的变换
+            MarkerOptions markerOptionsttrackresult;
+            for (LteBasesTrack lteBasesTrack : lteBasesTrackList) {
                 LocatonConverter.MyLatLng myLatLngBd09 = LocatonConverter.wgs84ToBd09(new
-                        LocatonConverter.MyLatLng(lteBasesTrack
-                        .getLat(), lteBasesTrack
-                        .getLng()));
-
+                        LocatonConverter.MyLatLng(lteBasesTrack.getLat(), lteBasesTrack.getLng()));
                 LatLng ll = new LatLng(myLatLngBd09.getLatitude(), myLatLngBd09.getLongitude());
-                if (lteBasesTrack.getRsrp() > -75) {
-
-                    //通过stroke属性即可设置线的颜色及粗细，new Stroke(5, 0xAA000000) 5为线宽，0xAA000000 为颜色
-                    //.stroke(new Stroke(1, 0xFF0000FF))
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack75)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-
-                } else if (lteBasesTrack.getRsrp() > -85) {
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack85)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-                } else if (lteBasesTrack.getRsrp() > -95) {
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack95)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-                } else if (lteBasesTrack.getRsrp() > -105) {
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack105)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-                } else if (lteBasesTrack.getRsrp() > -115) {
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack115)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-                } else if (lteBasesTrack.getRsrp() > -125) {
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack125)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-                } else if (lteBasesTrack.getRsrp() > -150) {
-                    markerOptionsttrack = new MarkerOptions()
-                            .position(ll)
-                            .icon(markerLettrack126)
-                            .zIndex(k)
-                            .draggable(false).alpha(MARKER_ALPHA).perspective(true);
-
-                }
-                if (!markerListtrack.contains(markerOptionsttrack)) {
-                    markerListtrack.add(markerOptionsttrack);
-                    mBaiduMap.addOverlay(markerOptionsttrack);
-                }
+                markerOptionsttrackresult = lteTrackLoad(lteBasesTrack,ll);
+                mBaiduMap.addOverlay(markerOptionsttrackresult);
             }
-
         }
     }
 
+    protected MarkerOptions lteTrackLoad(LteBasesTrack lteBasesTrack,LatLng ll) {
+        if (lteBasesTrack.getRsrp() > -75) {
+            //通过stroke属性即可设置线的颜色及粗细，new Stroke(5, 0xAA000000) 5为线宽，0xAA000000 为颜色
+            //.stroke(new Stroke(1, 0xFF0000FF))
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack75)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        } else if (lteBasesTrack.getRsrp() > -85) {
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack85)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        } else if (lteBasesTrack.getRsrp() > -95) {
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack95)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        } else if (lteBasesTrack.getRsrp() > -105) {
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack105)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        } else if (lteBasesTrack.getRsrp() > -115) {
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack115)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        } else if (lteBasesTrack.getRsrp() > -125) {
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack125)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        } else if (lteBasesTrack.getRsrp() > -150) {
+            markerOptionsttrack = new MarkerOptions()
+                    .position(ll)
+                    .icon(markerLettrack126)
+                    .draggable(false).alpha(MARKER_ALPHA).perspective(true);
+        }
+        return markerOptionsttrack;
+    }
 
     public void displayMyOverlaygrid(LatLng latLngBd09) {
 
@@ -882,12 +878,8 @@ public class SecondTabFragment extends BaseMainFragment implements SensorEventLi
                             .fillColor(0x4D363636)
                             .stroke(new Stroke(0, 0x00363636));
                 }
-                if (!markerListgrid.contains(mPolygonOptions1)) {
-                    markerListgrid.add(mPolygonOptions1);
-                    mBaiduMap.addOverlay(mPolygonOptions1);
-                }
+                mBaiduMap.addOverlay(mPolygonOptions1);
             }
-
         }
     }
 
