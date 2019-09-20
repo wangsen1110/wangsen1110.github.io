@@ -47,7 +47,7 @@ import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 public class FirstTabFragment extends BaseMainFragment {
     private static final String TAG = "FirstTabFragment";
     ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
-    RecentRecordAdapter recentRecordAdapter ;
+    RecentRecordAdapter recentRecordAdapter;
     NeighbourCellAdapter neighbourCellAdapter;
     long recentNetworkStatusCnt = 1;
     long recentSumSignalStrength = 1;
@@ -147,7 +147,7 @@ public class FirstTabFragment extends BaseMainFragment {
         recentNetworkStatusRecordList = new ArrayList<>();
         recentueStatusRecordList = new ArrayList<>();
         neighbourCellList = new ArrayList<>();
-            initRecyclerView();
+        initRecyclerView();
         recentNetworkStatusCnt = 0;
         recentAvgSignalStrength = 0;
 
@@ -245,97 +245,98 @@ public class FirstTabFragment extends BaseMainFragment {
         newCachedThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                if (updateUEStatusEvent.ueStatus.networkStatus != null && updateUEStatusEvent.ueStatus != null) {
-                recentNetworkStatusRecordList.add(0, updateUEStatusEvent.ueStatus.networkStatus);
-                recentueStatusRecordList.add(0, updateUEStatusEvent.ueStatus);
-                neighbourCellList.clear();
-                if (updateUEStatusEvent.ueStatus.networkStatus.lteNeighbourCellTowers
-                        != null) {
-                    neighbourCellList.addAll(updateUEStatusEvent.ueStatus.networkStatus
-                            .lteNeighbourCellTowers);
-                    if (updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower.cellId != 0){
-                        litepalLteBasestationCellList = LitePal.where("eci = ?", updateUEStatusEvent.ueStatus
-                                .networkStatus.lteServingCellTower.cellId + "").find(LteBasestationCell.class);
-                    }
-                    _mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (FirstTabFragment.this.isVisible()) {
-                                textViewFragmentFirstTabOperator.setText(updateUEStatusEvent.ueStatus.locationStatus
-                                        .operators + "");
-                                textViewFragmentFirstTabIMSI.setText(updateUEStatusEvent.ueStatus.networkStatus.imsi + "");
-                                textViewFragmentFirstTabIMEI.setText(updateUEStatusEvent.ueStatus.networkStatus.imei + "");
-                                textViewFragmentFirstTabUEModel.setText(updateUEStatusEvent.ueStatus.networkStatus.hardwareModel + "");
-                                textViewFragmentFirstTabAndroidVersion.setText(updateUEStatusEvent.ueStatus.networkStatus.androidVersion + "");
-                                textViewFragmentFirstTabphonenumber.setText(NetworkStatus.phonenumber + "");
-                                textViewFragmentFirstTabLongitude.setText(NumberFormat.doubleFormat(updateUEStatusEvent.ueStatus.locationStatus
-                                        .longitudeWgs84, 5) + "");
-                                textViewFragmentFirstTabLatitude.setText(NumberFormat.doubleFormat
-                                        (updateUEStatusEvent.ueStatus.locationStatus
-                                                .latitudeWgs84, 5) + "");
-                                textViewFragmentFirstTabAltitude.setText((int) (updateUEStatusEvent.ueStatus.locationStatus.altitude) + "米");
-                                textViewFragmentFirstTabCurrentLocName.setText(updateUEStatusEvent.ueStatus.locationStatus
-                                        .city + updateUEStatusEvent.ueStatus.locationStatus.district + updateUEStatusEvent
-                                        .ueStatus.locationStatus.street + updateUEStatusEvent.ueStatus.locationStatus
-                                        .streetNumber);
-                                textViewFragmentFirstTabTAC.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.tac + "");
-                                textViewFragmentFirstTabPCI.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.pci + "");
-                                textViewFragmentFirstTabCGI.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.enbId + "-" + updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.enbCellId);
-                                textViewFragmentFirstTabEarFcn.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.lteEarFcn + "");
-                                textViewFragmentFirstTabRSRP.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.signalStrength + "");
-                                textViewFragmentFirstTabRSRQ.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.rsrq + "");
-                                textViewFragmentFirstTabSINR.setText(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.sinr + "");
-                                textViewFragmentFirstTabBand.setText(LteBand.getBand
-                                        (updateUEStatusEvent.ueStatus.networkStatus
-                                                .lteServingCellTower.lteEarFcn) + "");
-                                if (LteBand.getDuplexMode(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.lteEarFcn) == LteBand.TDD) {
-                                    textViewFragmentFirstTabFrequency.setText(LteBand.getDlCenterFreq(
-                                            updateUEStatusEvent.ueStatus.networkStatus
+                if (updateUEStatusEvent.ueStatus.networkStatus != null && updateUEStatusEvent.ueStatus != null
+                        && updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower != null) {
+                    recentNetworkStatusRecordList.add(0, updateUEStatusEvent.ueStatus.networkStatus);
+                    recentueStatusRecordList.add(0, updateUEStatusEvent.ueStatus);
+                    neighbourCellList.clear();
+                    if (updateUEStatusEvent.ueStatus.networkStatus.lteNeighbourCellTowers
+                            != null) {
+                        neighbourCellList.addAll(updateUEStatusEvent.ueStatus.networkStatus
+                                .lteNeighbourCellTowers);
+                        if (updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower.cellId != 0) {
+                            litepalLteBasestationCellList = LitePal.where("eci = ?", updateUEStatusEvent.ueStatus
+                                    .networkStatus.lteServingCellTower.cellId + "").find(LteBasestationCell.class);
+                        }
+                        _mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (FirstTabFragment.this.isVisible()) {
+                                    textViewFragmentFirstTabOperator.setText(updateUEStatusEvent.ueStatus.locationStatus
+                                            .operators + "");
+                                    textViewFragmentFirstTabIMSI.setText(updateUEStatusEvent.ueStatus.networkStatus.imsi + "");
+                                    textViewFragmentFirstTabIMEI.setText(updateUEStatusEvent.ueStatus.networkStatus.imei + "");
+                                    textViewFragmentFirstTabUEModel.setText(updateUEStatusEvent.ueStatus.networkStatus.hardwareModel + "");
+                                    textViewFragmentFirstTabAndroidVersion.setText(updateUEStatusEvent.ueStatus.networkStatus.androidVersion + "");
+                                    textViewFragmentFirstTabphonenumber.setText(NetworkStatus.phonenumber + "");
+                                    textViewFragmentFirstTabLongitude.setText(NumberFormat.doubleFormat(updateUEStatusEvent.ueStatus.locationStatus
+                                            .longitudeWgs84, 5) + "");
+                                    textViewFragmentFirstTabLatitude.setText(NumberFormat.doubleFormat
+                                            (updateUEStatusEvent.ueStatus.locationStatus
+                                                    .latitudeWgs84, 5) + "");
+                                    textViewFragmentFirstTabAltitude.setText((int) (updateUEStatusEvent.ueStatus.locationStatus.altitude) + "米");
+                                    textViewFragmentFirstTabCurrentLocName.setText(updateUEStatusEvent.ueStatus.locationStatus
+                                            .city + updateUEStatusEvent.ueStatus.locationStatus.district + updateUEStatusEvent
+                                            .ueStatus.locationStatus.street + updateUEStatusEvent.ueStatus.locationStatus
+                                            .streetNumber);
+                                    textViewFragmentFirstTabTAC.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.tac + "");
+                                    textViewFragmentFirstTabPCI.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.pci + "");
+                                    textViewFragmentFirstTabCGI.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.enbId + "-" + updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.enbCellId);
+                                    textViewFragmentFirstTabEarFcn.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.lteEarFcn + "");
+                                    textViewFragmentFirstTabRSRP.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.signalStrength + "");
+                                    textViewFragmentFirstTabRSRQ.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.rsrq + "");
+                                    textViewFragmentFirstTabSINR.setText(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.sinr + "");
+                                    textViewFragmentFirstTabBand.setText(LteBand.getBand
+                                            (updateUEStatusEvent.ueStatus.networkStatus
                                                     .lteServingCellTower.lteEarFcn) + "");
-                                } else if (LteBand.getDuplexMode(updateUEStatusEvent.ueStatus.networkStatus
-                                        .lteServingCellTower.lteEarFcn) == LteBand.FDD) {
-                                    textViewFragmentFirstTabFrequency.setText(LteBand.getDlCenterFreq(
-                                            updateUEStatusEvent.ueStatus.networkStatus
-                                                    .lteServingCellTower.lteEarFcn) + "/" + LteBand
-                                            .getUlCenterFreq(
-                                                    updateUEStatusEvent.ueStatus.networkStatus
-                                                            .lteServingCellTower.lteEarFcn));
-                                }
-                                if (litepalLteBasestationCellList.isEmpty()) {
-                                    textViewFragmentFirstTabCellChsName.setText("基站数据库无此小区");
-                                } else {
-                                    textViewFragmentFirstTabCellChsName.setText(litepalLteBasestationCellList.get(0)
-                                            .getName() + "");
-                                }
-                                recentAvgSignalStrength = NumberFormat.doubleFormat((double) recentSumSignalStrength /
-                                        (double)
-                                                recentNetworkStatusCnt, 1);
-                                textViewFragmentFirstTabRecentAvgSignalStrength.setText
-                                        (recentNetworkStatusCnt + "条 平均电平" + (int) (recentAvgSignalStrength) + "dbm");
+                                    if (LteBand.getDuplexMode(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.lteEarFcn) == LteBand.TDD) {
+                                        textViewFragmentFirstTabFrequency.setText(LteBand.getDlCenterFreq(
+                                                updateUEStatusEvent.ueStatus.networkStatus
+                                                        .lteServingCellTower.lteEarFcn) + "");
+                                    } else if (LteBand.getDuplexMode(updateUEStatusEvent.ueStatus.networkStatus
+                                            .lteServingCellTower.lteEarFcn) == LteBand.FDD) {
+                                        textViewFragmentFirstTabFrequency.setText(LteBand.getDlCenterFreq(
+                                                updateUEStatusEvent.ueStatus.networkStatus
+                                                        .lteServingCellTower.lteEarFcn) + "/" + LteBand
+                                                .getUlCenterFreq(
+                                                        updateUEStatusEvent.ueStatus.networkStatus
+                                                                .lteServingCellTower.lteEarFcn));
+                                    }
+                                    if (litepalLteBasestationCellList.isEmpty()) {
+                                        textViewFragmentFirstTabCellChsName.setText("基站数据库无此小区");
+                                    } else {
+                                        textViewFragmentFirstTabCellChsName.setText(litepalLteBasestationCellList.get(0)
+                                                .getName() + "");
+                                    }
+                                    recentAvgSignalStrength = NumberFormat.doubleFormat((double) recentSumSignalStrength /
+                                            (double)
+                                                    recentNetworkStatusCnt, 1);
+                                    textViewFragmentFirstTabRecentAvgSignalStrength.setText
+                                            (recentNetworkStatusCnt + "条 平均电平" + (int) (recentAvgSignalStrength) + "dbm");
 
-                                if (recentRecordAdapter !=null && neighbourCellAdapter!=null){
-                                recentRecordAdapter.notifyDataSetChanged();
-                                neighbourCellAdapter.notifyDataSetChanged();
+                                    if (recentRecordAdapter != null && neighbourCellAdapter != null) {
+                                        recentRecordAdapter.notifyDataSetChanged();
+                                        neighbourCellAdapter.notifyDataSetChanged();
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
             }
 
         });
         try {
-            if (updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower.signalStrength != 0 ){
+            if (updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower != null) {
                 recentNetworkStatusCnt = recentNetworkStatusCnt + 1;
                 recentSumSignalStrength = recentSumSignalStrength + updateUEStatusEvent.ueStatus
                         .networkStatus

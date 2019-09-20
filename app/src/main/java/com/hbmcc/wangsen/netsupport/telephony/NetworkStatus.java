@@ -33,10 +33,10 @@ public class NetworkStatus {
     TelephonyManager mTelephonyManager;
     static public String phonenumber = "1234567890";
     static public int RSRP = 0;
-    static public int RSRQ= 0;
-    static public int RSRI= 0;
-    static public int SINR= 0;
-    static public int ASULEVEL= 0;
+    static public int RSRQ = 0;
+    static public int RSRI = 0;
+    static public int SINR = 0;
+    static public int ASULEVEL = 0;
     static public int ratType = determineNetworkType(App.getContext());
 
     public String time;
@@ -102,7 +102,7 @@ public class NetworkStatus {
                         tower.lteEarFcn = cellIdentityLte.getEarfcn();
                     } else {
                         try {
-                           tower.lteEarFcn = (int)cellIdentityLte.getClass().getDeclaredMethod("getEarfcn").invoke(cellIdentityLte);
+                            tower.lteEarFcn = (int) cellIdentityLte.getClass().getDeclaredMethod("getEarfcn").invoke(cellIdentityLte);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -259,7 +259,8 @@ public class NetworkStatus {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-        }try {
+        }
+        try {
             GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getCellLocation();
             if (ratType == CellInfo.TYPE_LTE) {
                 lteServingCellTower.cellId = location.getCid();
@@ -279,7 +280,7 @@ public class NetworkStatus {
                 gsmServingCellTower.isRegitered = true;
                 gsmServingCellTower.locationAreaCode = location.getLac();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             Toast.makeText(App.getContext(), "getServerCellInfoOnOlderDevices", Toast.LENGTH_SHORT).show();
         }
     }

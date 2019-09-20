@@ -149,24 +149,24 @@ public class MainActivity extends SupportActivity {
                     Toast.makeText(MainActivity.this, "请同意所有权限", Toast.LENGTH_LONG).show();
                     finish();
                 }
-//                startWork();
+                startWork();
                 break;
             default:
         }
     }
 
     private void startWork() {
-            // 定位初始化
-            mLocationClient = new LocationClient(getApplicationContext());
-            mLocationClient.registerLocationListener(myListener);
-            requestLocation();
-            //SD卡初始化
-            FileUtils.initialStorage();
-            mTelephonyManager = (TelephonyManager) App.getContext().getSystemService(Context
-                    .TELEPHONY_SERVICE);
+        // 定位初始化
+        mLocationClient = new LocationClient(getApplicationContext());
+        mLocationClient.registerLocationListener(myListener);
+        requestLocation();
+        //SD卡初始化
+        FileUtils.initialStorage();
+        mTelephonyManager = (TelephonyManager) App.getContext().getSystemService(Context
+                .TELEPHONY_SERVICE);
 
-            myPhoneStateListener = new MyPhoneStateListener();
-            mTelephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+        myPhoneStateListener = new MyPhoneStateListener();
+        mTelephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
     }
 
     private void requestLocation() {
@@ -175,38 +175,38 @@ public class MainActivity extends SupportActivity {
     }
 
     private void initLocation() {
-            LocationClientOption option = new LocationClientOption();
-            //设置发起定位请求的间隔，int类型，单位ms。如果设置为0，则代表单次定位，即仅定位一次，默认为0。如果设置非0，需设置1000ms以上才有效
-            option.setScanSpan(1000);
+        LocationClientOption option = new LocationClientOption();
+        //设置发起定位请求的间隔，int类型，单位ms。如果设置为0，则代表单次定位，即仅定位一次，默认为0。如果设置非0，需设置1000ms以上才有效
+        option.setScanSpan(1000);
 
-            //设置返回经纬度坐标类型，默认gcj02。gcj02：国测局坐标；/bd09ll：百度经纬度坐标；bd09：百度墨卡托坐标；海外地区定位，无需设置坐标类型，统一返回wgs84类型坐标
-            option.setCoorType("bd09ll");
+        //设置返回经纬度坐标类型，默认gcj02。gcj02：国测局坐标；/bd09ll：百度经纬度坐标；bd09：百度墨卡托坐标；海外地区定位，无需设置坐标类型，统一返回wgs84类型坐标
+        option.setCoorType("bd09ll");
 
-            //设置是否打开gps进行定位
-            option.setOpenGps(true);
+        //设置是否打开gps进行定位
+        option.setOpenGps(true);
 
-            //7.2版本新增能力，设置wifi缓存超时时间阈值，超过该阈值，首次定位将会主动扫描wifi以使得定位精准度提高，定位速度会有所下降，具体延时取决于wifi扫描时间，大约是1-3秒
-            option.setWifiCacheTimeOut(5 * 60 * 1000);
+        //7.2版本新增能力，设置wifi缓存超时时间阈值，超过该阈值，首次定位将会主动扫描wifi以使得定位精准度提高，定位速度会有所下降，具体延时取决于wifi扫描时间，大约是1-3秒
+        option.setWifiCacheTimeOut(5 * 60 * 1000);
 
-            //获取高度信息，目前只有是GPS定位结果时或者设置LocationClientOption.setIsNeedAltitude(true)时才有效，单位米
-            option.setIsNeedAltitude(true);
+        //获取高度信息，目前只有是GPS定位结果时或者设置LocationClientOption.setIsNeedAltitude(true)时才有效，单位米
+        option.setIsNeedAltitude(true);
 
-            //设置是否需要地址信息，默认为无地址
-            option.setIsNeedAddress(true);
+        //设置是否需要地址信息，默认为无地址
+        option.setIsNeedAddress(true);
 
-            //设置是否需要返回位置语义化信息，可以在BDLocation
-            option.setIsNeedLocationDescribe(true);
+        //设置是否需要返回位置语义化信息，可以在BDLocation
+        option.setIsNeedLocationDescribe(true);
 
-            //在网络定位时，是否需要设备方向 true:需要 ; false:不需要。
-            option.setNeedDeviceDirect(true);
+        //在网络定位时，是否需要设备方向 true:需要 ; false:不需要。
+        option.setNeedDeviceDirect(true);
 
-            // getLocationDescribe()中得到数据，ex:"在天安门附近"， 可以用作地址信息的补充
-            option.setIsNeedLocationDescribe(true);
+        // getLocationDescribe()中得到数据，ex:"在天安门附近"， 可以用作地址信息的补充
+        option.setIsNeedLocationDescribe(true);
 
-            //设置是否允许仿真GPS信号
-            option.setEnableSimulateGps(true);
+        //设置是否允许仿真GPS信号
+        option.setEnableSimulateGps(true);
 
-            mLocationClient.setLocOption(option);
+        mLocationClient.setLocOption(option);
 
     }
 
@@ -226,7 +226,7 @@ public class MainActivity extends SupportActivity {
 
                         }
                         //只有Event中前后两条记录的time不一致，才进行广播
-                        if (!mTime.equals(networkStatus.time) ) {
+                        if (!mTime.equals(networkStatus.time)) {
                             uploadSpeedStatus = new UploadSpeedStatus();
                             downloadSpeedStatus = new DownloadSpeedStatus();
                             locationStatus = new LocationStatus(location);
@@ -251,9 +251,9 @@ public class MainActivity extends SupportActivity {
             super.onSignalStrengthsChanged(signalStrength);
             if (NetworkStatus.ratType == com.hbmcc.wangsen.netsupport.telephony.cellinfo
                     .CellInfo.TYPE_LTE) {
-
-//                    NetworkStatus.SINR = (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
                 try {
+
+//                   NetworkStatus.SINR = (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
                     NetworkStatus.RSRI = (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
 
 //                    NetworkStatus.RSRI = (Integer) signalStrength.getClass().getMethod("getLteRssnr").invoke(signalStrength);
@@ -300,9 +300,9 @@ public class MainActivity extends SupportActivity {
 //                    }
 //                    else if (cellInfo instanceof CellInfoLte)
 //                    {
-                                CellSignalStrengthLte cellSignalStrengthLte = ((CellInfoLte) cellInfo).getCellSignalStrength();
+//                                CellSignalStrengthLte cellSignalStrengthLte = ((CellInfoLte) cellInfo).getCellSignalStrength();
 //                        dbm = cellSignalStrengthLte.getDbm();
-                                NetworkStatus.SINR = cellSignalStrengthLte.getRsrp()/(cellSignalStrengthLte.getRsrp());
+//                                NetworkStatus.SINR = cellSignalStrengthLte.getRsrp()/(cellSignalStrengthLte.getRsrp());
 //                    }
                             }
                         }
@@ -313,6 +313,8 @@ public class MainActivity extends SupportActivity {
                     e.printStackTrace();
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
+                }catch (Exception e){
+
                 }
 
             }
