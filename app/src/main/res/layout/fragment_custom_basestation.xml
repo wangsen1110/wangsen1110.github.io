@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EAEAEA"
     android:orientation="vertical">
-
-    <include layout="@layout/toolbar" />
 
     <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tab_fragment_basestastion_custom"
@@ -12,25 +13,262 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_fragment_forth_tab_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0sp"
-        android:text="开发专用"
-        android:textColor="#AAAAA8"
-        android:visibility="invisible" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_fragment_basestastion_custom"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/btn_fragment_basestion_database_import_custom"
+        android:id="@+id/btn_fragment_forth_tab_basestation_database"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30sp"
-        android:text="导入规划自定义数据" />
+        android:layout_marginTop="16dp"
+        android:background="#9E9FA8DA"
+        android:text="基站小区查询"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF">
+
+        <CheckBox
+            android:id="@+id/checkbox_fragment_forth_tab_gr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="2dip"
+            android:checked="false"
+            android:text="4G工参"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/checkbox_fragment_forth_tab_gid1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已导入/条"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="源文件路径: "
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/text_fragment_basestion_t_pah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+
+            android:gravity="left"
+            android:text="/优易/4G工参.csv"
+            android:textColor="#3F3E3E"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF">
+
+        <CheckBox
+            android:id="@+id/checkbox_fragment_forth_tab_g2r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="2dip"
+            android:checked="false"
+            android:text="规划自定义"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/checkbox_fragment_forth_tab_gid12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已导入/条"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="源文件路径: "
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/text_fragment_basestion_t_p2ah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+
+            android:gravity="left"
+            android:text="/优易/规划自定义.csv"
+            android:textColor="#3F3E3E"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF">
+
+        <CheckBox
+            android:id="@+id/checkbox_fragment_forth_tab_g2r1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="2dip"
+            android:checked="false"
+            android:text="LOG轨迹"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/checkbox_fragment_forth_tab_gid122"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已导入/条"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="源文件路径: "
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/text_fragment_basestion_track_path"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/recangle"
+            android:gravity="left"
+            android:text="/优易/测试log.csv"
+            android:textColor="#3F3E3E" />
+
+        <TextView
+            android:id="@+id/text_fragment_basestion_track_choose"
+            android:layout_width="63dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="true"
+            android:text="数据选择"
+            android:textColor="#3F51B5"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF">
+
+        <CheckBox
+            android:id="@+id/checkbox_fragment_forth_tab_g342r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="2dip"
+            android:checked="false"
+            android:text="大数据栅格"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/checkbox_fragment_forth_tab_gid212"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已导入/条"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="源文件路径: "
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/text_fragment_basestion_t_p2a1h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+
+            android:gravity="left"
+            android:text="/优易/栅格数据.csv"
+            android:textColor="#3F3E3E"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/btn_fragment_basestion_database_import_custom1"
+            android:layout_width="70sp"
+            android:layout_height="40sp"
+            android:layout_marginLeft="36sp"
+            android:layout_marginTop="25dip"
+            android:layout_marginRight="36sp"
+            android:layout_marginBottom="30sp"
+            android:background="#BBDEFB"
+            android:text="导入"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_fragment_basestion_database_import_custm1"
+            android:layout_width="70sp"
+            android:layout_height="40sp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="25dip"
+            android:layout_marginBottom="30sp"
+            android:background="#57F06292"
+            android:text="清空"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_fragment_forth_tab_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="110dp"
+            android:background="#88B2DFDB"
+            android:text="关于"
+            android:textSize="18sp"/>
+    </RelativeLayout>
 
 </LinearLayout>

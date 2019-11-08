@@ -32,7 +32,6 @@ public class LteBasestationDatabaseFragment extends SupportFragment {
     private List<LteBasestationCell> lteBasestationCellList;
     private LteBasestationDatabaseAdapter lteBasestationDatabaseAdapter;
 
-
     public static LteBasestationDatabaseFragment newInstance() {
         Bundle args = new Bundle();
         LteBasestationDatabaseFragment fragment = new LteBasestationDatabaseFragment();
@@ -68,8 +67,7 @@ public class LteBasestationDatabaseFragment extends SupportFragment {
                     lteBasestationCellList.clear();
                     lteBasestationCellList.addAll(LitePal.where("enbId = ? or tac = ? or name like ?", input, input, "%" + input + "%")
                             .order("enbId").find
-                                    (LteBasestationCell
-                                            .class));
+                                    (LteBasestationCell.class));
                     lteBasestationDatabaseAdapter.notifyDataSetChanged();
                 }
             }

@@ -61,13 +61,6 @@ public class AboutFragment extends BaseBackFragment {
     }
 
 
-    /**
-     * 这里演示:
-     * 比较复杂的Fragment页面会在第一次start时,导致动画卡顿
-     * Fragmentation提供了onEnterAnimationEnd()方法,该方法会在 入栈动画 结束时回调
-     * 所以在onCreateView进行一些简单的View初始化(比如 toolbar设置标题,返回按钮; 显示加载数据的进度条等),
-     * 然后在onEnterAnimationEnd()方法里进行 复杂的耗时的初始化 (比如FragmentPagerAdapter的初始化 加载数据等)
-     */
     @Override
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         initDelayView();
@@ -88,18 +81,14 @@ public class AboutFragment extends BaseBackFragment {
         imageviewUpdateurl.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipboardManager cm = (ClipboardManager) _mActivity.getSystemService(_mActivity
-                        .CLIPBOARD_SERVICE);
+                ClipboardManager cm = (ClipboardManager) _mActivity.getSystemService(_mActivity.CLIPBOARD_SERVICE);
                 ClipData mClipData = ClipData.newPlainText("Label",App.getContext().getString(R.string.newerVersionDownloadUrl) );
                 cm.setPrimaryClip(mClipData);
                 Toast.makeText(_mActivity,"下载链接已复制",Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
-
-        textViewFragmentAboutCurrentVersion.setText(AppUtils
-                .getVersionName(_mActivity));
-
+        textViewFragmentAboutCurrentVersion.setText(AppUtils.getVersionName(_mActivity));
         UpdateChecker.checkForDialog(_mActivity,App.getContext().getString(R.string.autoUpdateJsonUrl));
     }
 }

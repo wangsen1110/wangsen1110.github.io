@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8797AE">
+
+        <TextView
+            android:id="@+id/youyititle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:text="优易"
+            android:textColor="#FCFBFB"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_fragment_forth_tab_import"
+            android:layout_width="60sp"
+            android:layout_height="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="110sp"
+            android:background="@drawable/shape"
+            android:text="卡槽1"
+            android:visibility="gone"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_fragment_forth_tab_im"
+            android:layout_width="60sp"
+            android:layout_height="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/shape"
+            android:text="卡槽2"
+            android:visibility="gone"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</android.support.design.widget.AppBarLayout>

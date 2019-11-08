@@ -1,22 +1,17 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.third;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
-import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.adapter.ComplainAdapter;
 import com.hbmcc.wangsen.netsupport.adapter.FailureAdapter;
@@ -30,7 +25,6 @@ import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridFailureD
 import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridWirelessData;
 import com.hbmcc.wangsen.netsupport.util.HttpUtil;
 import com.hbmcc.wangsen.netsupport.util.LocatonConverter;
-import com.hbmcc.wangsen.netsupport.util.okhttp.Bean.UserInfo;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.litepal.LitePal;
@@ -42,14 +36,10 @@ import java.util.List;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 
-
-import static com.hbmcc.wangsen.netsupport.ui.fragment.second.SecondTabFragment.DISTANCE_OFFSET;
-
 public class ThirdTabFragment extends BaseMainFragment {
     private HttpUtil httpUtil = new HttpUtil();
     static String lalndata = "读取中……";
     String jsonlaln;
-    UserInfo userInfo;
     Gson gson = new Gson();
     public static DecimalFormat df = new DecimalFormat("#.00");
     private boolean isGetData = false;

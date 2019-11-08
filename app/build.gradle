@@ -14,10 +14,10 @@ android {
     defaultConfig {
         multiDexEnabled true
         applicationId "com.hbmcc.wangsen.netsupport"
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 28
-        versionCode 20190910
-        versionName "20190910"
+        versionCode 191108
+        versionName "191108"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     //百度SDK 不混淆
@@ -25,6 +25,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //自动生成指定名称的release发布版的 apk文件
+    android.applicationVariants.all { variant ->
+        def appName
+        if (project.hasProperty("applicationName")){
+            appName = applicationName
+        }else{
+            appName = parent.name
+        }
+        variant.outputs.all { output ->
+            outputFileName = "youyi.apk"
         }
     }
 }
@@ -59,9 +72,10 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs/IndoorscapeAlbumPlugin.jar')
     implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.12.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     //添加Gson依赖  依赖全部统一用implementation
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
     //Android工具类
     implementation 'com.blankj:utilcode:1.25.8'
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 }

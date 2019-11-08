@@ -20,10 +20,10 @@ public class CellInfo {
     public int locationAreaCode;
 
     //（必填）：移动电话基站的移动国家代码 (MCC)。
-    public int mobileCountryCode;
+    public String mobileCountryCode;
 
     //（必填）：移动电话基站的移动网络代码。对于 GSM \ WCDMA\LTE，这就是 MNC；CDMA 使用的是系统 ID(SID)。
-    public int mobileNetworkCode;
+    public String mobileNetworkCode;
 
     //测量到的无线信号强度（以 dBm 为单位）。
     public int signalStrength;

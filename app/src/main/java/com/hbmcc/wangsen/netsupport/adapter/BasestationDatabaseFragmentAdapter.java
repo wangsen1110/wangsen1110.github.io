@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase.GsmBasestationDatabaseFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase.LteBasestationDatabaseFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase.TdscdmaBasestationDatabaseFragment;
 
@@ -22,9 +21,8 @@ public class BasestationDatabaseFragmentAdapter extends FragmentPagerAdapter {
             return LteBasestationDatabaseFragment.newInstance();
         } else if(position == 1){
             return TdscdmaBasestationDatabaseFragment.newInstance();
-        }else{
-            return GsmBasestationDatabaseFragment.newInstance();
         }
+        return LteBasestationDatabaseFragment.newInstance();
     }
 
     @Override

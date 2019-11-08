@@ -1,8 +1,6 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -17,7 +15,6 @@ import android.widget.Toast;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.base.BaseBackFragment;
-import com.hbmcc.wangsen.netsupport.database.LteBasesCustom;
 import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridComplainData;
 import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridDetailData;
 import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridFailureData;
@@ -46,11 +43,10 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private Button btnFragmentBasestionDatabaseImportDataCustom;
-    ProgressDialog progressDialog;
     AlertDialog.Builder alertDialog;
     private long startTime; //起始时间
     private long endTime;//结束时间
-   private Button btnThirdWrielessImport;
+//   private Button btnThirdWrielessImport;
 
     public static CustomBasestationDatabaseFragment newInstance(String title) {
 
@@ -80,9 +76,8 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
     }
 
     private void initView(View view) {
-        mViewPager = view.findViewById(R.id.viewpager_fragment_basestastion_custom);
-        btnFragmentBasestionDatabaseImportDataCustom = view.findViewById(R.id.btn_fragment_basestion_database_import_custom);
-        btnThirdWrielessImport = view.findViewById(R.id.btn_fragment_forth_tab_test);
+//        mViewPager = view.findViewById(R.id.viewpager_fragment_basestastion_custom);
+//        btnThirdWrielessImport = view.findViewById(R.id.btn_fragment_forth_tab_test);
     }
 
     /**
@@ -101,155 +96,35 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
         btnFragmentBasestionDatabaseImportDataCustom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog = new AlertDialog.Builder(_mActivity);
-                alertDialog.setTitle("提示")
-                        .setMessage("该操作将清空原有规划自定义数据，是否继续")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                progressDialog = ProgressDialog.show(_mActivity, "提示", "规划自定义数据导入中，请稍等...",
-                                        true, false);
-                                importLteDatabase();
-                            }
-                        });
-                alertDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
             }
         });
 
-
-        btnThirdWrielessImport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog = new AlertDialog.Builder(_mActivity);
-                alertDialog.setTitle("提示")
-                        .setMessage("该操作为开发测试专用，将持续50分钟，非开发人员请勿使用，是否继续")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                progressDialog = ProgressDialog.show(_mActivity, "提示", "请稍等...",
-                                        true, false);
-                                importthirdetail();
-                                importthirdwrieless();
-                                importthirdcomplain();
-                                importthirdfailure();
-                            }
-                        });
-                alertDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
-            }
-        });
     }
 
 
-
-
-    public boolean importLteDatabase() {
-        startTime = System.currentTimeMillis();
-        if (com.hbmcc.wangsen.netsupport.util.FileUtils.isFileExist(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom())) {
-            newCachedThreadPool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom());//获得文件对象规划自定义(模板).csv
-                    LteBasesCustom lteBasesCustom;//获取工参实体类的实例
-                    List<LteBasesCustom> lteBasesCustomList = new ArrayList<>();//创建实体类集合
-                    String inString;
-                    int i = 0;
-                    try {
-                        LitePal.deleteAll(LteBasesCustom.class);//删除LteBasestationCell数据表
-                        BufferedReader reader =
-                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
-                        while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
-                            String[] inStringSplit = inString.split(",");
-//                            if (inStringSplit.length != 5) {
-//                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                                return;
-//                            }
-                            i++;
-
-                            if (i > 2) {
-                                lteBasesCustom = new LteBasesCustom();
-                                if (inStringSplit[0].length() > 0 ) {
-                                    lteBasesCustom.setName(inStringSplit[0]);
-                                }
-                                if (inStringSplit[1].length() > 0 ) {
-                                    lteBasesCustom.setCity(inStringSplit[1]);
-                                }
-                                if (inStringSplit[2].length() > 0 ) {
-                                    lteBasesCustom.setLng(Float.parseFloat(inStringSplit[2]));
-                                }
-                                if (inStringSplit[3].length() > 0 ) {
-                                    lteBasesCustom.setLat(Float.parseFloat
-                                            (inStringSplit[3]));
-                                }
-                                if (inStringSplit[4].length() > 0 ) {
-                                    lteBasesCustom.setRemark(inStringSplit[4]);
-                                }else {
-                                    lteBasesCustom.setRemark(" ");
-                                }
-                                lteBasesCustomList.add(lteBasesCustom);
-                            }
-                        }
-                        if (i == 2) {
-                            _mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressDialog.dismiss();//如果文件中没有数据，则取消进度框提示
-                                    Toast.makeText(App.getContext(), "文件无数据", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            return;
-                        }
-                        reader.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        final int cellNums = i;
-                        _mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG)
-                                        .show();
-                            }
-                        });
-                    } finally {
-                        LitePal.saveAll(lteBasesCustomList);
-                        endTime = System.currentTimeMillis();
-                        final long usedTime = (int) ((endTime - startTime) / 1000);
-                        final int cellNums = i;
-                        _mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
-                                Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                }
-            });
-        } else {
-            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
-            Toast.makeText(getContext(), "规划自定义文件不存在", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
+//    public void btnBaseData(){
+//        alertDialog = new AlertDialog.Builder(_mActivity);
+//        alertDialog.setTitle("提示")
+//                .setMessage("该操作将清空原有规划自定义数据，是否继续")
+//                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        progressDialog = ProgressDialog.show(_mActivity, "提示", "规划自定义数据导入中，请稍等...",
+//                                true, false);
+////                        importLteDatabase();
+//                    }
+//                });
+//        alertDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//
+//        });
+////        alertDialog.show();
+//    }
 
 
     public boolean importthirdwrieless() {
@@ -322,7 +197,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                         _mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
                                 Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
                                         ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
                             }
@@ -331,7 +205,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                 }
             });
         } else {
-            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
             Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -396,7 +269,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                         _mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
                                 Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
                                         ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
                             }
@@ -405,7 +277,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                 }
             });
         } else {
-            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
             Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -475,7 +346,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                         _mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
                                 Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
                                         ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
                             }
@@ -484,7 +354,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                 }
             });
         } else {
-            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
             Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -575,7 +444,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                         _mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                progressDialog.dismiss();//导入完成后，取消进度对话框显示
                                 Toast.makeText(App.getContext(), "共导入" + cellNums + "行数据，用时" + String.format
                                         ("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
                             }
@@ -584,7 +452,6 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
                 }
             });
         } else {
-            progressDialog.dismiss();//如果找不到文件，则取消进度框提示
             Toast.makeText(getContext(), "没有测试数据", Toast.LENGTH_LONG).show();
             return false;
         }

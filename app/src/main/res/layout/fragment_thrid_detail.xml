@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backGround">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="@drawable/rectangles_with_corners"
+            android:background="#FFFFFF"
             android:divider="@drawable/divider_line">   <!--标题-->
             <!--margintop 上面距离-->
             <TextView
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="详细指标"
-                android:textColor="#1F1F1F"
+                android:textColor="@color/textColor2"
                 android:textSize="15sp" />
         </RelativeLayout>
 
@@ -41,7 +42,8 @@
                 android:id="@+id/linearlayout_fragment_thrid_tab_recent_detail3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">  <!--无线指标版块-->
+                android:orientation="vertical"
+                android:background="#FFFFFF">  <!--无线指标版块-->
 
                 <TextView
                     android:layout_width="85sp"
@@ -50,7 +52,7 @@
                     android:background="@drawable/recangle"
                     android:gravity="center"
                     android:text="时间"
-                    android:textColor="#0A0A0A"
+                    android:textColor="@color/textColor1"
                     android:textSize="11sp"
                     android:fontFamily="Roboto-ThinItalic.ttf"/>
 
@@ -61,7 +63,7 @@
                     android:gravity="center"
                     android:text="无线接通率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"
@@ -71,7 +73,7 @@
                     android:gravity="center"
                     android:text="寻呼成功率率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
                 <TextView
                     android:layout_width="85sp"
                     android:layout_height="wrap_content"
@@ -80,7 +82,7 @@
                     android:gravity="center"
                     android:text="切换成功率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
                 <TextView
                     android:layout_width="85sp"
                     android:layout_height="wrap_content"
@@ -89,7 +91,7 @@
                     android:gravity="center"
                     android:text="无线掉线率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"
@@ -99,7 +101,7 @@
                     android:gravity="center"
                     android:text="MR覆盖率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"
@@ -109,7 +111,7 @@
                     android:gravity="center"
                     android:text="有效RRC连接"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"
@@ -129,7 +131,7 @@
                     android:gravity="center"
                     android:text="下行PRB利用率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
 
                 <TextView
@@ -140,7 +142,7 @@
                     android:gravity="center"
                     android:text="VOLTE接通率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"
@@ -150,7 +152,7 @@
                     android:gravity="center"
                     android:text="E-RAB建立成功率"
                     android:textSize="10sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"
@@ -160,14 +162,15 @@
                     android:gravity="center"
                     android:text="VoLTE下行时延"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView_fragment_third_tab_recent_record3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" /> <!--详细指标item-->
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"/> <!--详细指标item-->
         </LinearLayout>
 
     </LinearLayout>

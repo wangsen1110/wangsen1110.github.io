@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.CellIdentityGsm;
@@ -16,6 +17,7 @@ import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.PhoneUtils;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.telephony.cellinfo.CellInfo;
 import com.hbmcc.wangsen.netsupport.telephony.cellinfo.GsmCellInfo;
@@ -32,9 +34,10 @@ public class NetworkStatus {
     public static final int NETWORK_STATUS_ERROR = 9999;
     TelephonyManager mTelephonyManager;
     static public String phonenumber = "1234567890";
+    static public String netOperators = "中国移动";
     static public int RSRP = 0;
     static public int RSRQ = 0;
-    static public int RSRI = 0;
+    static public int RSSI = 0;
     static public int SINR = 0;
     static public int ASULEVEL = 0;
     static public int ratType = determineNetworkType(App.getContext());
@@ -51,6 +54,7 @@ public class NetworkStatus {
     public String hardwareModel;
 
     //获取电话号码
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public NetworkStatus() {
         mTelephonyManager = (TelephonyManager) App.getContext().getSystemService(Context
                 .TELEPHONY_SERVICE);
@@ -59,28 +63,23 @@ public class NetworkStatus {
         }
         SimpleDateFormat sDateFormat = new SimpleDateFormat("HH:mm:ss ");
         time = sDateFormat.format(new java.util.Date());
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-            }
-            imei = mTelephonyManager.getImei();
-        } else {
-            imei = mTelephonyManager.getDeviceId();
-        }
-        imsi = mTelephonyManager.getSubscriberId();
+        imei = PhoneUtils.getIMEI();
+        imsi = PhoneUtils.getIMSI();
         androidVersion = Build.VERSION.RELEASE;
         hardwareModel = Build.MODEL;
 
         // 获取基站信息
         //SDK18及之后android系统使用getAllCellInfo方法，并且对基站的类型加以区分
-
+        if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return ;
+        }
         List<android.telephony.CellInfo> infos = mTelephonyManager.getAllCellInfo();
         if (infos != null && infos.size() != 0) {
             lteNeighbourCellTowers = new ArrayList<>();
@@ -92,10 +91,9 @@ public class NetworkStatus {
                     tower.cellType = CellInfo.STRING_TYPE_LTE;
                     tower.isRegitered = i.isRegistered();
                     tower.tac = cellIdentityLte.getTac();
-                    tower.mobileCountryCode = cellIdentityLte.getMcc();
-                    tower.mobileNetworkCode = cellIdentityLte.getMnc();
+                    tower.mobileCountryCode = cellIdentityLte.getMccString();
+                    tower.mobileNetworkCode = cellIdentityLte.getMncString();
                     tower.cellId = cellIdentityLte.getCi();
-
                     tower.timingAdvance = ((CellInfoLte) i).getCellSignalStrength().getTimingAdvance();
 
                     if (Build.VERSION.SDK_INT >= 24) {
@@ -149,35 +147,36 @@ public class NetworkStatus {
                     } else {
                         lteNeighbourCellTowers.add(tower);
                     }
-                } else if (i instanceof CellInfoGsm) {
-                    GsmCellInfo tower = new GsmCellInfo();
-                    CellIdentityGsm cellIdentityGsm = ((CellInfoGsm) i).getCellIdentity();
-                    if (cellIdentityGsm == null) {
-                        continue;
-                    }
-                    tower.cellType = CellInfo.STRING_TYPE_GSM;
-                    tower.isRegitered = i.isRegistered();
-                    tower.locationAreaCode = cellIdentityGsm.getLac();
-                    tower.mobileCountryCode = cellIdentityGsm.getMcc();
-                    tower.mobileNetworkCode = cellIdentityGsm.getMnc();
-                    tower.signalStrength = ((CellInfoGsm) i).getCellSignalStrength().getDbm();
-                    tower.timingAdvance = 0;
-                    tower.gsmCellId = cellIdentityGsm.getCid();
-                    tower.psc = cellIdentityGsm.getPsc();
-                    if (Build.VERSION.SDK_INT >= 24) {
-                        tower.bsic = cellIdentityGsm.getBsic();
-                        tower.gsmArFcn = cellIdentityGsm.getArfcn();
-                    }
-                    if (i.isRegistered()) {
-                        gsmServingCellTower = tower;
-                    } else {
-                        gsmNeighbourCellTowers.add(tower);
-                    }
-                } else {
+                } else
+//                    if (i instanceof CellInfoGsm) {
+//                    GsmCellInfo tower = new GsmCellInfo();
+//                    CellIdentityGsm cellIdentityGsm = ((CellInfoGsm) i).getCellIdentity();
+//                    if (cellIdentityGsm == null) {
+//                        continue;
+//                    }
+//                    tower.cellType = CellInfo.STRING_TYPE_GSM;
+//                    tower.isRegitered = i.isRegistered();
+//                    tower.locationAreaCode = cellIdentityGsm.getLac();
+//
+//                    tower.signalStrength = ((CellInfoGsm) i).getCellSignalStrength().getDbm();
+//                    tower.timingAdvance = 0;
+//                    tower.gsmCellId = cellIdentityGsm.getCid();
+//                    if (Build.VERSION.SDK_INT >= 24) {
+//                        tower.bsic = cellIdentityGsm.getBsic();
+//                        tower.gsmArFcn = cellIdentityGsm.getArfcn();
+//                    }
+//                    if (i.isRegistered()) {
+//                        gsmServingCellTower = tower;
+//                    } else {
+//                        gsmNeighbourCellTowers.add(tower);
+//                    }
+//                }else
+                        {
                     Log.i(TAG, "基站库中无此小区");
                 }
             }
-        } else {
+        }
+        else {
             getServerCellInfoOnOlderDevices();
         }
 
@@ -194,6 +193,7 @@ public class NetworkStatus {
         }
         //获取电话号码
         phonenumber = mTelephonyManager.getLine1Number();
+        netOperators = mTelephonyManager.getNetworkOperatorName();
     }
 
     private static int determineNetworkType(Context context) {
@@ -261,7 +261,7 @@ public class NetworkStatus {
             // for ActivityCompat#requestPermissions for more details.
         }
         try {
-            GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getCellLocation();
+            GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getAllCellInfo();
             if (ratType == CellInfo.TYPE_LTE) {
                 lteServingCellTower.cellId = location.getCid();
                 lteServingCellTower.rsrq = RSRQ;
@@ -272,18 +272,17 @@ public class NetworkStatus {
                 lteServingCellTower.enbId = lteServingCellTower.cellId / 256;
                 lteServingCellTower.isRegitered = true;
                 lteServingCellTower.tac = location.getLac();
-            } else if (ratType == CellInfo.TYPE_GSM) {
-                gsmServingCellTower.gsmCellId = location.getCid();
-                gsmServingCellTower.asu = ASULEVEL;
-                gsmServingCellTower.signalStrength = RSRP;
-                gsmServingCellTower.cellType = CellInfo.STRING_TYPE_GSM;
-                gsmServingCellTower.isRegitered = true;
-                gsmServingCellTower.locationAreaCode = location.getLac();
             }
+//            else if (ratType == CellInfo.TYPE_GSM) {
+//                gsmServingCellTower.gsmCellId = location.getCid();
+//                gsmServingCellTower.asu = ASULEVEL;
+//                gsmServingCellTower.signalStrength = RSRP;
+//                gsmServingCellTower.cellType = CellInfo.STRING_TYPE_GSM;
+//                gsmServingCellTower.isRegitered = true;
+//                gsmServingCellTower.locationAreaCode = location.getLac();
+//            }
         } catch (Exception e) {
-            Toast.makeText(App.getContext(), "getServerCellInfoOnOlderDevices", Toast.LENGTH_SHORT).show();
+
         }
     }
-
-
 }

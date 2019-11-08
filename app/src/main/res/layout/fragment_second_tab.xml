@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView_fragment_second_tab_current_position_lon_lat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="经纬度:" />
-
-    <TextView
-        android:id="@+id/textView_fragment_second_tab_current_position_definition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="详细地址:" />
-
-    <TextView
-        android:id="@+id/textView_fragment_second_tab_clicked_cell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="当前未点击小区"
-        android:onClick="true"
-        tools:ignore="OnClick" />
-
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
         <com.baidu.mapapi.map.MapView
@@ -41,113 +21,161 @@
             android:clickable="true"
             android:focusable="true" />
 
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/weizhi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="#20000000"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_fragment_second_tab_current_position_lon_lat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="经纬度:"
+                android:textColor="@color/textColor2" />
+
+            <TextView
+                android:id="@+id/textView_fragment_second_tab_current_position_definition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="详细地址:"
+                android:textColor="@color/textColor2" />
+
+            <TextView
+                android:id="@+id/textView_fragment_second_tab_clicked_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="true"
+                android:text=""
+                android:textColor="@color/textColor2"
+                tools:ignore="OnClick" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_fragment_second_tab_dot"
+            android:layout_width="90sp"
+            android:layout_height="30sp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="35dp"
+            android:background="#4DC0BFBF"
+            android:radius="10dip"
+            android:text="开始打点"
+            android:textColor="#E13F51B5"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+        <!--          android:visibility="gone"-->
+
         <Button
             android:id="@+id/btn_fragment_second_tab_location"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/ic_location" />
-
 
         <Button
             android:id="@+id/btn_fragment_second_tab_change_map_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_width="55sp"
+            android:layout_height="30sp"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="0dp" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="25dp"
+            android:background="#4DC0BFBF"
+            android:bottomLeftRadius="10dp"
+            android:bottomRightRadius="10dp"
+            android:textColor="#CD3F51B5"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:topLeftRadius="10dp"
+            android:topRightRadius="10dp" /> <!--圆角设置，背景透明-->
 
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_LTE_cell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="95dp"
             android:layout_marginEnd="17dp"
-            android:layout_marginTop="52dip"
             android:checked="false"
             android:text="4G小区"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_grid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="130dip"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="85dip"
             android:checked="false"
             android:text="栅格图"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_project"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="165dip"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="120dip"
             android:checked="false"
             android:text="规划图"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_track"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="200dip"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="155dip"
             android:checked="false"
             android:text="轨迹图"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <CheckBox
             android:id="@+id/checkbox_fragment_second_tab_baidu_heat_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="235dip"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="190dip"
             android:checked="false"
             android:text="热点区"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-
-        <Button
-            android:id="@+id/btn_fragment_second_tab_dot"
-            android:layout_width="55sp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="230dip"
-            android:text="打点"
-            android:visibility="gone"
-             />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="150dp"
             android:layout_height="12dp"
-            android:background="@drawable/colorbar"/>
+            android:alpha="0.5"
+            android:background="@drawable/colorbar" />
+
         <TextView
             android:id="@+id/textView_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="     -75     -85      -95   -105  -115  -125"
-            android:textSize="10dp"
-            android:textColor="#1C1C1C"/>
+            android:textColor="@color/textColor2"
+            android:textSize="10dp" />
 
     </RelativeLayout>
-
 </LinearLayout>
-

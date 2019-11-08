@@ -1,5 +1,7 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.first;
 
+import android.content.Context;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +28,6 @@ import com.hbmcc.wangsen.netsupport.telephony.NetworkStatus;
 import com.hbmcc.wangsen.netsupport.telephony.UeStatus;
 import com.hbmcc.wangsen.netsupport.telephony.cellinfo.LteCellInfo;
 import com.hbmcc.wangsen.netsupport.ui.fragment.MainFragment;
-import com.hbmcc.wangsen.netsupport.ui.fragment.third.ThirdTabFragment;
 import com.hbmcc.wangsen.netsupport.util.FileUtils;
 import com.hbmcc.wangsen.netsupport.util.NumberFormat;
 
@@ -44,13 +45,15 @@ import java.util.concurrent.Executors;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 
+import static com.hbmcc.wangsen.netsupport.telephony.NetworkStatus.netOperators;
+
 public class FirstTabFragment extends BaseMainFragment {
     private static final String TAG = "FirstTabFragment";
     ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
     RecentRecordAdapter recentRecordAdapter;
     NeighbourCellAdapter neighbourCellAdapter;
-    long recentNetworkStatusCnt = 1;
-    long recentSumSignalStrength = 1;
+    long recentNetworkStatusCnt;
+    long recentSumSignalStrength;
     double recentAvgSignalStrength;
     private Toolbar toolbarMain;
     private TextView textViewFragmentFirstTabOperator;
@@ -87,6 +90,8 @@ public class FirstTabFragment extends BaseMainFragment {
     private List<LteBasestationCell> litepalLteBasestationCellList;
     private long startTime; //起始时间
     private long endTime;//结束时间
+    private String st, str = "";
+    private int indexStar = 0;
 
     public static FirstTabFragment newInstance() {
         Bundle args = new Bundle();
@@ -106,8 +111,8 @@ public class FirstTabFragment extends BaseMainFragment {
 
     private void initView(View view) {
         EventBusActivityScope.getDefault(_mActivity).register(this);
-        toolbarMain = view.findViewById(R.id.toolbar);
-        toolbarMain.setTitle(getString(R.string.app_name));
+//        toolbarMain = view.findViewById(R.id.toolbar);
+//        toolbarMain.setTitle(getString(R.string.app_name));
         textViewFragmentFirstTabOperator = view.findViewById(R.id.textView_fragment_first_tab_operator);
         textViewFragmentFirstTabIMSI = view.findViewById(R.id.textView_fragment_first_tab_IMSI);
         textViewFragmentFirstTabIMEI = view.findViewById(R.id.textView_fragment_first_tab_IMEI);
@@ -150,6 +155,12 @@ public class FirstTabFragment extends BaseMainFragment {
         initRecyclerView();
         recentNetworkStatusCnt = 0;
         recentAvgSignalStrength = 0;
+        FileUtils.initialStorage();
+//        LocationManager locManager = (LocationManager) _mActivity.getSystemService(Context.LOCATION_SERVICE);
+//        if (!locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+//            // 未打开位置开关，可能导致定位失败或定位不准，提示用户或做相应处理
+//            Toast.makeText(App.getContext(), "未检测到GPS，请打开GPS定位开关", Toast.LENGTH_SHORT).show();
+//        }
 
         btnFragmentFirstTabConvert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,51 +184,63 @@ public class FirstTabFragment extends BaseMainFragment {
         textViewFragmentFirstTabExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recentueStatusRecordList.size() > 0) {
-                    startTime = System.currentTimeMillis();
-                    if (!FileUtils.isFileExist(FileUtils.getAppPath())) {
-                        FileUtils.createSDDirs(FileUtils.getAppPath());
-                    }
-                    if (FileUtils.isFileExist(FileUtils.getAppPath())) {
-                        Date date = new Date();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String nowString = dateFormat.format(date);
-                        final File pathExport = new File(FileUtils.getAppPath() + nowString + "测试log.csv");
-                        newCachedThreadPool.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                FileIOUtils.writeFileFromString(pathExport, "时间," + "经度," + "纬度," +
-                                        "RSRP," + "ENBID," + "CellId," + "PCI," + "SINR," + "RSRQ," + "TAC," + "频点," +
-                                        "邻区频点," + "邻区PCI," + "邻区RSRP," + "位置" + "\n", true);
-                                for (UeStatus ueStatus : recentueStatusRecordList) {
-                                    String st = ueStatus.networkStatus.time + "," +
-                                            ueStatus.locationStatus.longitudeWgs84 + "," +
-                                            ueStatus.locationStatus.latitudeWgs84 + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.signalStrength + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.enbId + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.enbCellId + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.pci + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.sinr + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.rsrq + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.tac + "," +
-                                            ueStatus.networkStatus.lteServingCellTower.lteEarFcn + "," +
-                                            ((ueStatus.networkStatus.lteNeighbourCellTowers.size() > 0) ?
-                                                    ueStatus.networkStatus.lteNeighbourCellTowers.get(0).lteEarFcn + "," +
-                                                            ueStatus.networkStatus.lteNeighbourCellTowers.get(0).pci + "," +
-                                                            ueStatus.networkStatus.lteNeighbourCellTowers.get(0).signalStrength + ","
-                                                    : "无,无,无,") +
-                                            ueStatus.locationStatus.city + ueStatus.locationStatus.district +
-                                            ueStatus.locationStatus.street + ueStatus.locationStatus.streetNumber
-                                            + "\n";
-                                    FileIOUtils.writeFileFromString(pathExport, st, true);
+                if (textViewFragmentFirstTabExport.getText().equals("开始保存")) {
+                    textViewFragmentFirstTabExport.setText("导出LOG");
+                    indexStar = recentueStatusRecordList.size();
+                    textViewFragmentFirstTabExport.setTextColor(0xffff0000);
+                } else {
+                    textViewFragmentFirstTabExport.setText("开始保存");
+                    textViewFragmentFirstTabExport.setTextColor(0xff0000FF);
+                    if (indexStar > 0) {
+                        startTime = System.currentTimeMillis();
+                        if (!FileUtils.isFileExist(FileUtils.getAppPath())) {
+                            FileUtils.createSDDirs(FileUtils.getAppPath());
+                        }
+                        if (FileUtils.isFileExist(FileUtils.getAppPath())) {
+                            Date date = new Date();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            String nowString = dateFormat.format(date);
+                            final File pathExport = new File(FileUtils.getAppPath() + nowString + "测试log.csv");
+                            newCachedThreadPool.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    FileIOUtils.writeFileFromString(pathExport, "time," + "longitude," + "latitude," +
+                                            "RSRP," + "ENBID," + "CellId," + "PCI," + "SINR," + "RSRQ," + "TAC," + "EarFcn," + "location," +
+                                            "NeighbourEarFcn," + "NeighbourPCI," + "NeighbourRSRP," + "NeighbourEarFcn2," + "NeighbourPCI2,"
+                                            + "NeighbourRSRP2," + "\n", true);
+//                                    for (UeStatus ueStatus : recentueStatusRecordList) {
+                                    for (int i = indexStar; i < recentueStatusRecordList.size(); i++) {
+                                        st = recentueStatusRecordList.get(i).networkStatus.time + "," +
+                                                recentueStatusRecordList.get(i).locationStatus.longitudeWgs84 + "," +
+                                                recentueStatusRecordList.get(i).locationStatus.latitudeWgs84 + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.signalStrength + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.enbId + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.enbCellId + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.pci + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.sinr + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.rsrq + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.tac + "," +
+                                                recentueStatusRecordList.get(i).networkStatus.lteServingCellTower.lteEarFcn + "," +
+                                                recentueStatusRecordList.get(i).locationStatus.city + recentueStatusRecordList.get(i).locationStatus.district +
+                                                recentueStatusRecordList.get(i).locationStatus.street +
+                                                recentueStatusRecordList.get(i).locationStatus.streetNumber + " ";
+                                        if (recentueStatusRecordList.get(i).networkStatus.lteNeighbourCellTowers.size() > 0) {
+                                            for (LteCellInfo lteCellInfo : recentueStatusRecordList.get(i).networkStatus.lteNeighbourCellTowers) {
+                                                str = str + lteCellInfo.lteEarFcn + "," + lteCellInfo.pci + "," + lteCellInfo.signalStrength + ",";
+                                            }
+                                            st = st + "," + str;
+                                        }
+                                        FileIOUtils.writeFileFromString(pathExport, st + "\n", true);
+                                        st = str = "";
+                                    }
                                 }
-                            }
-                        });
-                        endTime = System.currentTimeMillis();
-                        final long usedTime = (int) ((endTime - startTime) / 1000);
-                        Toast.makeText(App.getContext(), "/优易/" + nowString +
-                                "测试log.csv" + "\n导出成功 \n用时 " +
-                                usedTime + " 秒", Toast.LENGTH_SHORT).show();
+                            });
+                            endTime = System.currentTimeMillis();
+                            final long usedTime = (int) ((endTime - startTime) / 1000);
+                            Toast.makeText(App.getContext(), "/优易/" + nowString +
+                                    "测试log.csv" + "\n导出成功\t\t共计 " + (recentueStatusRecordList.size() - indexStar) + " 条数据\n用时 " +
+                                    usedTime + " 秒", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -245,13 +268,11 @@ public class FirstTabFragment extends BaseMainFragment {
         newCachedThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                if (updateUEStatusEvent.ueStatus.networkStatus != null && updateUEStatusEvent.ueStatus != null
-                        && updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower != null) {
+                if (updateUEStatusEvent.ueStatus.networkStatus != null && updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower != null) {
                     recentNetworkStatusRecordList.add(0, updateUEStatusEvent.ueStatus.networkStatus);
-                    recentueStatusRecordList.add(0, updateUEStatusEvent.ueStatus);
+                    recentueStatusRecordList.add(updateUEStatusEvent.ueStatus);
                     neighbourCellList.clear();
-                    if (updateUEStatusEvent.ueStatus.networkStatus.lteNeighbourCellTowers
-                            != null) {
+                    if (updateUEStatusEvent.ueStatus.networkStatus.lteNeighbourCellTowers != null) {
                         neighbourCellList.addAll(updateUEStatusEvent.ueStatus.networkStatus
                                 .lteNeighbourCellTowers);
                         if (updateUEStatusEvent.ueStatus.networkStatus.lteServingCellTower.cellId != 0) {
@@ -262,8 +283,7 @@ public class FirstTabFragment extends BaseMainFragment {
                             @Override
                             public void run() {
                                 if (FirstTabFragment.this.isVisible()) {
-                                    textViewFragmentFirstTabOperator.setText(updateUEStatusEvent.ueStatus.locationStatus
-                                            .operators + "");
+                                    textViewFragmentFirstTabOperator.setText(netOperators);
                                     textViewFragmentFirstTabIMSI.setText(updateUEStatusEvent.ueStatus.networkStatus.imsi + "");
                                     textViewFragmentFirstTabIMEI.setText(updateUEStatusEvent.ueStatus.networkStatus.imei + "");
                                     textViewFragmentFirstTabUEModel.setText(updateUEStatusEvent.ueStatus.networkStatus.hardwareModel + "");
@@ -314,12 +334,13 @@ public class FirstTabFragment extends BaseMainFragment {
                                     if (litepalLteBasestationCellList.isEmpty()) {
                                         textViewFragmentFirstTabCellChsName.setText("基站数据库无此小区");
                                     } else {
-                                        textViewFragmentFirstTabCellChsName.setText(litepalLteBasestationCellList.get(0)
-                                                .getName() + "");
+                                        textViewFragmentFirstTabCellChsName.setText(litepalLteBasestationCellList.get(0).getName() + "");
                                     }
-                                    recentAvgSignalStrength = NumberFormat.doubleFormat((double) recentSumSignalStrength /
-                                            (double)
-                                                    recentNetworkStatusCnt, 1);
+                                    if (recentNetworkStatusCnt != 0) {
+                                        recentAvgSignalStrength = NumberFormat.doubleFormat((double) recentSumSignalStrength /
+                                                (double)
+                                                        recentNetworkStatusCnt, 1);
+                                    }
                                     textViewFragmentFirstTabRecentAvgSignalStrength.setText
                                             (recentNetworkStatusCnt + "条 平均电平" + (int) (recentAvgSignalStrength) + "dbm");
 
@@ -357,6 +378,5 @@ public class FirstTabFragment extends BaseMainFragment {
         recyclerViewFragmentFirstTabNeighbourCellInfo.setLayoutManager(layoutManager2);
         neighbourCellAdapter = new NeighbourCellAdapter(neighbourCellList);
         recyclerViewFragmentFirstTabNeighbourCellInfo.setAdapter(neighbourCellAdapter);
-
     }
 }

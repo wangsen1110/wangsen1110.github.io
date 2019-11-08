@@ -36,7 +36,7 @@ public class LocationStatus {
         radius = bdLocation.getRadius();    //获取定位精度，默认值为0.0f
         altitude = bdLocation.getAltitude();//获取高度
 
-        operators = getOperators(bdLocation.getOperators());//获取运营商信息
+//        operators = getOperators(bdLocation.getOperators());//获取运营商信息
         speed = bdLocation.getSpeed();//获取速度，仅gps定位结果时有速度信息，单位公里/小时，默认值0.0f
 
         //语义描述部分
@@ -54,20 +54,4 @@ public class LocationStatus {
         indoorLocationSource = bdLocation.getIndoorLocationSource();//返回支持的室内定位类型 #INDOOR_LOCATION_SOURCE_WIFI, #INDOOR_LOCATION_SOURCE_BLUETOOTH, #INDOOR_LOCATION_SOURCE_MAGNETIC, #INDOOR_LOCATION_SOURCE_SMALLCELLSTATION, #INDOOR_LOCATION_SOURCE_UNKNOWN
         indoorLocationSurpport = bdLocation.getIndoorLocationSurpport();//返回是否支持室内定位，,#INDOOR_LOCATION_NEARBY_SURPPORT_TRUE,#INDOOR_LOCATION_SURPPORT_FALSE,#INDOOR_LOCATION_SURPPORT_UNKNOWN
     }
-
-    private String getOperators(int op) {
-        switch (op) {
-            case BDLocation.OPERATORS_TYPE_UNKONW:
-                return "运营商识别中…";
-            case BDLocation.OPERATORS_TYPE_MOBILE:
-                return "中国移动";
-            case BDLocation.OPERATORS_TYPE_UNICOM:
-                return "中国联通";
-            case BDLocation.OPERATORS_TYPE_TELECOMU:
-                return "中国电信";
-            default:
-                return "运营商识别中";
-        }
-    }
-
 }
