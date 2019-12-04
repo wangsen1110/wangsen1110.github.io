@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backGround"
-        android:orientation="vertical"
-        android:singleLine="true">
+    android:layout_height="match_parent"
+    android:background="@color/backGround"
+    android:orientation="vertical">
 
         <include layout="@layout/youyititle" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30sp"
             android:background="@color/backGround">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/rectangles_with_corners"
                 android:divider="@drawable/divider_line"
                 android:orientation="vertical"
@@ -31,7 +25,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF">   <!-- 运营商版块1 -->
+                    android:background="@color/textBackGround">   <!-- 运营商版块1 -->
 
                     <TextView
                         android:id="@+id/textView_fragment_first_tab_operator"
@@ -40,7 +34,7 @@
                         android:layout_centerHorizontal="true"
                         android:text="中国移动"
                         android:textColor="#1F1F1F"
-                        android:textSize="14sp"
+                        android:textSize="13.5dp"
                         android:textStyle="bold" />
 
                 </RelativeLayout>  <!-- 运营商版块1 -->
@@ -48,20 +42,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF">   <!-- 运营商版块2 -->
+                    android:background="@color/textBackGround">   <!-- 运营商版块2 -->
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#FFFFFF">
+                        android:background="@color/textBackGround">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="IMSI:"
-                            android:textColor="@color/textColor1" />
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/textView_fragment_first_tab_IMSI"
@@ -69,7 +64,7 @@
                             android:layout_height="wrap_content"
                             android:hint="123456789012345"
                             android:textColor="@color/textColor2"
-                            android:textSize="12sp" />
+                            android:textSize="12dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -81,7 +76,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="IMEI:"
-                            android:textColor="@color/textColor1" />
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/textView_fragment_first_tab_IMEI"
@@ -89,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:hint="123456789012345"
                             android:textColor="@color/textColor2"
-                            android:textSize="12sp" />
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -98,7 +94,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF">   <!-- 运营商版块3 -->
+                    android:background="@color/textBackGround">   <!-- 运营商版块3 -->
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -110,7 +106,8 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="手机型号:"
-                            android:textColor="@color/textColor1" />
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/textView_fragment_first_tab_uemodel"
@@ -118,7 +115,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Mi-MIX2s"
                             android:textColor="@color/textColor2"
-                            android:textSize="13sp" />
+                            android:textSize="12dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -130,7 +127,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="安卓版本:"
-                            android:textColor="@color/textColor1" />
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/textView_fragment_first_tab_androidversion"
@@ -138,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:hint="8.1.0"
                             android:textColor="@color/textColor2"
-                            android:textSize="13sp" />
+                            android:textSize="12dp" />
 
                     </LinearLayout>
                 </LinearLayout>  <!-- 运营商版块3 -->
@@ -146,7 +144,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF">   <!-- 运营商版块2 -->
+                    android:background="@color/textBackGround">   <!-- 运营商版块2 -->
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -158,7 +156,8 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="电话号码:"
-                            android:textColor="@color/textColor1" />
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/textView_fragment_first_tab_phonenumber"
@@ -166,608 +165,634 @@
                             android:layout_height="wrap_content"
                             android:hint="01234567890"
                             android:textColor="@color/textColor2"
-                            android:textSize="13sp" />
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前网络:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_netWorkType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="4G"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout> <!-- 运营商版块 -->
+        </RelativeLayout>
+        <!--    </RelativeLayout>-->
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/backGround">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="89dp"
-                android:background="@color/backGround">
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/rectangles_with_corners"
+                android:divider="@drawable/divider_line"
+                android:orientation="vertical"
+                android:showDividers="middle"> <!-- 当前位置版块 -->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/rectangles_with_corners"
-                    android:divider="@drawable/divider_line"
-                    android:orientation="vertical"
-                    android:showDividers="middle"> <!-- 当前位置版块 -->
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF"> <!-- 当前位置版块1 -->
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_currentlocname"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:text="湖北省武汉市东西湖区123路456号"
-                            android:textColor="#1F1F1F"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF">   <!-- 当前位置版块2 -->
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="8dp"
-                                android:text="经度:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_longitude"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="123.45678"
-                                android:singleLine="true"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="纬度:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_latitude"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="12.34567"
-                                android:singleLine="true"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="高度:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_altitude"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="18"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout> <!-- 当前位置版块2 -->
-
-                </LinearLayout><!-- 当前位置版块 -->
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="140dp"
-                android:background="@color/backGround">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:background="@drawable/rectangles_with_corners"
-                    android:divider="@drawable/divider_line"
-                    android:orientation="vertical"
-                    android:showDividers="middle"> <!-- 当前小区版块 -->
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF"><!-- 当前小区版块1 -->
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_cellchsname"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:text="东西湖区XXX大楼-HLH-1"
-                            android:textColor="#1F1F1F"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF">   <!-- 当前小区版块2 -->
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="8dp"
-                                android:text="TAC:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_tac"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="12345"
-                                android:singleLine="true"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="PCI:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_pci"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="129"
-                                android:singleLine="true"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="CGI:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_cgi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="1234567-129"
-                                android:singleLine="true"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                    </LinearLayout> <!-- 当前小区版块2 -->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF">   <!-- 当前小区版块3 -->
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="8dp"
-                                android:text="频点:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_earfcn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="38950"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Band:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_band"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="40(TDD)"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="频率:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_frequency"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="2330"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout> <!-- 当前小区版块3 -->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF">   <!-- 当前小区版块4 -->
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="8dp"
-                                android:text="RSRP:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_RSRP"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="-73"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RSRQ:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_RSRQ"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="-4"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="SINR:"
-                                android:textColor="@color/textColor1" />
-
-                            <TextView
-                                android:id="@+id/textView_fragment_first_tab_SINR"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="9.0"
-                                android:textColor="@color/textColor2"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-                    </LinearLayout> <!-- 当前小区版块4 -->
-                </LinearLayout><!-- 当前小区版块 -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6sp"
-                android:layout_marginTop="236sp"
-                android:layout_marginRight="6sp"
-                android:background="@color/backGround">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF">   <!--标题-->
-
+                    android:background="@color/textBackGround"> <!-- 当前位置版块1 -->
                     <TextView
-                        android:id="@+id/textView_fragment_first_tab_recent_export"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="true"
-                        android:text="开始保存"
-                        android:textColor="#3D5AFE"
-                        android:textSize="15sp"
-                        tools:ignore="OnClick" />
-                    <!--                        android:visibility="gone"-->
-
-                    <TextView
-                        android:id="@+id/textView_fragment_first_tab_recent_avg_signal_strength"
+                        android:id="@+id/textView_fragment_first_tab_currentlocname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="记录 平均电平"
+                        android:text="湖北省武汉市东西湖区123路456号"
                         android:textColor="#1F1F1F"
-                        android:textSize="14sp"
+                        android:textSize="13.5dp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView_fragment_first_tab_neighbour_cell"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="邻区"
-                        android:textColor="#1F1F1F"
-                        android:textStyle="bold"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/textView_btn_fragment_first_tab_convert"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:onClick="true"
-                        android:text="切换邻区 "
-                        android:textColor="#3D5AFE"
-                        android:textSize="15sp"
-                        tools:ignore="OnClick" />
-
                 </RelativeLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5sp"
-                android:layout_marginTop="256sp"
-                android:layout_marginRight="5sp"
-                android:background="@color/backGround">
-
                 <LinearLayout
-                    android:id="@+id/linearlayout_fragment_first_tab_recent_record"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:singleLine="true"
-                    android:visibility="visible">  <!-- 历史信号强度版块-->
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround">   <!-- 当前位置版块2 -->
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:orientation="horizontal">
+                        android:layout_weight="1">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="时间"
-                            android:textColor="@color/textColor1" />
+                            android:paddingLeft="8dp"
+                            android:text="经度:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp"/>
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/textView_fragment_first_tab_longitude"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2.5"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="TAC"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="PCI"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2.5"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="eNB"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.8"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="cellid"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="RSRP"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.7"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="SINR"
-                            android:textColor="@color/textColor1" />
+                            android:hint="123.45678"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
                     </LinearLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView_fragment_first_tab_recent_record"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:singleLine="true"
-                        android:textColor="@color/textColor2"
-                        android:textSize="12.5sp" />
-                </LinearLayout>  <!-- 历史信号强度版块 -->
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5sp"
-                android:layout_marginTop="256sp"
-                android:layout_marginRight="5sp"
-                android:background="@color/backGround">
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_fragment_first_tab_neighbour_cell"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:singleLine="true"
-                    android:visibility="gone">  <!-- 邻区版块 -->
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:orientation="horizontal">
+                        android:layout_weight="1">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="Type"
-                            android:textColor="@color/textColor1" />
+                            android:text="纬度:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp"/>
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/textView_fragment_first_tab_latitude"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="Earfcn"
-                            android:textColor="@color/textColor1" />
+                            android:hint="12.34567"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="PCI"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="RSRP"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="BAND"
-                            android:textColor="@color/textColor1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:background="@drawable/recangle"
-                            android:gravity="center"
-                            android:text="频率(↓/↑)"
-                            android:textColor="@color/textColor1" />
                     </LinearLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView_fragment_first_tab_neighbour_cell_info"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:singleLine="true"
-                        android:textColor="@color/textColor2"
-                        android:textSize="12.5sp" />
-                </LinearLayout> <!-- 邻区版块 -->
-            </RelativeLayout>
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="高度:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp"/>
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_altitude"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="18"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout> <!-- 当前位置版块2 -->
+
+            </LinearLayout><!-- 当前位置版块 -->
+
         </RelativeLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:id="@+id/textView_fragment_first_tab_lte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backGround">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:background="@drawable/rectangles_with_corners"
+                android:divider="@drawable/divider_line"
+                android:orientation="vertical"
+                android:showDividers="middle"> <!-- 当前小区版块 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround"><!-- 当前小区版块1 -->
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_cellchsname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="东西湖区XXX大楼-HLH-1"
+                        android:textColor="#1F1F1F"
+                        android:textSize="13.5dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround">   <!-- 当前小区版块2 -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="TAC:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_tac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="12345"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PCI:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_pci"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="129"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CGI:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_cgi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="1234567-129"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                </LinearLayout> <!-- 当前小区版块2 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround">   <!-- 当前小区版块3 -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="频点:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_earfcn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="38950"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Band:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_band"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="40(TDD)"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="频率:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_frequency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="2330"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout> <!-- 当前小区版块3 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround">   <!-- 当前小区版块4 -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="RSRP:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_RSRP"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="-73"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RSRQ:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_RSRQ"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="-4"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SINR:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_SINR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="9.0"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </LinearLayout> <!-- 当前小区版块4 -->
+            </LinearLayout><!-- 当前小区版块 -->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/textView_fragment_first_tab_recent_lte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/textBackGround">
+
+            <TextView
+                android:id="@+id/textView_fragment_first_tab_recent_export"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="true"
+                android:text="开始保存"
+                android:textColor="#3D5AFE"
+                android:textSize="14dp"
+                tools:ignore="OnClick" />
+            <!--                        android:visibility="gone"-->
+
+            <TextView
+                android:id="@+id/textView_fragment_first_tab_recent_avg_signal_strength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="记录 平均电平"
+                android:textColor="#1F1F1F"
+                android:textSize="13.5dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_fragment_first_tab_neighbour_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="邻区"
+                android:textColor="#1F1F1F"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textView_btn_fragment_first_tab_convert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:onClick="true"
+                android:text="切换邻区 "
+                android:textColor="#3D5AFE"
+                android:textSize="14dp"
+                tools:ignore="OnClick" />
+
+            <LinearLayout
+                android:id="@+id/linearlayout_fragment_first_tab_recent_record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:singleLine="true"
+                android:visibility="visible">  <!-- 历史信号强度版块-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="时间"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.5"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="TAC"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="PCI"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.5"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="eNB"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="cellid"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="RSRP"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.7"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="SINR"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_fragment_first_tab_recent_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround"
+                    android:singleLine="true"
+                    android:textColor="@color/textColor2"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_fragment_first_tab_neighbour_cell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:singleLine="true"
+                android:visibility="gone">  <!-- 邻区版块 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="Type"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="Earfcn"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="PCI"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="RSRP"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="BAND"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:background="@drawable/recangle"
+                        android:gravity="center"
+                        android:text="频率(↓/↑)"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_fragment_first_tab_neighbour_cell_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround"
+                    android:singleLine="true"
+                    android:textColor="@color/textColor2"
+                    android:textSize="12dp" />
+            </LinearLayout> <!-- 邻区版块 -->
+
+        </RelativeLayout>
+
+</LinearLayout>

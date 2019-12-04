@@ -24,6 +24,7 @@ public  class HttpUtil {
     public static HttpUtil okHttpUtils = new HttpUtil();
 
     public HttpUtil() {
+
     }
 
     public static HttpUtil init() {
@@ -66,6 +67,26 @@ public  class HttpUtil {
     }
 
     public void getJsonRequet(String jsonlaln,String url){
+
+        //  构建okHttpClient，相当于请求的客户端，Builder设计模式
+        OkHttpClient okHttpClient1 = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        // 构建一个请求体，同样也是Builder设计模式
+        Request request1 = new Request.Builder().url("http://www.baidu.com").build();
+        //  生成一个Call对象，该对象是接口类型，后面会说
+        Call call1 = okHttpClient.newCall(request1);
+        call1.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+
+
         //  构建okHttpClient，相当于请求的客户端，Builder设计模式
         OkHttpClient okHttpClient = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
         // 构建一个请求体，同样也是Builder设计模式

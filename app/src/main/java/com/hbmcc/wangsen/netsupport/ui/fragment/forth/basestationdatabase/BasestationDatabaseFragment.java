@@ -82,7 +82,7 @@ public class BasestationDatabaseFragment extends BaseBackFragment {
 
     private void initDelayView() {
         mViewPager.setAdapter(new BasestationDatabaseFragmentAdapter(getChildFragmentManager()
-                , "4G", "3G", "2G"));
+                , "4G", "5G"));
         mTab.setupWithViewPager(mViewPager);
     }
 }

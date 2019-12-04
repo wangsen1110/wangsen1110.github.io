@@ -185,18 +185,21 @@ public class DataImport extends BaseMainFragment {
                                 lteBasestationCell.setEnbCellId((int) (lteBasestationCell.getEci() %
                                         256));
                                 lteBasestationCellList.add(lteBasestationCell);
+
                             }
+
                         }
+                        LitePal.saveAll(lteBasestationCellList);
                         reader.close();
                     } catch (Exception e) {
+                        LitePal.saveAll(lteBasestationCellList);
                         e.printStackTrace();
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG).show();
+                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常空值/重复，请处理", Toast.LENGTH_LONG).show();
                         ForthTabFragment.fragment.timerCell.cancel();
                         Looper.loop();
                     } finally {
-                        LitePal.saveAll(lteBasestationCellList);
                         endTime = System.currentTimeMillis();
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
@@ -271,8 +274,10 @@ public class DataImport extends BaseMainFragment {
                                 lteBasesCustomList.add(lteBasesCustom);
                             }
                         }
+                        LitePal.saveAll(lteBasesCustomList);
                         reader.close();
                     } catch (Exception e) {
+                        LitePal.saveAll(lteBasesCustomList);
                         e.printStackTrace();
                         final int cellNums = i;
                         Looper.prepare();
@@ -280,7 +285,6 @@ public class DataImport extends BaseMainFragment {
                         ForthTabFragment.fragment.timerCell.cancel();
                         Looper.loop();
                     } finally {
-                        LitePal.saveAll(lteBasesCustomList);
                         endTime = System.currentTimeMillis();
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
@@ -448,6 +452,11 @@ public class DataImport extends BaseMainFragment {
                                     lteBasesGrid.setGrid_call(inStringSplit[14]);
                                 }
                                 lteBasesGridList.add(lteBasesGrid);
+                                if (lteBasesGridList.size() > 10000) {
+                                    LitePal.saveAll(lteBasesGridList);
+                                    lteBasesGridList.clear();
+                                }
+
                             }
                         }
                         reader.close();
@@ -455,7 +464,7 @@ public class DataImport extends BaseMainFragment {
                         e.printStackTrace();
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG)
+                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常空值/重复，请处理", Toast.LENGTH_LONG)
                                 .show();
                         ForthTabFragment.fragment.timerCell.cancel();
                         Looper.loop();

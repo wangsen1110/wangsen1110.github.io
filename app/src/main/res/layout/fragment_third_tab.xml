@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGround">
+    android:background="#EAEAEA">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -184,7 +184,7 @@
     <LinearLayout
         android:id="@+id/linearlayout_fragment_thrid_tab_recent_comlain"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="260dp"
         android:layout_marginTop="470dp"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">  <!-- 设备状态-->

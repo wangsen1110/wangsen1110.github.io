@@ -3,17 +3,25 @@ package com.hbmcc.wangsen.netsupport.ui.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+import android.support.v4.app.FragmentManager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
+import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.event.TabSelectedEvent;
+import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.FifthTabFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.first.FirstTabFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.forth.ForthTabFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.second.SecondTabFragment;
@@ -28,19 +36,27 @@ public class MainFragment extends SupportFragment {
     public static final int THIRD = 2;
     public static final int FORTH = 3;
     private static final int REQ_MSG = 10;
-    int lastSelectedPosition = 0;
+    public static int lastSelectedPosition = 0;
+    public static int newSelectedPosition = 0;
     @Nullable
     TextBadgeItem numberBadgeItem;
     @Nullable
     ShapeBadgeItem shapeBadgeItem;
-    private SupportFragment[] mFragments = new SupportFragment[4];
-    private BottomNavigationBar bottomNavigationBar;
+    public static SupportFragment[] mFragments = new SupportFragment[4];
+    public static  BottomNavigationBar bottomNavigationBar;
+    public static MainFragment fragment;
+    private FragmentManager mFragmentManager;
+
+    private GestureDetector mGestureDetector;
+    private int verticalMinistance = 100;            //水平最小识别距离
+    private int minVelocity = 10;            //最小识别速度
 
     public static MainFragment newInstance() {
 
         Bundle args = new Bundle();
-
-        MainFragment fragment = new MainFragment();
+        if (fragment == null) {
+            fragment = new MainFragment();
+        }
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,6 +65,7 @@ public class MainFragment extends SupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_fragment, container, false);
+
         initView(view);
         return view;
     }
@@ -59,10 +76,10 @@ public class MainFragment extends SupportFragment {
         SupportFragment firstFragment = findChildFragment(FirstTabFragment.class);
         if (firstFragment == null) {
             mFragments[FIRST] = FirstTabFragment.newInstance();
-            mFragments[SECOND] = SecondTabFragment.newInstance();
+//            mFragments[SECOND] = SecondTabFragment.newInstance();
+            mFragments[SECOND] = FifthTabFragment.newInstance();
             mFragments[THIRD] = ThirdTabFragment.newInstance();
             mFragments[FORTH] = ForthTabFragment.newInstance();
-
 
             loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
                     mFragments[FIRST],
@@ -74,13 +91,29 @@ public class MainFragment extends SupportFragment {
 
             // 这里我们需要拿到mFragments的引用
             mFragments[FIRST] = firstFragment;
-            mFragments[SECOND] = findChildFragment(SecondTabFragment.class);
+//            mFragments[SECOND] = findChildFragment(SecondTabFragment.class);
+            mFragments[SECOND] = findChildFragment(FifthTabFragment.class);
             mFragments[THIRD] = findChildFragment(ThirdTabFragment.class);
             mFragments[FORTH] = findChildFragment(ForthTabFragment.class);
         }
     }
 
     private void initView(View view) {
+        getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+//        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+//        transaction.setCustomAnimations( R.xml.from_left,R.xml.out_right);
+
+        mGestureDetector = new GestureDetector(App.getContext(), new LearnGestureListener());
+//        为fragment添加OnTouchListener监听器
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mGestureDetector.onTouchEvent(event);
+                return true;
+            }
+        });
+
 
         numberBadgeItem = new TextBadgeItem()
                 .setBorderWidth(4)
@@ -117,6 +150,7 @@ public class MainFragment extends SupportFragment {
                 if (lastSelectedPosition != position) {
                     showHideFragment(mFragments[position], mFragments[lastSelectedPosition]);
                     lastSelectedPosition = bottomNavigationBar.getCurrentSelectedPosition();
+                    newSelectedPosition = lastSelectedPosition;
                 }
             }
 
@@ -134,6 +168,7 @@ public class MainFragment extends SupportFragment {
         });
     }
 
+
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
@@ -147,6 +182,50 @@ public class MainFragment extends SupportFragment {
      */
     public void startBrotherFragment(SupportFragment targetFragment) {
         start(targetFragment);
+    }
+
+
+    //设置手势识别监听器
+    class LearnGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+
+                if (newSelectedPosition >= 3) {
+                    newSelectedPosition = 0;
+                } else {
+                    newSelectedPosition = newSelectedPosition + 1;
+                }
+
+                showHideFragment(mFragments[newSelectedPosition], mFragments[lastSelectedPosition]);
+                bottomNavigationBar.setFirstSelectedPosition(newSelectedPosition)
+                        .initialise();
+                lastSelectedPosition = newSelectedPosition;
+
+            } else if (e2.getX() - e1.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+                if (newSelectedPosition <= 0) {
+                    newSelectedPosition = 3;
+                } else {
+                    newSelectedPosition = newSelectedPosition - 1;
+                }
+
+                showHideFragment(mFragments[newSelectedPosition], mFragments[lastSelectedPosition]);
+                bottomNavigationBar.setFirstSelectedPosition(newSelectedPosition)
+                        .initialise();
+                lastSelectedPosition = newSelectedPosition;
+            }
+            return true;
+        }
+
+        //此方法必须重写且返回真，否则onFling不起效
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+    }
+
+    public void showToast(String text) {
+        Toast.makeText(App.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
 }

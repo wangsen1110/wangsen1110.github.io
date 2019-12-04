@@ -1,10 +1,13 @@
 package com.hbmcc.wangsen.netsupport.telephony;
 
 import com.baidu.location.BDLocation;
+import com.baidu.location.Poi;
 import com.hbmcc.wangsen.netsupport.util.LocatonConverter;
 
+import java.util.List;
+
 public class LocationStatus {
-    public BDLocation bdLocation;
+    public static BDLocation bdLocation;
     public double latitudeBaidu, longitudeBaidu, latitudeWgs84, longitudeWgs84, altitude;
     public float radius, speed;
     public String coorType, networkLocationType, province, city, district, street, streetNumber,
@@ -53,5 +56,6 @@ public class LocationStatus {
         floor = bdLocation.getFloor();//获取楼层信息，目前只在百度支持室内定位的地方有返回，默认null
         indoorLocationSource = bdLocation.getIndoorLocationSource();//返回支持的室内定位类型 #INDOOR_LOCATION_SOURCE_WIFI, #INDOOR_LOCATION_SOURCE_BLUETOOTH, #INDOOR_LOCATION_SOURCE_MAGNETIC, #INDOOR_LOCATION_SOURCE_SMALLCELLSTATION, #INDOOR_LOCATION_SOURCE_UNKNOWN
         indoorLocationSurpport = bdLocation.getIndoorLocationSurpport();//返回是否支持室内定位，,#INDOOR_LOCATION_NEARBY_SURPPORT_TRUE,#INDOOR_LOCATION_SURPPORT_FALSE,#INDOOR_LOCATION_SURPPORT_UNKNOWN
+        List<Poi> poiList = bdLocation.getPoiList(); //POI信息包括POI ID、名称等，具体信息请参照类参考中POI类的相关说明
     }
 }

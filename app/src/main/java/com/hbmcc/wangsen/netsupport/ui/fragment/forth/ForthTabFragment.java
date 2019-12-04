@@ -131,7 +131,7 @@ public class ForthTabFragment extends BaseMainFragment implements OnProgressBarL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        bnpCell.incrementProgressBy((DataImport.csvFileLineCell <= 5000 ? 2200 : 3650));
+                        bnpCell.incrementProgressBy((DataImport.csvFileLineCell <= 5000 ? 2200 : 3500));
                     }
                 });
             }

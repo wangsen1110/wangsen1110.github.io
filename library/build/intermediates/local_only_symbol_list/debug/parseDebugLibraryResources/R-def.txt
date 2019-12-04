@@ -1,0 +1,11 @@
+R_DEF: Internal format may change without notice
+local
+string android_auto_update_dialog_btn_cancel
+string android_auto_update_dialog_btn_download
+string android_auto_update_dialog_checking
+string android_auto_update_dialog_title
+string android_auto_update_download_progress
+string android_auto_update_notify_content
+string android_auto_update_notify_ticker
+string android_auto_update_toast_no_new_update
+xml update_apk_paths

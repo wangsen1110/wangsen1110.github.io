@@ -1,17 +1,16 @@
 package com.hbmcc.wangsen.netsupport.telephony.cellinfo;
 
 public class CellInfo {
-    public static final int TYPE_GSM = 0;
-    public static final int TYPE_CDMA = 1;
+    public static final int TYPE_UNKNOWN = 0;
+    public static final int TYPE_GSM = 16;
+    public static final int TYPE_CDMA = 4;
     public static final int TYPE_WCDMA = 2;
-    public static final int TYPE_LTE = 3;
-    public static final int TYPE_TDSCDMA = 4;
-    public static final int TYPE_UNKNOWN = 9;
+    public static final int TYPE_LTE = 13;
+    public static final int TYPE_TDSCDMA = 17;
+    public static final int NETWORK_TYPE_NR = 20;
     public static final String STRING_TYPE_GSM = "GSM";
     public static final String STRING_TYPE_LTE = "LTE";
-    public static final String STRING_TYPE_CDMA = "CDMA";
-    public static final String STRING_TYPE_WCDMA = "WCDMA";
-    public static final String STRING_TYPE_TDSCDMA = "TDSCDMA";
+
 
     public String cellType;
     public int cellId = 0;
@@ -36,5 +35,4 @@ public class CellInfo {
 
     //是否是服务小区
     public Boolean isRegitered;
-
 }

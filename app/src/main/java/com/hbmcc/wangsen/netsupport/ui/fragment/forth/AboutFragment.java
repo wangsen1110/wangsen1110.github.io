@@ -28,6 +28,7 @@ public class AboutFragment extends BaseBackFragment {
     private static final String TAG = "AboutFragment";
     private static final String ARG_TITLE = "arg_title";
     private String mTitle;
+    private static AboutFragment fragment;
 
     private Toolbar mToolbar;
     private ImageView imageviewUpdateurl;
@@ -35,8 +36,9 @@ public class AboutFragment extends BaseBackFragment {
     private TextView textViewFragmentAboutCurrentVersion;
 
     public static AboutFragment newInstance(String title) {
-
-        AboutFragment fragment = new AboutFragment();
+        if (fragment == null){
+            fragment = new AboutFragment();
+        }
         Bundle bundle = new Bundle();
         bundle.putString(ARG_TITLE, title);
         fragment.setArguments(bundle);
@@ -60,7 +62,6 @@ public class AboutFragment extends BaseBackFragment {
         initToolbarNav(mToolbar);
     }
 
-
     @Override
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         initDelayView();
@@ -82,13 +83,15 @@ public class AboutFragment extends BaseBackFragment {
             @Override
             public boolean onLongClick(View v) {
                 ClipboardManager cm = (ClipboardManager) _mActivity.getSystemService(_mActivity.CLIPBOARD_SERVICE);
-                ClipData mClipData = ClipData.newPlainText("Label",App.getContext().getString(R.string.newerVersionDownloadUrl) );
+                ClipData mClipData = ClipData.newPlainText("Label", App.getContext().getString(R.string.newerVersionDownloadUrl));
                 cm.setPrimaryClip(mClipData);
-                Toast.makeText(_mActivity,"下载链接已复制",Toast.LENGTH_SHORT).show();
+                Toast.makeText(_mActivity, "下载链接已复制", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
         textViewFragmentAboutCurrentVersion.setText(AppUtils.getVersionName(_mActivity));
-        UpdateChecker.checkForDialog(_mActivity,App.getContext().getString(R.string.autoUpdateJsonUrl));
+        UpdateChecker.checkForDialog(_mActivity, App.getContext().getString(R.string.autoUpdateJsonUrl));
     }
 }
+
+

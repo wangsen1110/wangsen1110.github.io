@@ -1,7 +1,9 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.third;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,6 +44,7 @@ public class ThirdTabFragment extends BaseMainFragment {
     String jsonlaln;
     Gson gson = new Gson();
     public static DecimalFormat df = new DecimalFormat("#.00");
+    public static ThirdTabFragment fragment ;
     private boolean isGetData = false;
     public static int ID = 0;
     public static String detailname;
@@ -71,7 +74,9 @@ public class ThirdTabFragment extends BaseMainFragment {
 
     public static ThirdTabFragment newInstance() {
         Bundle args = new Bundle();
-        ThirdTabFragment fragment = new ThirdTabFragment();
+        if(fragment == null) {
+            fragment = new ThirdTabFragment();
+        }
         fragment.setArguments(args);
         return fragment;
     }
@@ -101,15 +106,19 @@ public class ThirdTabFragment extends BaseMainFragment {
         textonclick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!thridWirelessdatalist.isEmpty()){
                 ThirdTabFragment.detailname = thridWirelessdatalist.get(ID).getCellname();
                 fragmentdetail();
+                }
 //                Toast.makeText(App.getContext(), "ThirdTabFragment.eci的值是 \n" + ThirdTabFragment.eci, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public void initRecyclerView() {
-        NetworkStatus networkStatus = new NetworkStatus();
+            NetworkStatus networkStatus = new NetworkStatus();
+
 //        方式一
 //        String latLngstring = thirdlatLng.toString();
 //        String[] split = latLngstring.split(",");
@@ -212,6 +221,7 @@ public class ThirdTabFragment extends BaseMainFragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         //   进入当前Fragment

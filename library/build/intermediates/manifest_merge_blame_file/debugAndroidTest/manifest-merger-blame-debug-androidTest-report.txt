@@ -1,0 +1,68 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.loveplusplus.update.test" >
+4
+5    <uses-sdk
+5-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:5:5-74
+6        android:minSdkVersion="23"
+6-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:5:15-41
+7        android:targetSdkVersion="29" />
+7-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:5:42-71
+8
+9    <instrumentation
+9-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:11:5-15:78
+10        android:name="android.test.InstrumentationTestRunner"
+10-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:11:22-75
+11        android:functionalTest="false"
+11-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:14:22-52
+12        android:handleProfiling="false"
+12-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:13:22-53
+13        android:label="Tests for com.loveplusplus.update.test"
+13-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:15:22-76
+14        android:targetPackage="com.loveplusplus.update.test" />
+14-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:12:22-74
+15
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+16-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:22-64
+17    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+17-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-83
+17-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:22-80
+18
+19    <application
+19-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:7:5-9:19
+20        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+20-->[com.android.support:support-compat:28.0.0] /Users/sen/.gradle/caches/transforms-2/files-2.1/dd1cf78f22bdd94f550130b281f27c97/support-compat-28.0.0/AndroidManifest.xml:22:18-91
+21        android:debuggable="true" >
+21-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:7:18-43
+22        <uses-library android:name="android.test.runner" />
+22-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:8:9-60
+22-->/Users/sen/developer/android/NetSupport/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3732156869206146971.xml:8:23-57
+23
+24        <service
+24-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:9-17:40
+25            android:name="com.loveplusplus.update.DownloadService"
+25-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:13-67
+26            android:exported="false" />
+26-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:13-37
+27
+28        <provider
+28-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:9-27:20
+29            android:name="com.loveplusplus.update.UpdateApkFileProvider"
+29-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:13-73
+30            android:authorities="com.loveplusplus.update.test.update.provider"
+30-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:13-67
+31            android:exported="false"
+31-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-37
+32            android:grantUriPermissions="true" >
+32-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-47
+33            <meta-data
+33-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:13-26:60
+34                android:name="android.support.FILE_PROVIDER_PATHS"
+34-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:17-67
+35                android:resource="@xml/update_apk_paths" />
+35-->[__tested_artifact__::library] /Users/sen/developer/android/NetSupport/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:17-57
+36        </provider>
+37    </application>
+38
+39</manifest>

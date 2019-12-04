@@ -13,4 +13,6 @@
     <color name="textColor1">#97000000</color>
     <color name="textColor2">#000000</color>
     <color name="backGround">#EAEAEA</color>
+    <color name="textBackGround">#FFFFFF</color>
+    <color name="btnBackGround">#20000000</color>
 </resources>

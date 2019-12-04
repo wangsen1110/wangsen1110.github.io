@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="#FFFFFF"
+            android:background="@color/textBackGround"
             android:divider="@drawable/divider_line">   <!--标题-->
             <!--margintop 上面距离-->
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#FFFFFF">  <!--无线指标版块-->
+                android:background="@color/textBackGround">  <!--无线指标版块-->
 
                 <TextView
                     android:layout_width="85sp"
@@ -170,7 +170,7 @@
                 android:id="@+id/recyclerView_fragment_third_tab_recent_record3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"/> <!--详细指标item-->
+                android:background="@color/textBackGround"/> <!--详细指标item-->
         </LinearLayout>
 
     </LinearLayout>

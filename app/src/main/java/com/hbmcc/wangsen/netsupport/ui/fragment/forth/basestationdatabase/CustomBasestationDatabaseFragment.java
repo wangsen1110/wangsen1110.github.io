@@ -66,19 +66,8 @@ public class CustomBasestationDatabaseFragment extends BaseBackFragment {
         }
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_custom_basestation, container,
-                false);
-        initView(view);
-        return attachToSwipeBack(view);
-    }
 
-    private void initView(View view) {
-//        mViewPager = view.findViewById(R.id.viewpager_fragment_basestastion_custom);
-//        btnThirdWrielessImport = view.findViewById(R.id.btn_fragment_forth_tab_test);
-    }
+
 
     /**
      * 这里演示:

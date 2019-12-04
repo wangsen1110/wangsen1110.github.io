@@ -17,6 +17,7 @@ import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.telephony.cellinfo.CellInfo;
@@ -27,6 +28,8 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.blankj.utilcode.util.NetworkUtils.isWifiConnected;
 
 public class NetworkStatus {
     protected FragmentActivity _mActivity;
@@ -40,7 +43,6 @@ public class NetworkStatus {
     static public int RSSI = 0;
     static public int SINR = 0;
     static public int ASULEVEL = 0;
-    static public int ratType = determineNetworkType(App.getContext());
 
     public String time;
     public LteCellInfo lteServingCellTower;
@@ -78,7 +80,7 @@ public class NetworkStatus {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return ;
+            return;
         }
         List<android.telephony.CellInfo> infos = mTelephonyManager.getAllCellInfo();
         if (infos != null && infos.size() != 0) {
@@ -171,12 +173,11 @@ public class NetworkStatus {
 //                        gsmNeighbourCellTowers.add(tower);
 //                    }
 //                }else
-                        {
+                {
                     Log.i(TAG, "基站库中无此小区");
                 }
             }
-        }
-        else {
+        } else {
             getServerCellInfoOnOlderDevices();
         }
 
@@ -233,21 +234,22 @@ public class NetworkStatus {
             case TelephonyManager.NETWORK_TYPE_EVDO_B:
                 return CellInfo.TYPE_CDMA;
             case TelephonyManager.NETWORK_TYPE_IDEN:
-                break;
+                return TelephonyManager.NETWORK_TYPE_IDEN;
             case TelephonyManager.NETWORK_TYPE_UMTS:
                 return CellInfo.TYPE_TDSCDMA;
             case TelephonyManager.NETWORK_TYPE_EHRPD:
-                break;
+                return TelephonyManager.NETWORK_TYPE_EHRPD;
             case TelephonyManager.NETWORK_TYPE_1xRTT:
-                break;
+                return TelephonyManager.NETWORK_TYPE_1xRTT;
             case TelephonyManager.NETWORK_TYPE_UNKNOWN:
-                break;
+                return TelephonyManager.NETWORK_TYPE_UNKNOWN;
             case TelephonyManager.NETWORK_TYPE_IWLAN:
-                break;
+                return TelephonyManager.NETWORK_TYPE_IWLAN;
+            case TelephonyManager.NETWORK_TYPE_NR:
+                return CellInfo.NETWORK_TYPE_NR;
             default:
                 return CellInfo.TYPE_UNKNOWN;
         }
-        return CellInfo.TYPE_UNKNOWN;
     }
 
     private void getServerCellInfoOnOlderDevices() {
@@ -262,7 +264,7 @@ public class NetworkStatus {
         }
         try {
             GsmCellLocation location = (GsmCellLocation) mTelephonyManager.getAllCellInfo();
-            if (ratType == CellInfo.TYPE_LTE) {
+            if (determineNetworkType(App.getContext()) == CellInfo.TYPE_LTE) {
                 lteServingCellTower.cellId = location.getCid();
                 lteServingCellTower.rsrq = RSRQ;
                 lteServingCellTower.sinr = SINR;
@@ -273,16 +275,67 @@ public class NetworkStatus {
                 lteServingCellTower.isRegitered = true;
                 lteServingCellTower.tac = location.getLac();
             }
-//            else if (ratType == CellInfo.TYPE_GSM) {
-//                gsmServingCellTower.gsmCellId = location.getCid();
-//                gsmServingCellTower.asu = ASULEVEL;
-//                gsmServingCellTower.signalStrength = RSRP;
-//                gsmServingCellTower.cellType = CellInfo.STRING_TYPE_GSM;
-//                gsmServingCellTower.isRegitered = true;
-//                gsmServingCellTower.locationAreaCode = location.getLac();
-//            }
+            else if (determineNetworkType(App.getContext())  == CellInfo.TYPE_GSM) {
+                gsmServingCellTower.gsmCellId = location.getCid();
+                gsmServingCellTower.asu = ASULEVEL;
+                gsmServingCellTower.signalStrength = RSRP;
+                gsmServingCellTower.cellType = CellInfo.STRING_TYPE_GSM;
+                gsmServingCellTower.isRegitered = true;
+                gsmServingCellTower.locationAreaCode = location.getLac();
+            }
         } catch (Exception e) {
 
         }
+    }
+
+    public String getCellType() {
+        if (isWifiConnected()) {
+            return "WIFI";
+        }
+        switch (determineNetworkType(App.getContext())) {
+            case 0:
+                return "NO";
+            case 1:
+                return "GPRS";
+            case 2:
+                return "EDGE";
+            case 3:
+                return "UMTS";
+            case 4:
+                return "CDMA";
+            case 5:
+                return "EVDO_0";
+            case 6:
+                return "EVDO_A";
+            case 7:
+                return "1XRTT";
+            case 8:
+                return "HSDPA";
+            case 9:
+                return "HSUPA";
+            case 10:
+                return "HSPA";
+            case 11:
+                return "IDEN";
+            case 12:
+                return "EVDO_B";
+            case 13:
+                return "LTE";
+            case 14:
+                return "EHRPD";
+            case 15:
+                return "HSPAP";
+            case 16:
+                return "GSM";
+            case 17:
+                return "TDSCDMA";
+            case 18:
+                return "IWLAN";
+            case 19:
+                return "LTE_CA";
+            case 20:
+                return "NR";
+        }
+        return "NO";
     }
 }
