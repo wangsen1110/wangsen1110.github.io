@@ -1,6 +1,7 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.support.v4.app.FragmentManager;
 
@@ -19,6 +21,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.hbmcc.wangsen.netsupport.App;
+import com.hbmcc.wangsen.netsupport.MainActivity;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.event.TabSelectedEvent;
 import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.FifthTabFragment;
@@ -43,7 +46,7 @@ public class MainFragment extends SupportFragment {
     @Nullable
     ShapeBadgeItem shapeBadgeItem;
     public static SupportFragment[] mFragments = new SupportFragment[4];
-    public static  BottomNavigationBar bottomNavigationBar;
+    public static BottomNavigationBar bottomNavigationBar;
     public static MainFragment fragment;
     private FragmentManager mFragmentManager;
 
@@ -112,6 +115,7 @@ public class MainFragment extends SupportFragment {
                 mGestureDetector.onTouchEvent(event);
                 return true;
             }
+
         });
 
 
@@ -135,9 +139,9 @@ public class MainFragment extends SupportFragment {
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp,
                         "首页").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.ic_location_on_white_24dp,
-                        "地图").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.ic_find_replace_white_24dp,
+                .addItem(new BottomNavigationItem(R.drawable.ic_problem_128,
+                        "问题").setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.ic_index_zhibiao,
                         "指标").setActiveColorResource(R.color.orange))
                 .addItem(new BottomNavigationItem(R.drawable.ic_settings_grey_500_24dp,
                         "管理").setActiveColorResource(R.color.orange))
@@ -184,48 +188,110 @@ public class MainFragment extends SupportFragment {
         start(targetFragment);
     }
 
+    class ScrollView extends FrameLayout {
 
-    //设置手势识别监听器
-    class LearnGestureListener extends GestureDetector.SimpleOnGestureListener {
+        public ScrollView(Context context) {
+            super(context);
+        }
+
         @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getX() - e2.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            //TODOAuto-generatedmethodstub
+            mGestureDetector.onTouchEvent(ev); //让GestureDetector响应触碰事件
+//            super.dispatchTouchEvent(ev); //让Activity响应触碰事件
+            return false;
+        }
 
-                if (newSelectedPosition >= 3) {
-                    newSelectedPosition = 0;
-                } else {
-                    newSelectedPosition = newSelectedPosition + 1;
-                }
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            return super.onInterceptTouchEvent(ev);
+        }
 
-                showHideFragment(mFragments[newSelectedPosition], mFragments[lastSelectedPosition]);
-                bottomNavigationBar.setFirstSelectedPosition(newSelectedPosition)
-                        .initialise();
-                lastSelectedPosition = newSelectedPosition;
 
-            } else if (e2.getX() - e1.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
-                if (newSelectedPosition <= 0) {
-                    newSelectedPosition = 3;
-                } else {
-                    newSelectedPosition = newSelectedPosition - 1;
-                }
+        }
 
-                showHideFragment(mFragments[newSelectedPosition], mFragments[lastSelectedPosition]);
-                bottomNavigationBar.setFirstSelectedPosition(newSelectedPosition)
-                        .initialise();
-                lastSelectedPosition = newSelectedPosition;
+        //设置手势识别监听器
+        class LearnGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return false;
             }
-            return true;
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+//                scrollBy((int) distanceX, getScrollY());
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                if (e1.getX() - e2.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+
+                    if (newSelectedPosition >= 3) {
+                        newSelectedPosition = 0;
+                    } else {
+                        newSelectedPosition = newSelectedPosition + 1;
+                    }
+
+                    showHideFragment(mFragments[newSelectedPosition], mFragments[lastSelectedPosition]);
+                    bottomNavigationBar.setFirstSelectedPosition(newSelectedPosition)
+                            .initialise();
+                    lastSelectedPosition = newSelectedPosition;
+
+                } else if (e2.getX() - e1.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
+                    if (newSelectedPosition <= 0) {
+                        newSelectedPosition = 3;
+                    } else {
+                        newSelectedPosition = newSelectedPosition - 1;
+                    }
+
+                    showHideFragment(mFragments[newSelectedPosition], mFragments[lastSelectedPosition]);
+                    bottomNavigationBar.setFirstSelectedPosition(newSelectedPosition)
+                            .initialise();
+                    lastSelectedPosition = newSelectedPosition;
+                }
+                return true;
+            }
+
+            //此方法必须重写且返回真，否则onFling不起效
+//        @Override
+//        public boolean onDown(MotionEvent e) {
+//            return true;
+//        }
         }
 
-        //此方法必须重写且返回真，否则onFling不起效
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
+        public void showToast(String text) {
+            Toast.makeText(App.getContext(), text, Toast.LENGTH_SHORT).show();
         }
-    }
 
-    public void showToast(String text) {
-        Toast.makeText(App.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
+        //在Fragment中注册事件
+//    ((MainActivity)getActivity()).registerMyOnTouchListener(myOnTouchListener);
 
-}
+//    public MainActivity.MyOnTouchListener myOnTouchListener = new MainActivity.MyOnTouchListener() {
+//        @Override
+//        public boolean onTouch(MotionEvent ev) {
+//
+//            //让GestureDetector先响应事件
+//            boolean event = mGestureDetector.onTouchEvent(ev);
+//            return event;
+//        }
+//    };
+
+    }

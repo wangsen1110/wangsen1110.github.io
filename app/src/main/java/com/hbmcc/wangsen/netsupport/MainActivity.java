@@ -19,6 +19,8 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ import java.util.concurrent.Executors;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportActivityDelegate;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
@@ -185,7 +188,7 @@ public class MainActivity extends SupportActivity {
         //在网络定位时，是否需要设备方向 true:需要 ; false:不需要。
         option.setNeedDeviceDirect(true);
         // getLocationDescribe()中得到数据，ex:"在天安门附近"， 可以用作地址信息的补充
-//        option.setIsNeedLocationDescribe(true);
+        option.setIsNeedLocationDescribe(true);
         //设置是否允许仿真GPS信号
         option.setEnableSimulateGps(true);
         //默认高精度，设置定位模式，高精度，低功耗，仅设备
@@ -249,7 +252,7 @@ public class MainActivity extends SupportActivity {
 //                    Toast.makeText(App.getContext(), NetworkStatus.RSRP +"未检测到SIM数据包，请关闭WIFI，打开数据连接", Toast.LENGTH_LONG).show();
 //                    Log.e("7", NetworkStatus.RSRP+"NetworkStatus.RSRP****** \t" + signalStrength.getClass().getMethod("getDbm").invoke(signalStrength));
                 NetworkStatus.RSRQ = (Integer) signalStrength.getClass().getMethod("getLteRsrq").invoke(signalStrength);
-//                    NetworkStatus.RSSI = -113 + 2 * (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
+                    NetworkStatus.RSSI = -113 + 2 * (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
                 if (DeviceUtils.getModel().contains("-AL00") || DeviceUtils.getModel().contains("-AN00") || DeviceUtils.getModel().contains("-TL00"))
                     NetworkStatus.SINR = (Integer) signalStrength.getClass().getMethod("getLteRssnr").invoke(signalStrength);
                 else
@@ -343,6 +346,71 @@ public class MainActivity extends SupportActivity {
 //            }catch (Exception e){e.printStackTrace();}
 //        }
 //        return subscriberId;
+//    }
+
+
+//    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(10);
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        for (MyOnTouchListener listener : onTouchListeners) {
+//            listener.onTouch(ev);
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
+
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev){
+////TODOAuto-generatedmethodstub
+//        _mActivity.onTouchEvent(ev); //让GestureDetector响应触碰事件
+//        super.dispatchTouchEvent(ev); //让Activity响应触碰事件
+//        return false;
+//    }
+
+
+
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev){
+//        //让GestureDetector响应触碰事件
+//        gesture.onTouchEvent(ev);
+//        //让Activity响应触碰事件
+//        super.dispatchTouchEvent(ev);
+//        return false;
+//    }
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        return gesture.onTouchEvent(event);
+//    }
+
+//    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+//        onTouchListeners.add(myOnTouchListener);
+//    }
+//    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+//        onTouchListeners.remove(myOnTouchListener) ;
+//    }
+//    public interface MyOnTouchListener {
+//        public boolean onTouch(MotionEvent ev);
+//    }
+
+
+
+//    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(
+//            10);
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        for (MyOnTouchListener listener : onTouchListeners) {
+//            listener.onTouch(ev);
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
+//
+//    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+//        onTouchListeners.add(myOnTouchListener);
+//    }
+//    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+//        onTouchListeners.remove(myOnTouchListener) ;
+//    }
+//    public interface MyOnTouchListener {
+//        public boolean onTouch(MotionEvent ev);
 //    }
 
 }

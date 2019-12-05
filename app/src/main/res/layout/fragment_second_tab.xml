@@ -34,9 +34,11 @@
                 android:id="@+id/btn_fragment_second_tab_back"
                 android:layout_width="30dp"
                 android:layout_height="20dp"
-                android:alpha="0.5"
+
                 android:background="@drawable/back_icon"
                 />
+
+<!--            android:alpha="1"-->
 
             <TextView
                 android:id="@+id/textView_fragment_second_tab_current_position_lon_lat"
@@ -386,8 +388,7 @@
             android:id="@+id/textView_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="80dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:text="     -75     -85      -95   -105  -115  -125"
             android:textColor="@color/textColor2"

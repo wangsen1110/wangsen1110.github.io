@@ -22,6 +22,7 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
@@ -127,11 +128,11 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
     private double mCurrentLon = 0.0;
     private float mCurrentAccracy;
     private MyLocationData locData;
-    private List<LteBasestationCell> lteBasestationCellList = new ArrayList<>();
-    private List<LteBasestationCell> currentLteBasestationCellList = new ArrayList<>();
-    private List<LteBasesCustom> lteBasesCustomList = new ArrayList<>();//规划自定义数据集合
-    private List<LteBasesTrack> lteBasesTrackList = new ArrayList<>();//规划自定义数据集合
-    private List<LteBasesGrid> lteBasesGridList1 = new ArrayList<>();
+    private static List<LteBasestationCell> lteBasestationCellList = new ArrayList<>();
+    private static List<LteBasestationCell> currentLteBasestationCellList = new ArrayList<>();
+    private static List<LteBasesCustom> lteBasesCustomList = new ArrayList<>();//规划自定义数据集合
+    private static List<LteBasesTrack> lteBasesTrackList = new ArrayList<>();//规划自定义数据集合
+    private static List<LteBasesGrid> lteBasesGridList1 = new ArrayList<>();
     private MarkerOptions markerOptions = new MarkerOptions();//构建MarkerOption，用于在地图上添加Marker
     private MarkerOptions markerOptionscustom = new MarkerOptions();
     private MarkerOptions markerOptionsttrack = new MarkerOptions();
@@ -213,7 +214,7 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second_tab, container,
                 false);
-        mapstatusdistance.add(new LatLng(114.45703, 31.788457));
+        mapstatusdistance.add(new LatLng(112.45703, 30.788457));
         initView(view);
         return view;
     }
@@ -247,11 +248,11 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
 
     @Override
     public void onResume() {
-        mMapView.onResume();
+//        mMapView.onResume();
         super.onResume();
-        //为系统的方向传感器注册监听器
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-                SensorManager.SENSOR_DELAY_UI);
+        mapstatusdistance.clear();
+        mapstatusdistance.add(new LatLng(112.45703, 30.788457));
+        goToCurrentLocation();
     }
 
     @Override
@@ -484,7 +485,6 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
                 //lteBasestationCellList.get(marker.getZIndex()).getName();
                 if (lastSelectedMarker != null) {
 
-
                     ((MainFragment) getPreFragment()).startBrotherFragment(LteBasestationcellDetailInfoFragment
                             .newInstance(lteBasestationCellList.get(lastSelectedMarker.getZIndex())));
                 }
@@ -613,12 +613,12 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
         //显示指南针
         UiSettings mUiSettings = mBaiduMap.getUiSettings();
-        //mUiSettings.setAllGesturesEnabled(false);
+        mUiSettings.setAllGesturesEnabled(false);
         //实例化UiSettings类对象
         mUiSettings.setCompassEnabled(true);
 
         //通过设置enable为true或false 选择是否启用地图缩放手势
-        //mUiSettings.setZoomGesturesEnabled(true);
+        mUiSettings.setZoomGesturesEnabled(true);
 
         mUiSettings.setOverlookingGesturesEnabled(true);
 
@@ -697,9 +697,8 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
     }
 
     private void goToCurrentLocation() {
-        LatLng ll = new LatLng(mCurrentLat, mCurrentLon);
         MapStatus.Builder builder = new MapStatus.Builder();
-        builder.target(ll).zoom(18.0f);
+        builder.target(new LatLng(mCurrentLat, mCurrentLon)).zoom(18.0f);
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
 

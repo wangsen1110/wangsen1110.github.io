@@ -1,59 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
-
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backGround"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="内容一"
-        android:textColor="#03A9F4"
-        android:textSize="24sp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="80dp"
-        android:gravity="center"
-        android:text="内容二"
-        android:textColor="#03A9F4"
-        android:textSize="24sp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="80dp"
-        android:gravity="center"
-        android:text="内容三"
-        android:textColor="#03A9F4"
-        android:textSize="24sp" />
+    <!--    <android.support.v7.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_margin="6dp"-->
+    <!--        app:cardCornerRadius="9dp"-->
+    <!--        tools:ignore="MissingConstraints">-->
 
-    <Button
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="80dp"
-        android:gravity="center"
-        android:text="内容四"
-        android:textColor="#03A9F4"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="9dp"
+        tools:ignore="MissingConstraints">
 
-    <Button
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backGround">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangles_with_corners"
+                android:divider="@drawable/divider_line"
+                android:orientation="vertical"
+                android:showDividers="middle"> <!-- 运营商版块 -->
+                <Button
+                    android:id="@+id/btn_fragment_forth_tab_clear"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="60dp"
+                    android:background="#BBDEFB"
+                    android:text="地市"
+                    android:textSize="18dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround">   <!-- 运营商版块1 -->
+
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_operator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="中国移动"
+                        android:textColor="#1F1F1F"
+                        android:textSize="13.5dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>  <!-- 运营商版块1 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textBackGround">   <!-- 运营商版块2 -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/textBackGround">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="IMSI:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_IMSI"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="123456789012345"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IMEI:"
+                            android:textColor="@color/textColor1"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView_fragment_first_tab_IMEI"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="123456789012345"
+                            android:textColor="@color/textColor2"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>  <!-- 运营商版块2 -->
+
+            </LinearLayout> <!-- 运营商版块 -->
+        </RelativeLayout>
+        <!--    </RelativeLayout>-->
+    </android.support.v7.widget.CardView>
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="80dp"
-        android:gravity="center"
-        android:text="内容五"
-        android:textColor="#03A9F4"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@drawable/rectangles_with_corners"
+        android:divider="@drawable/divider_line"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/textBackGround"
+            android:divider="@drawable/divider_line">   <!--标题-->
+            <!--margintop 上面距离-->
+            <TextView
+                android:id="@+id/textView_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="问题详细"
+                android:textColor="@color/textColor2"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangles_with_corners"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linearlayout_fragment_thrid_tab_recent_detail3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/textBackGround"
+                android:orientation="vertical">  <!--无线指标版块-->
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:background="@drawable/recangle"
+                    android:fontFamily="Roboto-ThinItalic.ttf"
+                    android:gravity="center"
+                    android:text="时间"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="无线接通率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="寻呼成功率率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="切换成功率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="无线掉线率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="MR覆盖率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="有效RRC连接"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="上行PRB利用率"
+                    android:textColor="#0A0A0A"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="下行PRB利用率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="VOLTE接通率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="E-RAB建立成功率"
+                    android:textColor="@color/textColor1"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/recangle"
+                    android:gravity="center"
+                    android:text="VoLTE下行时延"
+                    android:textColor="@color/textColor1"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_fragment_third_tab_recent_record3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/textBackGround" /> <!--详细指标item-->
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--    </android.support.v7.widget.CardView>-->
 </LinearLayout>
-</ScrollView>

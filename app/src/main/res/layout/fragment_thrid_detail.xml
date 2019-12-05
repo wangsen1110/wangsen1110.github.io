@@ -121,7 +121,7 @@
                     android:gravity="center"
                     android:text="上行PRB利用率"
                     android:textSize="11sp"
-                    android:textColor="#0A0A0A"/>
+                    android:textColor="@color/textColor1"/>
 
                 <TextView
                     android:layout_width="85sp"

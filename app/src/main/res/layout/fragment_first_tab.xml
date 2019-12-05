@@ -1,313 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGround"
     android:orientation="vertical">
 
-        <include layout="@layout/youyititle" />
+    <include layout="@layout/youyititle" />
 
-        <RelativeLayout
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="9dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backGround">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/backGround">
+            android:background="@drawable/rectangles_with_corners"
+            android:divider="@drawable/divider_line"
+            android:orientation="vertical"
+            android:showDividers="middle"> <!-- 运营商版块 -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textBackGround">   <!-- 运营商版块1 -->
+
+                <TextView
+                    android:id="@+id/textView_fragment_first_tab_operator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="中国移动"
+                    android:textColor="#1F1F1F"
+                    android:textSize="13.5dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>  <!-- 运营商版块1 -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:background="@drawable/rectangles_with_corners"
-                android:divider="@drawable/divider_line"
-                android:orientation="vertical"
-                android:showDividers="middle"> <!-- 运营商版块 -->
+                android:background="@color/textBackGround">   <!-- 运营商版块2 -->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/textBackGround">   <!-- 运营商版块1 -->
+                    android:layout_weight="1"
+                    android:background="@color/textBackGround">
 
                     <TextView
-                        android:id="@+id/textView_fragment_first_tab_operator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="中国移动"
-                        android:textColor="#1F1F1F"
-                        android:textSize="13.5dp"
-                        android:textStyle="bold" />
+                        android:paddingLeft="8dp"
+                        android:text="IMSI:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
 
-                </RelativeLayout>  <!-- 运营商版块1 -->
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_IMSI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="123456789012345"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/textBackGround">   <!-- 运营商版块2 -->
+                    android:layout_weight="1">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/textBackGround">
+                        android:text="IMEI:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="8dp"
-                            android:text="IMSI:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_IMSI"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="123456789012345"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_IMEI"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IMEI:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_IMEI"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="123456789012345"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>  <!-- 运营商版块2 -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/textBackGround">   <!-- 运营商版块3 -->
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="8dp"
-                            android:text="手机型号:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_uemodel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="Mi-MIX2s"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="安卓版本:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_androidversion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="8.1.0"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-                </LinearLayout>  <!-- 运营商版块3 -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/textBackGround">   <!-- 运营商版块2 -->
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="8dp"
-                            android:text="电话号码:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_phonenumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="01234567890"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="当前网络:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_netWorkType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="4G"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-                    </LinearLayout>
+                        android:hint="123456789012345"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
-            </LinearLayout> <!-- 运营商版块 -->
-        </RelativeLayout>
-        <!--    </RelativeLayout>-->
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/backGround">
+            </LinearLayout>  <!-- 运营商版块2 -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:background="@drawable/rectangles_with_corners"
-                android:divider="@drawable/divider_line"
-                android:orientation="vertical"
-                android:showDividers="middle"> <!-- 当前位置版块 -->
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/textBackGround"> <!-- 当前位置版块1 -->
-                    <TextView
-                        android:id="@+id/textView_fragment_first_tab_currentlocname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="湖北省武汉市东西湖区123路456号"
-                        android:textColor="#1F1F1F"
-                        android:textSize="13.5dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                android:background="@color/textBackGround">   <!-- 运营商版块3 -->
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/textBackGround">   <!-- 当前位置版块2 -->
+                    android:layout_weight="1">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:paddingLeft="8dp"
+                        android:text="手机型号:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="8dp"
-                            android:text="经度:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp"/>
-
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_longitude"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="123.45678"
-                            android:singleLine="true"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_uemodel"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:hint="Mi-MIX2s"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="纬度:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_latitude"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="12.34567"
-                            android:singleLine="true"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:text="安卓版本:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="高度:"
-                            android:textColor="@color/textColor1"
-                            android:textSize="13dp"/>
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_androidversion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="8.1.0"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
 
-                        <TextView
-                            android:id="@+id/textView_fragment_first_tab_altitude"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="18"
-                            android:textColor="@color/textColor2"
-                            android:textSize="12dp" />
+                </LinearLayout>
+            </LinearLayout>  <!-- 运营商版块3 -->
 
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textBackGround">   <!-- 运营商版块2 -->
 
-                </LinearLayout> <!-- 当前位置版块2 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-            </LinearLayout><!-- 当前位置版块 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:text="电话号码:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
 
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_phonenumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="01234567890"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前网络:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_netWorkType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="4G"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout> <!-- 运营商版块 -->
+    </RelativeLayout>
+    <!--    </RelativeLayout>-->
+</android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="3dp"
+        app:cardCornerRadius="9dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backGround">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangles_with_corners"
+            android:divider="@drawable/divider_line"
+            android:orientation="vertical"
+            android:showDividers="middle"> <!-- 当前位置版块 -->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textBackGround"> <!-- 当前位置版块1 -->
+                <TextView
+                    android:id="@+id/textView_fragment_first_tab_currentlocname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="湖北省武汉市东西湖区123路456号"
+                    android:textColor="#1F1F1F"
+                    android:textSize="13.5dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textBackGround">   <!-- 当前位置版块2 -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:text="经度:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_longitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="123.45678"
+                        android:singleLine="true"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="纬度:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_latitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="12.34567"
+                        android:singleLine="true"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="高度:"
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/textView_fragment_first_tab_altitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="18"
+                        android:textColor="@color/textColor2"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+            </LinearLayout> <!-- 当前位置版块2 -->
+
+        </LinearLayout><!-- 当前位置版块 -->
+
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="9dp">
 
         <RelativeLayout
             android:id="@+id/textView_fragment_first_tab_lte"
@@ -318,7 +334,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
                 android:background="@drawable/rectangles_with_corners"
                 android:divider="@drawable/divider_line"
                 android:orientation="vertical"
@@ -560,14 +575,21 @@
             </LinearLayout><!-- 当前小区版块 -->
         </RelativeLayout>
 
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        app:cardCornerRadius="9dp">
+        <!--        app:cardElevation="5dp"-->
+
         <RelativeLayout
             android:id="@+id/textView_fragment_first_tab_recent_lte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/textBackGround">
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp">
 
             <TextView
                 android:id="@+id/textView_fragment_first_tab_recent_export"
@@ -794,5 +816,6 @@
             </LinearLayout> <!-- 邻区版块 -->
 
         </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
