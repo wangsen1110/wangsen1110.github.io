@@ -97,16 +97,18 @@ public class DataImport extends BaseMainFragment {
             newCachedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    File lteDatabaseFile = new File(FileUtils.getLteInputFile());//获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
+                    File lteDatabaseFile = new File(FileUtils.getLteInputFile());
+                    //获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
                     LteBasestationCell lteBasestationCell;//获取工参实体类的实例
                     List<LteBasestationCell> lteBasestationCellList = new ArrayList<>();//创建实体类列表
                     String inString;
                     int i = 0;
                     try {
                         BufferedReader reader =
-                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));
+                        //获得输入流
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
-                            String[] inStringSplit = inString.split(",");
+                            String[] inStringSplit  = inString.split(",");
                             if (inStringSplit.length != 18) {
                                 Looper.prepare();
                                 Toast.makeText(App.getContext(), "导入的工参数据格式不对", Toast.LENGTH_SHORT).show();
@@ -196,7 +198,8 @@ public class DataImport extends BaseMainFragment {
                         e.printStackTrace();
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常空值/重复，请处理", Toast.LENGTH_LONG).show();
+                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常空值/重复，请处理",
+                                Toast.LENGTH_LONG).show();
                         ForthTabFragment.fragment.timerCell.cancel();
                         Looper.loop();
                     } finally {
@@ -204,7 +207,7 @@ public class DataImport extends BaseMainFragment {
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "共导入" + (cellNums - 2) + "行数据，用时" + String.format
+                        Toast.makeText(App.getContext(), "基站 共导入" + (cellNums - 1) + "行数据，用时" + String.format
                                 ("%d " +
                                         "s", usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
@@ -226,20 +229,21 @@ public class DataImport extends BaseMainFragment {
 
     public boolean importCustom() {
         startTime = System.currentTimeMillis();
-        if (com.hbmcc.wangsen.netsupport.util.FileUtils.isFileExist(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom())) {
+        if (com.hbmcc.wangsen.netsupport.util.FileUtils.isFileExist(com.hbmcc.wangsen.netsupport.util.FileUtils
+                .getLteInputFilecustom())) {
             newCachedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom());//获得文件对象规划自定义(模板).csv
+                    File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom());
                     LteBasesCustom lteBasesCustom;//获取工参实体类的实例
                     List<LteBasesCustom> lteBasesCustomList = new ArrayList<>();//创建实体类集合
                     String inString;
                     int i = 0;
                     try {
                         BufferedReader reader =
-                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
-                            String[] inStringSplit = inString.split(",");
+                            String[] inStringSplit  = inString.split(",");
 //                            if (inStringSplit.length != 5) {
 //                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
 //                                    @Override
@@ -281,15 +285,15 @@ public class DataImport extends BaseMainFragment {
                         e.printStackTrace();
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG).show();
-                        ForthTabFragment.fragment.timerCell.cancel();
+                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常空值/重复，请处理", Toast.LENGTH_LONG).show();
                         Looper.loop();
                     } finally {
                         endTime = System.currentTimeMillis();
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "共导入" + (cellNums - 2) + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                        Toast.makeText(App.getContext(), "规划 共导入" + (cellNums - 1) + "行数据，用时" + String.format("%d " + "s",
+                                usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
                         msg.obj = "Custom";
                         mhandler.sendMessage(msg);
@@ -308,12 +312,13 @@ public class DataImport extends BaseMainFragment {
 
     public boolean importTrack() {
         startTime = System.currentTimeMillis();
-        if (com.hbmcc.wangsen.netsupport.util.FileUtils.isFileExist(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFiletrack())) {
+        if (com.hbmcc.wangsen.netsupport.util.FileUtils.isFileExist(com.hbmcc.wangsen.netsupport.util.FileUtils
+                .getLteInputFiletrack())) {
             newCachedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
                     if (ForthTabFragment.logChooicePath == "null") {
-                        lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFiletrack());//获得文件对象规划自定义(模板).csv
+                        lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFiletrack());//获得文件.csv
                     } else {
                         lteDatabaseFile = new File(FileUtils.getAppPath() + ForthTabFragment.logChooicePath);
                     }
@@ -322,9 +327,8 @@ public class DataImport extends BaseMainFragment {
                     String inString;
                     int i = 0;
                     try {
-
                         BufferedReader reader =
-                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
+                                new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
                             String[] inStringSplit = inString.split(",");
                             i++;
@@ -350,8 +354,7 @@ public class DataImport extends BaseMainFragment {
                         e.printStackTrace();
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常，请处理", Toast.LENGTH_LONG).show();
-                        ForthTabFragment.fragment.timerCell.cancel();
+                        Toast.makeText(App.getContext(), "第" + cellNums + "行数据异常空值/重复，请处理", Toast.LENGTH_LONG).show();
                         Looper.loop();
                     } finally {
                         LitePal.saveAll(lteBasesTrackList);
@@ -359,7 +362,8 @@ public class DataImport extends BaseMainFragment {
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "共导入" + (cellNums - 2) + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                        Toast.makeText(App.getContext(), "轨迹 共导入" + (cellNums - 1) + "行数据，用时" + String.format("%d " + "s",
+                                usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
                         msg.obj = "Track";
                         mhandler.sendMessage(msg);
@@ -383,7 +387,7 @@ public class DataImport extends BaseMainFragment {
             newCachedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFileGrid());//获得文件对象规划自定义(模板).csv
+                    File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFileGrid());//获得文件.csv
                     LteBasesGrid lteBasesGrid;//获取工参实体类的实例
                     List<LteBasesGrid> lteBasesGridList = new ArrayList<>();//创建实体类集合
                     String inString;
@@ -392,7 +396,7 @@ public class DataImport extends BaseMainFragment {
                         BufferedReader reader =
                                 new BufferedReader(new InputStreamReader(new FileInputStream(lteDatabaseFile), "GBK"));//获得输入流
                         while ((inString = reader.readLine()) != null) {//一行一行读，判断是否为空
-                            String[] inStringSplit = inString.split(",");
+                            String[] inStringSplit  = inString.split(",");
 //                            if (inStringSplit.length != 15) {
 //                                _mActivity.runOnUiThread(new Runnable() {//开启子线程进行提示
 //                                    @Override
@@ -474,7 +478,8 @@ public class DataImport extends BaseMainFragment {
                         final long usedTime = (int) ((endTime - startTime) / 1000);
                         final int cellNums = i;
                         Looper.prepare();
-                        Toast.makeText(App.getContext(), "共导入" + (cellNums - 2) + "行数据，用时" + String.format("%d " + "s", usedTime), Toast.LENGTH_LONG).show();
+                        Toast.makeText(App.getContext(), "栅格 共导入" + (cellNums - 1) + "行数据，用时" + String.format("%d " + "s",
+                                usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
                         msg.obj = "Grid";
                         mhandler.sendMessage(msg);

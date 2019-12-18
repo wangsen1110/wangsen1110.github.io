@@ -148,6 +148,7 @@ public class ForthTabFragment extends BaseMainFragment implements OnProgressBarL
             timerCell.cancel();
         }
         lock.unlock();
+
     }
 
     @Override

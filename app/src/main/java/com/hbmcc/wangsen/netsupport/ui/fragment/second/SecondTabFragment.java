@@ -38,13 +38,13 @@ import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiDetailSearchResult;
-import com.baidu.mapapi.search.poi.PoiIndoorResult;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
+//import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+//import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+//import com.baidu.mapapi.search.poi.PoiDetailResult;
+//import com.baidu.mapapi.search.poi.PoiDetailSearchResult;
+//import com.baidu.mapapi.search.poi.PoiIndoorResult;
+//import com.baidu.mapapi.search.poi.PoiResult;
+//import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
@@ -115,7 +115,7 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
     private TextView textViewFragmentSecondTabCGI;
     private EditText editTextLteLatlonSearch;
 
-    public PoiSearch mPoiSearch;
+    //    public PoiSearch mPoiSearch;
     public LocationStatus locationStatus;
     private Toolbar mToolbar;
 
@@ -308,8 +308,8 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
         mMapView = view.findViewById(R.id.bmapView_fragment_second_tab_bmapview);
         mBaiduMap = mMapView.getMap();
         ThirdTabFragment.thirdlatLng = mMapView.getMap().getMapStatus().target;
-        mPoiSearch = PoiSearch.newInstance();
-        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
+//        mPoiSearch = PoiSearch.newInstance();
+//        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
     }
 
     //懒加载方式
@@ -542,7 +542,7 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
             }
         });
 
-        mPoiSearch.searchInCity((new PoiCitySearchOption()).city("武汉").keyword("武汉").pageNum(10));
+//        mPoiSearch.searchInCity((new PoiCitySearchOption()).city("武汉").keyword("武汉").pageNum(10));
     }
 
     private void btnDotLoad(final LatLng lll) {
@@ -634,7 +634,7 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        double x = sensorEvent.values[SensorManager.DATA_X];
+        double x = sensorEvent.values[SensorManager.AXIS_X];
         if (Math.abs(x - lastX) > 1.0) {
             mCurrentDirection = (int) x;
             locData = new MyLocationData.Builder()
@@ -664,7 +664,6 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
             }
             mCurrentLat = updateUEStatusEvent.ueStatus.locationStatus.latitudeBaidu;
             mCurrentLon = updateUEStatusEvent.ueStatus.locationStatus.longitudeBaidu;
-
             mCurrentAccracy = updateUEStatusEvent.ueStatus.locationStatus.radius;
             locData = new MyLocationData.Builder()
                     .accuracy(mCurrentAccracy)
@@ -1106,8 +1105,8 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
         }
     }
 
-    OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
-        public void onGetPoiResult(PoiResult result) {
+//    OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
+//        public void onGetPoiResult(PoiResult result) {
 //            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
 //                Toast.makeText(App.getContext(), "未搜索到POI数据", Toast.LENGTH_SHORT).show();
 //            }
@@ -1125,26 +1124,26 @@ public class SecondTabFragment extends BaseBackFragment implements SensorEventLi
 //                strInfo += "找到结果";
 //                Toast.makeText(App.getContext(), strInfo, Toast.LENGTH_LONG).show();
 //            }
-        }
+//        }
+//
+//        @Override
+//        public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+//
+//        }
+//
+//        @Override
+//        public void onGetPoiDetailResult(PoiDetailSearchResult poiDetailSearchResult) {
+//            //获取Place详情页检索结果
+//            poiDetailSearchResult.getPoiDetailInfoList();
+//
+//        }
+//
+//        @Override
+//        public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
+//
+//        }
 
-        @Override
-        public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-
-        }
-
-        @Override
-        public void onGetPoiDetailResult(PoiDetailSearchResult poiDetailSearchResult) {
-            //获取Place详情页检索结果
-            poiDetailSearchResult.getPoiDetailInfoList();
-
-        }
-
-        @Override
-        public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-
-        }
-
-    };
+//    };
 
 
 }

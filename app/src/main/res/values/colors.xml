@@ -13,6 +13,12 @@
     <color name="textColor1">#97000000</color>
     <color name="textColor2">#000000</color>
     <color name="backGround">#EAEAEA</color>
+    <color name="textBackGroundSecond">#52000000</color>
+    <color name="backGroundChoose">#E2E2E2</color>
+
     <color name="textBackGround">#FFFFFF</color>
     <color name="btnBackGround">#20000000</color>
+
+    <color name="fifth_blue_big">#E3F2FD</color>
+    <color name="fifth_blue_small">#94BBDEFB</color>
 </resources>

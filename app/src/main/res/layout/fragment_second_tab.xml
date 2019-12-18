@@ -23,31 +23,30 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/weizhi"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:background="#20000000"
-            android:singleLine="true"
-            android:orientation="vertical">
+            android:background="@color/textBackGroundSecond"
+            android:orientation="vertical"
+            android:singleLine="true">
 
             <Button
                 android:id="@+id/btn_fragment_second_tab_back"
                 android:layout_width="30dp"
                 android:layout_height="20dp"
 
-                android:background="@drawable/back_icon"
-                />
+                android:background="@drawable/back_icon" />
 
-<!--            android:alpha="1"-->
+            <!--            android:alpha="1"-->
 
             <TextView
                 android:id="@+id/textView_fragment_second_tab_current_position_lon_lat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="当前经纬度:"
                 android:singleLine="true"
-                android:textColor="@color/textColor2" />
+                android:text="当前经纬度:"
+                android:textColor="@color/textBackGround" />
 
             <TextView
                 android:id="@+id/textView_fragment_second_tab_current_position_definition"
@@ -55,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="地址:"
-                android:textColor="@color/textColor2"
+                android:textColor="@color/textBackGround"
                 android:textSize="13dp" />
 
             <TextView
@@ -66,7 +65,7 @@
                 android:layout_marginTop="0dp"
                 android:singleLine="true"
                 android:text=""
-                android:textColor="@color/textColor2"
+                android:textColor="#3F51B5"
                 android:textSize="13dp" />
 
         </LinearLayout>
@@ -76,8 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="75dp"
             android:background="#20000000"
-            android:singleLine="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:singleLine="true">
 
             <TextView
                 android:id="@+id/textView_fragment_second_tab_clicked_cell"
@@ -97,7 +96,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="35dp"
-            android:background="#2F000000"
+            android:background="@color/textBackGroundSecond"
             android:radius="10dip"
             android:text="开始打点"
             android:textColor="#3F51B5"
@@ -131,7 +130,7 @@
             android:background="@drawable/unfold_more_72px"
             android:text="搜索"
             android:textSize="12dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 
         <TextView
@@ -146,7 +145,7 @@
             android:background="@color/btnBackGround"
             android:text="请选择搜索类别"
             android:textSize="14dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_fragment_lte_latlon_search"
@@ -161,7 +160,8 @@
             android:text="经纬度"
             android:textSize="14dp"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btn_fragment_lte_cgi_search"
             android:layout_width="65dp"
@@ -175,7 +175,7 @@
             android:text="小区"
             android:textSize="14dp"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_fragment_lte__search"
@@ -190,7 +190,7 @@
             android:text="小区"
             android:textSize="14dp"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/linearlayout_fragment_latlon_search"
@@ -207,8 +207,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="true"
                 android:background="@color/btnBackGround"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
@@ -225,8 +225,7 @@
                     android:id="@+id/btn_fragment_lte_basestion_latlon_search"
                     android:layout_width="35dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/search_location_datail_625px"
-                     />
+                    android:background="@drawable/search_location_datail_625px" />
             </LinearLayout>
         </LinearLayout>
 
@@ -246,8 +245,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="true"
                 android:background="#20000000"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
@@ -289,20 +288,20 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="80dp"
-            android:orientation = "vertical">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_fragment_second_tab_change_map_type"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
+                android:layout_width="45dp"
+                android:layout_height="27dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@color/btnBackGround"
+                android:layout_marginRight="6dp"
+                android:background="@color/textBackGroundSecond"
                 android:textColor="#3F51B5"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <CheckBox
@@ -373,12 +372,10 @@
         </LinearLayout>
 
 
-
         <android.support.v7.widget.AppCompatImageView
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="60dp"
             android:layout_width="150dp"
             android:layout_height="12dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
             android:alpha="0.4"
             android:background="@drawable/colorbar" />
@@ -390,7 +387,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
-            android:text="     -75     -85      -95   -105  -115  -125"
+            android:text="        -75    -85      -95   -105  -115  -125"
             android:textColor="@color/textColor2"
             android:textSize="10dp" />
 
