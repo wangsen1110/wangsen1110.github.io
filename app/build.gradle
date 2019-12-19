@@ -90,4 +90,5 @@ dependencies {
     implementation 'com.blankj:utilcode:1.25.8'
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
     implementation 'liji.library.dev:citypickerview:5.1.0'
+    compile 'com.contrarywind:Android-PickerView:4.1.9'
 }
