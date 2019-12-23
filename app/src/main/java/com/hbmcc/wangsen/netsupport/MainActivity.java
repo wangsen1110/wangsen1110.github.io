@@ -349,68 +349,6 @@ public class MainActivity extends SupportActivity {
 //    }
 
 
-//    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(10);
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        for (MyOnTouchListener listener : onTouchListeners) {
-//            listener.onTouch(ev);
-//        }
-//        return super.dispatchTouchEvent(ev);
-//    }
 
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev){
-////TODOAuto-generatedmethodstub
-//        _mActivity.onTouchEvent(ev); //让GestureDetector响应触碰事件
-//        super.dispatchTouchEvent(ev); //让Activity响应触碰事件
-//        return false;
-//    }
-
-
-
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev){
-//        //让GestureDetector响应触碰事件
-//        gesture.onTouchEvent(ev);
-//        //让Activity响应触碰事件
-//        super.dispatchTouchEvent(ev);
-//        return false;
-//    }
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        return gesture.onTouchEvent(event);
-//    }
-
-//    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
-//        onTouchListeners.add(myOnTouchListener);
-//    }
-//    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
-//        onTouchListeners.remove(myOnTouchListener) ;
-//    }
-//    public interface MyOnTouchListener {
-//        public boolean onTouch(MotionEvent ev);
-//    }
-
-
-
-//    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(
-//            10);
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        for (MyOnTouchListener listener : onTouchListeners) {
-//            listener.onTouch(ev);
-//        }
-//        return super.dispatchTouchEvent(ev);
-//    }
-//
-//    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
-//        onTouchListeners.add(myOnTouchListener);
-//    }
-//    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
-//        onTouchListeners.remove(myOnTouchListener) ;
-//    }
-//    public interface MyOnTouchListener {
-//        public boolean onTouch(MotionEvent ev);
-//    }
 
 }

@@ -55,7 +55,6 @@ public class MainFragment extends SupportFragment {
     private int minVelocity = 10;            //最小识别速度
 
     public static MainFragment newInstance() {
-
         Bundle args = new Bundle();
         if (fragment == null) {
             fragment = new MainFragment();
