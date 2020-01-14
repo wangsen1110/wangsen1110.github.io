@@ -38,13 +38,15 @@ import java.util.List;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 
+import static com.hbmcc.wangsen.netsupport.base.EnumHttpQ.THIRD_WIRELESS;
+
 public class ThirdTabFragment extends BaseMainFragment {
     private HttpUtil httpUtil = new HttpUtil();
     static String lalndata = "读取中……";
     String jsonlaln;
     Gson gson = new Gson();
     public static DecimalFormat df = new DecimalFormat("#.00");
-    public static ThirdTabFragment fragment ;
+    public static ThirdTabFragment fragment;
     private boolean isGetData = false;
     public static int ID = 0;
     public static String detailname;
@@ -74,7 +76,7 @@ public class ThirdTabFragment extends BaseMainFragment {
 
     public static ThirdTabFragment newInstance() {
         Bundle args = new Bundle();
-        if(fragment == null) {
+        if (fragment == null) {
             fragment = new ThirdTabFragment();
         }
         fragment.setArguments(args);
@@ -106,9 +108,9 @@ public class ThirdTabFragment extends BaseMainFragment {
         textonclick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!thridWirelessdatalist.isEmpty()){
-                ThirdTabFragment.detailname = thridWirelessdatalist.get(ID).getCellname();
-                fragmentdetail();
+                if (!thridWirelessdatalist.isEmpty()) {
+                    ThirdTabFragment.detailname = thridWirelessdatalist.get(ID).getCellname();
+                    fragmentdetail();
                 }
 //                Toast.makeText(App.getContext(), "ThirdTabFragment.eci的值是 \n" + ThirdTabFragment.eci, Toast.LENGTH_SHORT).show();
             }
@@ -117,7 +119,7 @@ public class ThirdTabFragment extends BaseMainFragment {
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     public void initRecyclerView() {
-            NetworkStatus networkStatus = new NetworkStatus();
+        NetworkStatus networkStatus = new NetworkStatus();
 
 //        方式一
 //        String latLngstring = thirdlatLng.toString();
@@ -137,8 +139,8 @@ public class ThirdTabFragment extends BaseMainFragment {
         thridFailureDatalist = new ArrayList<>();
         thirdComplainDatalist = new ArrayList<>();
 
-        String url = "http://192.168.1.133:8081/query";
-        String qpresult = httpUtil.postJsonRequet(jsonlaln, url);
+        String url = "http://192.168.1.133:8082/query";
+        httpUtil.postJsonRequet(jsonlaln, url,THIRD_WIRELESS);
 
         LocatonConverter.MyLatLng myLatLngWgs84 = LocatonConverter.bd09ToWgs84(new LocatonConverter
                 .MyLatLng(thirdlatLng.latitude, thirdlatLng.longitude));//09经纬度转为s84
@@ -180,7 +182,7 @@ public class ThirdTabFragment extends BaseMainFragment {
         if (thirdComplainDatalistquery.size() > 0) {
             for (int j = 0; j < thirdComplainDatalistquery.size(); j++) {
                 thirdComplainData = thirdComplainDatalistquery.get(j);
-                thirdComplainDatalist.add(new ThridComplainData( thirdComplainData.getTime()+"",
+                thirdComplainDatalist.add(new ThridComplainData(thirdComplainData.getTime() + "",
                         thirdComplainData.getUserid(), thirdComplainData.getCategory(),
                         thirdComplainData.getAddress()));
             }
@@ -228,7 +230,7 @@ public class ThirdTabFragment extends BaseMainFragment {
         if (enter && !isGetData) {
             isGetData = true;
             //   这里可以做网络请求或者需要的数据刷新操作  GetData();
-            initRecyclerView();
+//            initRecyclerView();
         } else {
             isGetData = false;
         }

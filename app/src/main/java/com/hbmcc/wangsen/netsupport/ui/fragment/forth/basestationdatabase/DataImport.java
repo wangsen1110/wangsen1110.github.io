@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.base.BaseMainFragment;
+import com.hbmcc.wangsen.netsupport.base.EnumBaseData;
 import com.hbmcc.wangsen.netsupport.database.LteBasesCustom;
 import com.hbmcc.wangsen.netsupport.database.LteBasesGrid;
 import com.hbmcc.wangsen.netsupport.database.LteBasesTrack;
@@ -25,6 +26,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.CELL;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.CUSTOM;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.GRID;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.TRACK;
+
 
 public class DataImport extends BaseMainFragment {
     ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
@@ -36,22 +42,22 @@ public class DataImport extends BaseMainFragment {
     Handler mhandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            ForthTabFragment.fragment.arrayListCount.add(msg.obj.toString());
+            ForthTabFragment.fragment.arrayListCount.add((EnumBaseData) msg.obj);
             ForthTabFragment.fragment.textCount(ForthTabFragment.fragment.arrayListCount);
         }
     };
 
     public void importData() {
         csvFileLineCell = 0;
-        if (ForthTabFragment.fragment.hashSetCount.contains(ForthTabFragment.fragment.Cell)) {
+        if (ForthTabFragment.fragment.hashSetCount.contains(CELL)) {
             File lteDatabaseFile = new File(FileUtils.getLteInputFile());//获得文件对象name="lteBasestationDatabaseTemplate">4G工参(模板).csv
             csvFileLineCell = csvFileLineCell + com.blankj.utilcode.util.FileUtils.getFileLines(lteDatabaseFile);
         }
-        if (ForthTabFragment.fragment.hashSetCount.contains(ForthTabFragment.fragment.Custom)) {
+        if (ForthTabFragment.fragment.hashSetCount.contains(CUSTOM)) {
             File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFilecustom());//获得文件对象规划自定义(模板).csv
             csvFileLineCell = csvFileLineCell + com.blankj.utilcode.util.FileUtils.getFileLines(lteDatabaseFile) / 2;
         }
-        if (ForthTabFragment.fragment.hashSetCount.contains(ForthTabFragment.fragment.Track)) {
+        if (ForthTabFragment.fragment.hashSetCount.contains(TRACK)) {
             if (ForthTabFragment.logChooicePath == "null") {
                 lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFiletrack());//获得文件对象规划自定义(模板).csv
             } else {
@@ -59,7 +65,7 @@ public class DataImport extends BaseMainFragment {
             }
             csvFileLineCell = csvFileLineCell + com.blankj.utilcode.util.FileUtils.getFileLines(lteDatabaseFile) / 2;
         }
-        if (ForthTabFragment.fragment.hashSetCount.contains(ForthTabFragment.fragment.Grid)) {
+        if (ForthTabFragment.fragment.hashSetCount.contains(GRID)) {
             File lteDatabaseFile = new File(com.hbmcc.wangsen.netsupport.util.FileUtils.getLteInputFileGrid());//获得文件对象规划自定义(模板).csv
             if (csvFileLineCell > 40000) {
                 csvFileLineCell = csvFileLineCell + com.blankj.utilcode.util.FileUtils.getFileLines(lteDatabaseFile) / 2;
@@ -69,18 +75,18 @@ public class DataImport extends BaseMainFragment {
         }
         ForthTabFragment.fragment.progressBarVisibleCell();
 
-        for (String i : ForthTabFragment.fragment.hashSetCount) {
+        for (EnumBaseData i : ForthTabFragment.fragment.hashSetCount) {
             switch (i) {
-                case "Cell":
+                case CELL:
                     importLteDatabase();
                     break;
-                case "Custom":
+                case CUSTOM:
                     importCustom();
                     break;
-                case "Track":
+                case TRACK:
                     importTrack();
                     break;
-                case "Grid":
+                case GRID:
                     importGrid();
                     break;
                 default:
@@ -211,7 +217,7 @@ public class DataImport extends BaseMainFragment {
                                 ("%d " +
                                         "s", usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
-                        msg.obj = "Cell";
+                        msg.obj = CELL;
                         mhandler.sendMessage(msg);
                         Looper.loop();
                     }
@@ -295,7 +301,7 @@ public class DataImport extends BaseMainFragment {
                         Toast.makeText(App.getContext(), "规划 共导入" + (cellNums - 1) + "行数据，用时" + String.format("%d " + "s",
                                 usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
-                        msg.obj = "Custom";
+                        msg.obj = CUSTOM;
                         mhandler.sendMessage(msg);
                         Looper.loop();
                     }
@@ -365,7 +371,7 @@ public class DataImport extends BaseMainFragment {
                         Toast.makeText(App.getContext(), "轨迹 共导入" + (cellNums - 1) + "行数据，用时" + String.format("%d " + "s",
                                 usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
-                        msg.obj = "Track";
+                        msg.obj = TRACK;
                         mhandler.sendMessage(msg);
                         Looper.loop();
                     }
@@ -481,7 +487,7 @@ public class DataImport extends BaseMainFragment {
                         Toast.makeText(App.getContext(), "栅格 共导入" + (cellNums - 1) + "行数据，用时" + String.format("%d " + "s",
                                 usedTime), Toast.LENGTH_LONG).show();
                         Message msg = new Message();
-                        msg.obj = "Grid";
+                        msg.obj = GRID;
                         mhandler.sendMessage(msg);
                         Looper.loop();
                     }

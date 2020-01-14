@@ -12,9 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoLte;
-import android.telephony.CellInfoNr;
-import android.telephony.CellSignalStrengthLte;
-import android.telephony.CellSignalStrengthNr;
+
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
@@ -66,7 +64,7 @@ public class MainActivity extends SupportActivity {
     private DownloadSpeedStatus downloadSpeedStatus;
     private LocationStatus locationStatus;
 
-    MyPhoneStateListener myPhoneStateListener;
+    public static MyPhoneStateListener myPhoneStateListener;
     TelephonyManager mTelephonyManager;
 
     //只有Event中前后两条记录的time不一致，才进行广播
@@ -253,7 +251,8 @@ public class MainActivity extends SupportActivity {
 //                    Log.e("7", NetworkStatus.RSRP+"NetworkStatus.RSRP****** \t" + signalStrength.getClass().getMethod("getDbm").invoke(signalStrength));
                 NetworkStatus.RSRQ = (Integer) signalStrength.getClass().getMethod("getLteRsrq").invoke(signalStrength);
                     NetworkStatus.RSSI = -113 + 2 * (Integer) signalStrength.getClass().getMethod("getLteSignalStrength").invoke(signalStrength);
-                if (DeviceUtils.getModel().contains("-AL00") || DeviceUtils.getModel().contains("-AN00") || DeviceUtils.getModel().contains("-TL00"))
+                if (DeviceUtils.getModel().contains("-AL00") || DeviceUtils.getModel().contains("-AN00") ||
+                        DeviceUtils.getModel().contains("-TL00") ||  DeviceUtils.getModel().contains("-AL10"))
                     NetworkStatus.SINR = (Integer) signalStrength.getClass().getMethod("getLteRssnr").invoke(signalStrength);
                 else
                     NetworkStatus.SINR = (Integer) signalStrength.getClass().getMethod("getLteRssnr").invoke(signalStrength) / 10;

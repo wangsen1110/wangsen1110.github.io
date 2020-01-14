@@ -1,6 +1,9 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.first;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.FileIOUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.adapter.NeighbourCellAdapter;
@@ -29,8 +35,10 @@ import com.hbmcc.wangsen.netsupport.telephony.NetworkStatus;
 import com.hbmcc.wangsen.netsupport.telephony.UeStatus;
 import com.hbmcc.wangsen.netsupport.telephony.cellinfo.LteCellInfo;
 import com.hbmcc.wangsen.netsupport.ui.fragment.MainFragment;
+import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.FifthData.FifthProblemData;
 import com.hbmcc.wangsen.netsupport.ui.fragment.second.SecondTabFragment;
 import com.hbmcc.wangsen.netsupport.util.FileUtils;
+import com.hbmcc.wangsen.netsupport.util.HttpUtil;
 import com.hbmcc.wangsen.netsupport.util.NumberFormat;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -38,15 +46,18 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.litepal.LitePal;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 
+import static com.hbmcc.wangsen.netsupport.base.EnumHttpQ.FIRST_LOGIN;
 import static com.hbmcc.wangsen.netsupport.telephony.NetworkStatus.netOperators;
 
 public class FirstTabFragment extends BaseMainFragment {
@@ -85,7 +96,7 @@ public class FirstTabFragment extends BaseMainFragment {
     private TextView textViewFragmentFirstTabExport;
     private RecyclerView recyclerViewFragmentFirstTabRecentRecord;
     private RecyclerView recyclerViewFragmentFirstTabNeighbourCellInfo;
-    private List<UeStatus> recentueStatusRecordList;
+    public List<UeStatus> recentueStatusRecordList;
     private List<NetworkStatus> recentNetworkStatusRecordList;
     private List<LteCellInfo> neighbourCellList;
     private TextView btnFragmentFirstTabConvert;
@@ -106,6 +117,7 @@ public class FirstTabFragment extends BaseMainFragment {
 
     private static final String TAG1 = "HomeFragment";
 
+
     public static FirstTabFragment newInstance() {
         Bundle args = new Bundle();
         if (fragment == null) {
@@ -124,7 +136,7 @@ public class FirstTabFragment extends BaseMainFragment {
     }
 
     private void initView(View view) {
-        mGestureDetector = new GestureDetector(App.getContext(),new  LearnGestureListener());
+        mGestureDetector = new GestureDetector(App.getContext(), new LearnGestureListener());
 //        为fragment添加OnTouchListener监听器
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -183,6 +195,7 @@ public class FirstTabFragment extends BaseMainFragment {
         recentAvgSignalStrength = 0;
         FileUtils.initialStorage();
 
+
         btn_fragment_bar_tab_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,7 +238,9 @@ public class FirstTabFragment extends BaseMainFragment {
             }
         });
 
+//        login();
     }
+
 
     public void startDot() {
         indexStartDot = recentueStatusRecordList.size();
@@ -395,6 +410,7 @@ public class FirstTabFragment extends BaseMainFragment {
             Toast.makeText(App.getContext(), "网络出现问题，请检查", Toast.LENGTH_LONG).show();
         }
     }
+
     /**
      * Reselected Tab
      */
@@ -430,12 +446,11 @@ public class FirstTabFragment extends BaseMainFragment {
                 } else {
                     MainFragment.newSelectedPosition = MainFragment.newSelectedPosition + 1;
                 }
-
-                showHideFragment(MainFragment.mFragments[MainFragment.newSelectedPosition], MainFragment.mFragments[MainFragment.lastSelectedPosition]);
-                MainFragment.bottomNavigationBar.setFirstSelectedPosition(MainFragment.newSelectedPosition)
-                        .initialise();
+                showHideFragment(MainFragment.mFragments[MainFragment.newSelectedPosition],
+                        MainFragment.mFragments[MainFragment.lastSelectedPosition]);
+                MainFragment.bottomNavigationBar.setFirstSelectedPosition(MainFragment.newSelectedPosition).initialise();
                 MainFragment.lastSelectedPosition = MainFragment.newSelectedPosition;
-                
+
             } else if (e2.getX() - e1.getX() > verticalMinistance && Math.abs(velocityX) > minVelocity) {
                 if (MainFragment.newSelectedPosition <= 0) {
                     MainFragment.newSelectedPosition = 3;
@@ -450,9 +465,27 @@ public class FirstTabFragment extends BaseMainFragment {
             return true;
         }
     }
+
     public void showToast(String text) {
         Toast.makeText(App.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
+
+//    public void handle() {
+//        Message msg = new Message();
+//        mhandler.sendMessage(msg);
+//    }
+//
+//    Handler mhandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if (HttpUtil.qresult == null) {
+//                showToast("登录失败");
+//            } else {
+//                showToast("登录成功");
+//            }
+//
+//        }
+//    };
 
 }

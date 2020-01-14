@@ -93,8 +93,8 @@ public class NetworkStatus {
                     tower.cellType = CellInfo.STRING_TYPE_LTE;
                     tower.isRegitered = i.isRegistered();
                     tower.tac = cellIdentityLte.getTac();
-                    tower.mobileCountryCode = cellIdentityLte.getMccString();
-                    tower.mobileNetworkCode = cellIdentityLte.getMncString();
+                    tower.mobileCountryCode = cellIdentityLte.getMcc()+"";
+                    tower.mobileNetworkCode = cellIdentityLte.getMnc()+"";
                     tower.cellId = cellIdentityLte.getCi();
                     tower.timingAdvance = ((CellInfoLte) i).getCellSignalStrength().getTimingAdvance();
 
@@ -197,6 +197,7 @@ public class NetworkStatus {
         netOperators = mTelephonyManager.getNetworkOperatorName();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private static int determineNetworkType(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager == null) {
@@ -245,13 +246,14 @@ public class NetworkStatus {
                 return TelephonyManager.NETWORK_TYPE_UNKNOWN;
             case TelephonyManager.NETWORK_TYPE_IWLAN:
                 return TelephonyManager.NETWORK_TYPE_IWLAN;
-            case TelephonyManager.NETWORK_TYPE_NR:
-                return CellInfo.NETWORK_TYPE_NR;
+//            case TelephonyManager.NETWORK_TYPE_NR:
+//                return CellInfo.NETWORK_TYPE_NR;
             default:
                 return CellInfo.TYPE_UNKNOWN;
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void getServerCellInfoOnOlderDevices() {
         if (ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -288,6 +290,7 @@ public class NetworkStatus {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public String getCellType() {
         if (isWifiConnected()) {
             return "WIFI";

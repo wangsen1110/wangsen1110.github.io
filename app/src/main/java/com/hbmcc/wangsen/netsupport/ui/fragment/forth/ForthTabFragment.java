@@ -18,12 +18,14 @@ import com.daimajia.numberprogressbar.OnProgressBarListener;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
 import com.hbmcc.wangsen.netsupport.base.BaseMainFragment;
+import com.hbmcc.wangsen.netsupport.base.EnumBaseData;
 import com.hbmcc.wangsen.netsupport.database.LteBasesCustom;
 import com.hbmcc.wangsen.netsupport.database.LteBasesGrid;
 import com.hbmcc.wangsen.netsupport.database.LteBasesTrack;
 import com.hbmcc.wangsen.netsupport.database.LteBasestationCell;
 import com.hbmcc.wangsen.netsupport.event.TabSelectedEvent;
 import com.hbmcc.wangsen.netsupport.ui.fragment.MainFragment;
+import com.hbmcc.wangsen.netsupport.ui.fragment.first.FirstTabFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase.BasestationDatabaseFragment;
 import com.hbmcc.wangsen.netsupport.ui.fragment.forth.basestationdatabase.DataImport;
 
@@ -31,7 +33,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.litepal.LitePal;
 
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.Lock;
@@ -40,13 +41,13 @@ import java.util.concurrent.locks.ReentrantLock;
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 
 import static com.blankj.utilcode.util.ViewUtils.runOnUiThread;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.CELL;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.CUSTOM;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.GRID;
+import static com.hbmcc.wangsen.netsupport.base.EnumBaseData.TRACK;
 
 public class ForthTabFragment extends BaseMainFragment implements OnProgressBarListener {
     public static ForthTabFragment fragment;
-    public String Cell = "Cell";
-    public String Custom = "Custom";
-    public String Track = "Track";
-    public String Grid = "Grid";
     private Button btnFragmentForthTabBasestationDatabase;
     private CheckBox checkBox4GBaseData;
     private CheckBox checkBoxCustom;
@@ -59,12 +60,13 @@ public class ForthTabFragment extends BaseMainFragment implements OnProgressBarL
     private Button btnFragmentForthTabImport;
     private Button btnFragmentForthTabClear;
     private Button btnFragmentForthTabAbout;
+    private Button btnFragmentForthTabLogin;
     private TextView trackChoose;
     public static String logChooicePath = "null";
     private String youyiDir;
     private TextView trackPath;
-    public static HashSet<String> arrayListCount;
-    public static HashSet<String> hashSetCount;
+    public static HashSet<EnumBaseData> arrayListCount;
+    public static HashSet<EnumBaseData> hashSetCount;
     private DataImport dataImport;
     private NumberProgressBar bnpCell;
     public Timer timerCell;
@@ -103,14 +105,15 @@ public class ForthTabFragment extends BaseMainFragment implements OnProgressBarL
         btnFragmentForthTabImport = view.findViewById(R.id.btn_fragment_forth_tab_import);
         btnFragmentForthTabClear = view.findViewById(R.id.btn_fragment_forth_tab_clear);
         btnFragmentForthTabAbout = view.findViewById(R.id.btn_fragment_forth_tab_about);
+        btnFragmentForthTabLogin = view.findViewById(R.id.btn_fragment_forth_tab_login);
         trackChoose = view.findViewById(R.id.text_fragment_basestion_track_choose);
         trackPath = view.findViewById(R.id.text_fragment_basestion_track_path);
-        arrayListCount = new HashSet<String>();
-        hashSetCount = new HashSet<String>();
-        arrayListCount.add(Cell);
-        arrayListCount.add(Custom);
-        arrayListCount.add(Track);
-        arrayListCount.add(Grid);
+        arrayListCount = new HashSet<>();
+        hashSetCount = new HashSet<>();
+        arrayListCount.add(CELL);
+        arrayListCount.add(CUSTOM);
+        arrayListCount.add(TRACK);
+        arrayListCount.add(GRID);
         textCount(arrayListCount);
 
         bnpCell = (NumberProgressBar) view.findViewById(R.id.number_progress_bar_cell);
@@ -179,16 +182,16 @@ public class ForthTabFragment extends BaseMainFragment implements OnProgressBarL
                     Toast.makeText(App.getContext(), "未选择数据!\n请勾选数据选项后,再导入", Toast.LENGTH_SHORT).show();
                 } else {
                     if (checkBox4GBaseData.isChecked()) {
-                        hashSetCount.add(Cell);
+                        hashSetCount.add(CELL);
                     }
                     if (checkBoxCustom.isChecked()) {
-                        hashSetCount.add(Custom);
+                        hashSetCount.add(CUSTOM);
                     }
                     if (checkBoxTrack.isChecked()) {
-                        hashSetCount.add(Track);
+                        hashSetCount.add(TRACK);
                     }
                     if (checkBoxGrid.isChecked()) {
-                        hashSetCount.add(Grid);
+                        hashSetCount.add(GRID);
                     }
                     dataImport.importData();
                 }
@@ -204,40 +207,48 @@ public class ForthTabFragment extends BaseMainFragment implements OnProgressBarL
                 } else {
                     if (checkBox4GBaseData.isChecked()) {
                         LitePal.deleteAll(LteBasestationCell.class);
-                        arrayListCount.add(Cell);
+                        arrayListCount.add(CELL);
                     }
                     if (checkBoxCustom.isChecked()) {
                         LitePal.deleteAll(LteBasesCustom.class);
-                        arrayListCount.add(Custom);
+                        arrayListCount.add(CUSTOM);
                     }
                     if (checkBoxTrack.isChecked()) {
                         LitePal.deleteAll(LteBasesTrack.class);
-                        arrayListCount.add(Track);
+                        arrayListCount.add(TRACK);
                     }
                     if (checkBoxGrid.isChecked()) {
                         LitePal.deleteAll(LteBasesGrid.class);
-                        arrayListCount.add(Grid);
+                        arrayListCount.add(GRID);
                     }
                     Toast.makeText(App.getContext(), "缓冲数据已清空", Toast.LENGTH_SHORT).show();
                     textCount(arrayListCount);
                 }
             }
         });
+
+
+        btnFragmentForthTabLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainFragment) getParentFragment()).startBrotherFragment(LoginFragment.newInstance("登录"));
+            }
+        });
     }
 
-    public void textCount(Set<String> ints) {
-        for (String i : ints) {
+    public void textCount(HashSet<EnumBaseData> ints) {
+        for (EnumBaseData i : ints) {
             switch (i) {
-                case "Cell":
+                case CELL:
                     textView4GBaseData.setText("已导入" + LitePal.count(LteBasestationCell.class) + "条");
                     break;
-                case "Custom":
+                case CUSTOM:
                     textViewCustom.setText("已导入" + LitePal.count(LteBasesCustom.class) + "条");
                     break;
-                case "Track":
+                case TRACK:
                     textViewTrack.setText("已导入" + LitePal.count(LteBasesTrack.class) + "条");
                     break;
-                case "Grid":
+                case GRID:
                     textViewGrid.setText("已导入" + LitePal.count(LteBasesGrid.class) + "条");
                     break;
                 default:

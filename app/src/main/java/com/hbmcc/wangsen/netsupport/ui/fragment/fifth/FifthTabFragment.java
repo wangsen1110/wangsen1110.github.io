@@ -1,11 +1,14 @@
 package com.hbmcc.wangsen.netsupport.ui.fragment.fifth;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,73 +28,62 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hbmcc.wangsen.netsupport.App;
 import com.hbmcc.wangsen.netsupport.R;
-import com.hbmcc.wangsen.netsupport.adapter.ComplainAdapter;
-import com.hbmcc.wangsen.netsupport.adapter.FailureAdapter;
-import com.hbmcc.wangsen.netsupport.adapter.WirelessAdapter;
+import com.hbmcc.wangsen.netsupport.adapter.fifth.ProblemAdapter;
 import com.hbmcc.wangsen.netsupport.base.BaseMainFragment;
 import com.hbmcc.wangsen.netsupport.event.TabSelectedEvent;
+import com.hbmcc.wangsen.netsupport.event.UpdateUeStatusEvent;
+import com.hbmcc.wangsen.netsupport.telephony.NetworkStatus;
 import com.hbmcc.wangsen.netsupport.ui.fragment.MainFragment;
+import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.FifthData.FifthProblemData;
 import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.bean.CardBean;
 import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.bean.GetJsonDataUtil;
 import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.bean.JsonBean;
-import com.hbmcc.wangsen.netsupport.ui.fragment.fifth.bean.TestCircleWheelViewActivity;
-import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridComplainData;
-import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridFailureData;
-import com.hbmcc.wangsen.netsupport.ui.fragment.third.WirelessData.ThridWirelessData;
+import com.hbmcc.wangsen.netsupport.ui.fragment.forth.ForthTabFragment;
+import com.hbmcc.wangsen.netsupport.util.HttpUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONArray;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
+import static com.hbmcc.wangsen.netsupport.base.EnumHttpQ.FIFTH_PROBLEM;
+
 
 public class FifthTabFragment extends BaseMainFragment {
 
     public static FifthTabFragment fragment;
-    private RecyclerView recyclerViewFragmentThridTabRecentRecord;
-    private RecyclerView recyclerViewFragmentThridTabRecentRecord2;
-    private RecyclerView recyclerViewFragmentThridTabRecentRecordcomplain;
-    public List<ThridWirelessData> thridWirelessdatalist;
-    public List<ThridFailureData> thridFailureDatalist;
-    public List<ThridComplainData> thirdComplainDatalist;
-
-    public List<ThridWirelessData> thridWirelessdatalistquery;
-    public List<ThridFailureData> thridFailureDatalistquery;
-    public List<ThridComplainData> thirdComplainDatalistquery;
-
-    public ThridWirelessData thridWirelessdata;
-    public ThridFailureData thridFailureData;
-    public ThridComplainData thirdComplainData;
-
-    ScrollView scrollview;
-    Button btnFifthCityChoose;
-    Button btnFifthDayChoose;
-    Button btnFifthTabAdd;
-    Button btnFifthTabDelete;
-
-    WirelessAdapter wirelessAdapter;
-    FailureAdapter failureAdapter;
-    ComplainAdapter complainAdapter;
-
+    public FifthProblemData fifthProblemData;
+    private ProblemAdapter problemAdapter;
+    private RecyclerView recyclerViewFragmentFifthTabProblemRecentRecord;
+    private List<FifthProblemData> fifthProblemDataList = new ArrayList<>();
+    private List<FifthProblemData> fifthProblemDataListQuery = new ArrayList<FifthProblemData>();
+    private Gson gson = new Gson();
+    private HttpUtil httpUtil = new HttpUtil();
+    private ScrollView scrollview;
+    private Button btnFifthCityChoose;
+    private Button btnFifthDayChoose;
+    private Button btnFifthTabAdd;
+    private Button btnFifthTabDelete;
     private boolean isGetData = false;
-
     //    private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
     private List<JsonBean> options1ItemsJosn = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
-    private Button btn_Options;
-    private Button btn_CustomOptions;
-    private Button btn_CustomTime;
 
     private TimePickerView pvTime, pvCustomTime, pvCustomLunar;
     private OptionsPickerView pvOptions, pvCustomOptions, pvNoLinkOptions;
@@ -101,6 +93,12 @@ public class FifthTabFragment extends BaseMainFragment {
     private ArrayList<String> food = new ArrayList<>();
     private ArrayList<String> clothes = new ArrayList<>();
     private ArrayList<String> computer = new ArrayList<>();
+    private ArrayList<String> timeSelectList = new ArrayList<>();
+
+    private String opt1tx, opt2tx, opt3tx = "湖北汇总";
+    private String dayChooseText = "2020/1/2";
+    private String cityChooseText = "cityChoose";
+    private boolean fristQuery = true;
 
 
     public static FifthTabFragment newInstance() {
@@ -117,10 +115,8 @@ public class FifthTabFragment extends BaseMainFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fifth_tab, container,
                 false);
-
         mFrameLayout = (FrameLayout) view.findViewById(R.id.fragmen_fragment);
         //等数据加载完毕再初始化并显示Picker,以免还未加载完数据就显示,造成APP崩溃。
-
         initView(view);
         return view;
     }
@@ -133,6 +129,7 @@ public class FifthTabFragment extends BaseMainFragment {
         btnFifthDayChoose = view.findViewById(R.id.btn_fragment_fifth_day_choose);
         btnFifthTabAdd = view.findViewById(R.id.btn_fragment_fifth_tab_add);
         btnFifthTabDelete = view.findViewById(R.id.btn_fragment_fifth_tab_delete);
+        recyclerViewFragmentFifthTabProblemRecentRecord = view.findViewById(R.id.recyclerView_fragment_fifth_tab_recent_record);
 
 //        recyclerViewFragmentThridTabRecentRecord = view.findViewById(R.id.recyclerView_fragment_third_tab_recent_record1);
 //        recyclerViewFragmentThridTabRecentRecord2 = view.findViewById(R.id.recyclerView_fragment_third_tab_recent_record2);
@@ -157,13 +154,18 @@ public class FifthTabFragment extends BaseMainFragment {
         super.onLazyInitView(savedInstanceState);
         initJsonData();
 
+        try {
+            ProblemDataQuery(dayChooseText);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         btnFifthCityChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(_mActivity, JsonDataActivity.class));
-//                ((MainFragment) getParentFragment()).startBrotherFragment
-//                        (JsonDataActivity.newInstance());
                 showPickerView();
+                cityChooseText = (String) btnFifthCityChoose.getText();
             }
         });
 
@@ -173,29 +175,111 @@ public class FifthTabFragment extends BaseMainFragment {
             public void onClick(View v) {
                 initTimePicker();
                 pvTime.show(v, false);
+                dayChooseText = (String) btnFifthDayChoose.getText();
             }
         });
 
         btnFifthTabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(_mActivity, TestCircleWheelViewActivity.class));
+                if (dayChooseText.equals("dayChooseText")) {
+                    Toast.makeText(_mActivity, "未选择日期，不知道查询哪一天的指标", Toast.LENGTH_LONG).show();
+                }
+                if (cityChooseText.equals("cityChoose")) {
+                    Toast.makeText(_mActivity, "未选择地区，不知道查询哪地方的指标", Toast.LENGTH_LONG).show();
+                }
+                if (!timeSelectList.contains(dayChooseText) && !cityChooseText.equals("cityChoose") && !dayChooseText.equals("dayChooseText")) {
+                    timeSelectList.add(dayChooseText);
+//                    Toast.makeText(_mActivity,
+//                            !timeSelectList.contains(dayChooseText)+""+
+//                    !cityChooseText.equals("cityChoose")+""+
+//                    !dayChooseText.equals("dayChooseText")+""
+//                            , Toast.LENGTH_LONG).show();
+                    try {
+                        ProblemDataQuery(dayChooseText);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fifthProblemDataListQuery != null && !cityChooseText.equals("cityChoose") && !dayChooseText.equals("dayChooseText")) {
+//                    Toast.makeText(_mActivity, "fifthProblemDataListQuery" +fifthProblemDataListQuery.size() , Toast.LENGTH_SHORT).show();
 
+                    for (int j = 0; j < fifthProblemDataListQuery.size() - 1; j++) {
+                        if (fifthProblemDataListQuery.get(j).getpDistrict().equals(opt3tx) &&
+                                fifthProblemDataListQuery.get(j).getpTime().equals(dayChooseText)) {
+                            fifthProblemDataList.add(fifthProblemDataListQuery.get(j));
+                            break;
+                        }
+
+                    }
+                }
+                initRecyclerView();
             }
         });
 
         btnFifthTabDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                initCustomTimePicker();
-//                initTimePicker();
+                fifthProblemDataList.clear();
+                initRecyclerView();
             }
         });
     }
 
 
-    public void initRecyclerView() {
+    public void handle() {
+        Message msg = new Message();
+        mhandler.sendMessage(msg);
+    }
 
+    Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (!HttpUtil.qresult.equals(null)) {
+                Gson gsonservice = new GsonBuilder().serializeNulls().create();
+                Type type = new TypeToken<List<FifthProblemData>>() {
+                }.getType();
+                fifthProblemDataListQuery = gsonservice.fromJson(HttpUtil.qresult, type);
+
+                for (int j = 0; j < fifthProblemDataListQuery.size() - 1; j++) {
+                    if (fifthProblemDataListQuery.get(j).getpDistrict().equals(opt3tx) &&
+                            fifthProblemDataListQuery.get(j).getpTime().equals(dayChooseText)) {
+                        fifthProblemDataList.add(fifthProblemDataListQuery.get(j));
+                        break;
+                    }
+                }
+                initRecyclerView();
+            } else {
+                Toast.makeText(_mActivity, "未查询到对应数据，请更换日期再查询", Toast.LENGTH_LONG).show();
+            }
+            if (fristQuery) {
+                dayChooseText = "dayChooseText";
+                fristQuery = false;
+            }
+
+        }
+    };
+
+    private void ProblemDataQuery(String ptime) throws Exception {
+
+        HashMap<String, Object> jsonmap = new HashMap<String, Object>();
+        jsonmap.put("latitude", 123.21321);
+        jsonmap.put("longitude", 123.21321);
+        jsonmap.put("userphone", NetworkStatus.phonenumber);
+
+        jsonmap.put("ptime", ptime);
+
+        String jsonlaln = gson.toJson(jsonmap);
+        String url = "http://192.168.1.133:8082/fifth/problemlist";
+        httpUtil.postJsonRequet(jsonlaln, url, FIFTH_PROBLEM);
+    }
+
+
+    public void initRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewFragmentFifthTabProblemRecentRecord.setLayoutManager(layoutManager);
+        problemAdapter = new ProblemAdapter(fifthProblemDataList);
+        recyclerViewFragmentFifthTabProblemRecentRecord.setAdapter(problemAdapter);
     }
 
     @Override
@@ -228,30 +312,32 @@ public class FifthTabFragment extends BaseMainFragment {
         EventBusActivityScope.getDefault(_mActivity).unregister(this);
     }
 
-
     private void showPickerView() {// 弹出选择器
-        if (options1ItemsJosn.isEmpty()){
+        if (options1ItemsJosn.isEmpty()) {
             initJsonData();
         }
         OptionsPickerView pvOptions = new OptionsPickerBuilder(_mActivity, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                String opt1tx = options1ItemsJosn.size() > 0 ?
+                opt1tx = options1ItemsJosn.size() > 0 ?
                         options1ItemsJosn.get(options1).getPickerViewText() : "";
 
-                String opt2tx = options2Items.size() > 0
+                opt2tx = options2Items.size() > 0
                         && options2Items.get(options1).size() > 0 ?
                         options2Items.get(options1).get(options2) : "";
 
-                String opt3tx = options2Items.size() > 0
+                opt3tx = options2Items.size() > 0
                         && options3Items.get(options1).size() > 0
                         && options3Items.get(options1).get(options2).size() > 0 ?
                         options3Items.get(options1).get(options2).get(options3) : "";
 
                 String tx = opt1tx + opt2tx + opt3tx;
                 btnFifthCityChoose.setText(opt3tx);
-                Toast.makeText(_mActivity, "已选择\t\t"+tx, Toast.LENGTH_SHORT).show();
+                if (opt3tx.equals("汇总")) {
+                    btnFifthCityChoose.setText(opt2tx + opt3tx);
+                }
+                Toast.makeText(_mActivity, "已选择\t\t" + tx, Toast.LENGTH_SHORT).show();
             }
         })
                 .setTitleText("城市选择")
@@ -334,9 +420,9 @@ public class FifthTabFragment extends BaseMainFragment {
         //因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
-        startDate.set(2018, 11, 0);
+        startDate.set(2020, 0, 1);
         Calendar endDate = Calendar.getInstance();
-        endDate.set(2019, 11, 28);
+        endDate.set(2020, 1, 1);
         //时间选择器
         pvTime = new TimePickerBuilder(getActivity(), new OnTimeSelectListener() {
             @Override
@@ -381,9 +467,15 @@ public class FifthTabFragment extends BaseMainFragment {
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/M/d");// HH:mm:ss
         return format.format(date);
     }
 
+    private String getTimeDefault() {//获取当前时间的前一天时间
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/M/d");// HH:mm:ss
+        long ms = new Date().getTime() - 1 * 24 * 3600 * 1000L;
+        Date prevDay = new Date(ms);
+        return format.format(prevDay);
+    }
 
 }

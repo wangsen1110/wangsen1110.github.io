@@ -2,13 +2,13 @@ apply plugin: 'com.android.library'
 
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 191201
-        versionName '191201'
+        targetSdkVersion 28
+        versionCode 191227
+        versionName '191227'
 
     }
     buildTypes {
@@ -17,11 +17,11 @@ android {
         }
     }
 
-  //库项目不生成 BuildConfig
-    libraryVariants.all {
-        it.generateBuildConfig.enabled = false
-
-    }
+//  //库项目不生成 BuildConfig
+//    libraryVariants.all {
+//        variant.getGenerateBuildConfigProvider().enb = false
+//
+//    }
 }
 
 dependencies {

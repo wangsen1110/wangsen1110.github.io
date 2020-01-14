@@ -1,520 +1,523 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-
-<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backGround"
-    android:orientation="vertical">
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:background="@color/backGround"
-        app:cardCornerRadius="9dp"
-        tools:ignore="MissingConstraints">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backGround">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:showDividers="middle"> <!-- 运营商版块 -->
-
-                <Button
-                    android:id="@+id/btn_fragment_fifth_city_choose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="4"
-                    android:background="@color/backGroundChoose"
-                    android:drawableRight="@drawable/down_darw_icon_16"
-                    android:text="区域选择"
-                    android:textSize="14dp" />
-
-
-                <Button
-                    android:id="@+id/btn_fragment_fifth_day_choose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="7dp"
-                    android:layout_weight="4"
-                    android:background="@color/backGroundChoose"
-                    android:drawableRight="@drawable/down_darw_icon_16"
-                    android:text="日期选择"
-                    android:textSize="14dp" />
-
-                <Button
-                    android:id="@+id/btn_fragment_fifth_tab_add"
-                    android:layout_width="45dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="3"
-                    android:background="@color/backGroundChoose"
-                    android:text="添加"
-                    android:textSize="14dp" />
-
-                <Button
-                    android:id="@+id/btn_fragment_fifth_tab_delete"
-                    android:layout_width="45dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="3"
-                    android:background="@color/backGroundChoose"
-                    android:text="清空"
-                    android:textSize="14dp" />
-
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:background="@color/textBackGround">   &lt;!&ndash; 运营商版块2 &ndash;&gt;-->
-                <!--                    </LinearLayout>  &lt;!&ndash; 运营商版块2 &ndash;&gt;-->
-
-            </LinearLayout> <!-- 运营商版块 -->
-        </RelativeLayout>
-        <!--    </RelativeLayout>-->
-    </android.support.v7.widget.CardView>
-
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backGround"
+        android:orientation="vertical">
 
-        android:layout_margin="3dp"
-        android:background="@drawable/rectangles_with_corners"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        tools:ignore="MissingConstraints">
-
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/textBackGround">   <!--标题-->
-            <!--margintop 上面距离-->
-            <TextView
-                android:id="@+id/textView_f"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="问题明细"
-                android:textColor="@color/textColor2"
-                android:textSize="14dp" />
+            android:layout_margin="6dp"
+            android:background="@color/backGround"
+            app:cardCornerRadius="9dp"
+            tools:ignore="MissingConstraints">
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backGround">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:showDividers="middle"> <!-- 运营商版块 -->
+
+                    <Button
+                        android:id="@+id/btn_fragment_fifth_city_choose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_weight="4"
+                        android:background="@color/backGroundChoose"
+                        android:drawableRight="@drawable/down_darw_icon_16"
+                        android:text="区域选择"
+                        android:textSize="14dp" />
+
+                    <Button
+                        android:id="@+id/btn_fragment_fifth_day_choose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_weight="4"
+                        android:background="@color/backGroundChoose"
+                        android:drawableRight="@drawable/down_darw_icon_16"
+                        android:text="日期选择"
+                        android:textSize="14dp" />
+
+                    <Button
+                        android:id="@+id/btn_fragment_fifth_tab_add"
+                        android:layout_width="45dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="3"
+                        android:background="@color/backGroundChoose"
+                        android:text="添加"
+                        android:textSize="14dp" />
+
+                    <Button
+                        android:id="@+id/btn_fragment_fifth_tab_delete"
+                        android:layout_width="45dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="3"
+                        android:background="@color/backGroundChoose"
+                        android:text="清空"
+                        android:textSize="14dp" />
+
+
+                </LinearLayout> <!-- 运营商版块 -->
+            </RelativeLayout>
+            <!--    </RelativeLayout>-->
+        </android.support.v7.widget.CardView>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+
+            android:layout_margin="3dp"
             android:background="@drawable/rectangles_with_corners"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:showDividers="middle"
+            tools:ignore="MissingConstraints">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textBackGround">   <!--标题-->
+                <!--margintop 上面距离-->
+                <TextView
+                    android:id="@+id/textView_f"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="问题明细"
+                    android:textColor="@color/textColor2"
+                    android:textSize="13dp" />
+
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:background="@drawable/rectangles_with_corners"
+                android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="12"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="@color/textColor1"
-                    android:textSize="13dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="20"
-                    android:background="@color/fifth_blue_big"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text="覆盖类"
-                    android:textColor="@color/textColor1"
-                    android:textSize="13dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="9"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/textColor1"
+                        android:textSize="13dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_big"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text="负荷类"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="17"
+                        android:background="@color/fifth_blue_big"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text="覆盖类"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_big"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text="干扰类"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/fifth_blue_big"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text="负荷"
+                        android:textColor="@color/textColor1"
+                        android:textSize="9dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="20"
-                    android:background="@color/fifth_blue_big"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text="性能类"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="5"
+                        android:background="@color/fifth_blue_big"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text="干扰类"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="25"
-                    android:background="@color/fifth_blue_big"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text="基础维护"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="35"
+                        android:background="@color/fifth_blue_big"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text="性能类"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="25"
-                    android:background="@color/fifth_blue_big"
-                    android:ems="1"
-                    android:gravity="center"
-                    android:text="7734问题"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="20"
+                        android:background="@color/fifth_blue_big"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text="基础维护"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="20"
+                        android:background="@color/fifth_blue_big"
+                        android:ems="1"
+                        android:gravity="center"
+                        android:text="7734问题"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_fragment_thrid_tab_recent_detail3"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">  <!--无线指标版块-->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="区域"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="时间"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="全网覆盖率"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="弱覆盖小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="室外弱覆盖小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="室内弱覆盖小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="高负荷小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="2dp"-->
+<!--                        android:layout_weight="10"-->
+<!--                        android:background="@color/fifth_blue_small"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="高负荷待扩容小区占比"-->
+<!--                        android:textColor="@color/textColor1"-->
+<!--                        android:textSize="12dp" />-->
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="高干扰小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="FDD高干扰小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="TDD高干扰小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="低接通小区数"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="高掉话小区数"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="上行高丢包小区数"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="下行高丢包小区数"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="低ESRVCC切换小区数"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="低CQI小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="长时高频退服小区发生率"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="全量维护问题小区解决率"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="4G小区可用性比例"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="室分零流量小区占比"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="长期退服站点数量"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="覆盖问题未闭环数量"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="感知问题未闭环数量"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="干线问题未闭环数量"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="维护问题未闭环数量"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="10"
+                        android:background="@color/fifth_blue_small"
+                        android:gravity="center"
+                        android:text="其他问题未闭环数量"
+                        android:textColor="@color/textColor1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_fragment_fifth_tab_recent_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/textBackGround" /> <!--详细指标item-->
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearlayout_fragment_thrid_tab_recent_detail3"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">  <!--无线指标版块-->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="区域"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="时间"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="MR覆盖率"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="弱覆盖小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="宏站弱覆盖小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="室分弱覆盖小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="高负荷小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="高流量小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="高负荷待扩容小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="高干扰小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="FDD高流量干扰小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="TDD高流量干扰小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="低接通小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="高掉话小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="高丢包小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="低CQI小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="长时高频退服小区发生率"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="全量维护问题小区解决率"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="4G小区可用性比例"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="室分零流量小区占比"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="长期退服站点数量"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="覆盖问题未闭环数量"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="感知问题未闭环数量"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="干线问题未闭环数量"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="维护问题未闭环数量"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="10"
-                    android:background="@color/fifth_blue_small"
-                    android:gravity="center"
-                    android:text="其他问题未闭环数量"
-                    android:textColor="@color/textColor1"
-                    android:textSize="12dp" />
-
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_fragment_fifth_tab_recent_record"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/textBackGround" /> <!--详细指标item-->
         </LinearLayout>
-
+        <!--    </android.support.v7.widget.CardView>-->
     </LinearLayout>
-    <!--    </android.support.v7.widget.CardView>-->
-</LinearLayout>
-
 
 
 </RelativeLayout>

@@ -70,6 +70,7 @@
                         android:layout_height="wrap_content"
                         android:hint="123456789012345"
                         android:textColor="@color/textColor2"
+                        android:singleLine="true"
                         android:textSize="12dp" />
                 </LinearLayout>
 
@@ -91,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:hint="123456789012345"
                         android:textColor="@color/textColor2"
+                        android:singleLine="true"
                         android:textSize="12dp" />
 
                 </LinearLayout>
@@ -474,6 +476,7 @@
                             android:layout_height="wrap_content"
                             android:hint="40(TDD)"
                             android:textColor="@color/textColor2"
+                            android:singleLine="true"
                             android:textSize="12dp" />
 
                     </LinearLayout>

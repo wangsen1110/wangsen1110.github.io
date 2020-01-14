@@ -27,22 +27,35 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         FifthProblemData fifthProblemData = fifthProblemDataList.get(i);
-//        holder.textViewtime.setText(fifthProblemData.getTime() + "");
-//        holder.textViewconnected.setText(fifthProblemData.getConnected() + "");
-//        holder.textViewpaging.setText(fifthProblemData.getPaging() + "");
-//        holder.textViewhandover.setText(fifthProblemData.getHandover() + "");
-//        holder.textViewrelease.setText(fifthProblemData.getRelease() + "");
-//        holder.textViewcover.setText(fifthProblemData.getCover() + "");
-//        holder.textViewusercount.setText(fifthProblemData.getUsercount() + "");
-//        holder.textViewprbuseup.setText(fifthProblemData.getPrbuseup() + "");
-//        holder.textViewprbusedown.setText(fifthProblemData.getPrbusedown() + "");
-//        holder.textViewvoconnected.setText(fifthProblemData.getVoconnected() + "");
-//        holder.textViewvoerabconnet.setText(fifthProblemData.getVoerabconnet() + "");
-//        holder.textViewvodelay.setText(fifthProblemData.getVodelay() + "");
+        holder.textViewpDistrict.setText(fifthProblemData.getpDistrict() + "");
+        holder.textViewpTime.setText(fifthProblemData.getpTime() + "");
+        holder.textViewpCoverage.setText(fifthProblemData.getpCoverage() + "");
+        holder.textViewpWeakcoverage.setText(fifthProblemData.getpCoverage() + "");
+        holder.textViewpWeakCoverageOutdoor.setText(fifthProblemData.getpWeakCoverageOutdoor() + "");
+        holder.textViewpWeakCoverageIndoor.setText(fifthProblemData.getpWeakCoverageIndoor() + "");
+        holder.textViewpHighLoad.setText(fifthProblemData.getpHighLoad() + "");
+        holder.textViewpHighInterference.setText(fifthProblemData.getpHighInterference() + "");
+        holder.textViewpHighInterferenceFDD.setText(fifthProblemData.getpHighInterferenceFDD() + "");
+        holder.textViewpHighInterferenceTDD.setText(fifthProblemData.getpHighInterferenceTDD() + "");
+        holder.textViewpLowOm.setText(fifthProblemData.getpLowOm() + "");
+        holder.textViewpHighDrop.setText(fifthProblemData.getpHighDrop() + "");
+        holder.textViewpUpwardHighDrop.setText(fifthProblemData.getpUpwardHighDrop() + "");
+        holder.textViewpDownHighDrop.setText(fifthProblemData.getpDownHighDrop() + "");
+        holder.textViewpLowESRVCCSwitch.setText(fifthProblemData.getpLowESRVCCSwitch() + "");
+        holder.textViewpLowCQI.setText(fifthProblemData.getpLowCQI() + "");
+        holder.textViewpLongTimeWithdraw.setText(fifthProblemData.getpLongTimeWithdraw() + "");
+        holder.textViewpMaintainSolve.setText(fifthProblemData.getpMaintainSolve() + "");
+        holder.textViewp4GAvailable.setText(fifthProblemData.getP4GAvailable() + "");
+        holder.textViewpIndoorZeroFlow.setText(fifthProblemData.getpIndoorZeroFlow() + "");
+        holder.textViewpLongTimeWithdrawQuantity.setText(fifthProblemData.getpLongTimeWithdrawQuantity() + "");
+        holder.textViewpCoverageProblemQuantity.setText(fifthProblemData.getpCoverageProblemQuantity() + "");
+        holder.textViewpPerceptionProblemQuantity.setText(fifthProblemData.getpPerceptionProblemQuantity() + "");
+        holder.textViewpInterferenceProblemQuantity.setText(fifthProblemData.getpInterferenceProblemQuantity() + "");
+        holder.textViewpMaintainProblemQuantity.setText(fifthProblemData.getpMaintainProblemQuantity() + "");
+        holder.textViewpOtherProblemQuantity.setText(fifthProblemData.getpOtherProblemQuantity() + "");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,37 +67,65 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return fifthProblemDataList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewtime;
-        TextView textViewconnected;
-        TextView textViewpaging;
-        TextView textViewhandover;
-        TextView textViewrelease;
-        TextView textViewcover;
-        TextView textViewusercount;
-        TextView textViewprbuseup;
-        TextView textViewprbusedown;
-        TextView textViewvoconnected;
-        TextView textViewvoerabconnet;
-        TextView textViewvodelay;
+        TextView textViewpDistrict;
+        TextView textViewpTime;
+        TextView textViewpCoverage;
+        TextView textViewpWeakcoverage;
+        TextView textViewpWeakCoverageOutdoor;
+        TextView textViewpWeakCoverageIndoor;
+        TextView textViewpHighLoad;
+        TextView textViewpHighInterference;
+        TextView textViewpHighInterferenceFDD;
+        TextView textViewpHighInterferenceTDD;
+        TextView textViewpLowOm;
+        TextView textViewpHighDrop;
+        TextView textViewpUpwardHighDrop;
+        TextView textViewpDownHighDrop;
+        TextView textViewpLowESRVCCSwitch;
+        TextView textViewpLowCQI;
+        TextView textViewpLongTimeWithdraw;
+        TextView textViewpMaintainSolve;
+        TextView textViewp4GAvailable;
+        TextView textViewpIndoorZeroFlow;
+        TextView textViewpLongTimeWithdrawQuantity;
+        TextView textViewpCoverageProblemQuantity;
+        TextView textViewpPerceptionProblemQuantity;
+        TextView textViewpInterferenceProblemQuantity;
+        TextView textViewpMaintainProblemQuantity;
+        TextView textViewpOtherProblemQuantity;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textViewtime = itemView.findViewById(R.id.textview_recyclerview_item_detail_time);
-            textViewconnected = itemView.findViewById(R.id.textview_recyclerview_item_detail_connected);
-            textViewpaging = itemView.findViewById(R.id.textview_recyclerview_item_detail_paging);
-            textViewhandover = itemView.findViewById(R.id.textview_recyclerview_item_detail_handover);
-            textViewrelease = itemView.findViewById(R.id.textview_recyclerview_item_detail_release);
-            textViewcover = itemView.findViewById(R.id.textview_recyclerview_item_detail_cover);
-            textViewusercount = itemView.findViewById(R.id.textview_recyclerview_item_detail_usercount);
-            textViewprbuseup = itemView.findViewById(R.id.textview_recyclerview_item_detail_prbuseup);
-            textViewprbusedown = itemView.findViewById(R.id.textview_recyclerview_item_detail_prbusedown);
-            textViewvoconnected = itemView.findViewById(R.id.textview_recyclerview_item_detail_voconnected);
-            textViewvoerabconnet = itemView.findViewById(R.id.textview_recyclerview_item_detail_voerabconnet);
-            textViewvodelay = itemView.findViewById(R.id.textview_recyclerview_item_detail_vodelay);
+            textViewpDistrict = itemView.findViewById(R.id.textview_recyclerview_item_problem_pDistrict);
+            textViewpTime = itemView.findViewById(R.id.textview_recyclerview_item_problem_pTime);
+            textViewpCoverage = itemView.findViewById(R.id.textview_recyclerview_item_problem_pCoverage);
+            textViewpWeakcoverage = itemView.findViewById(R.id.textview_recyclerview_item_problem_pWeakcoverage);
+            textViewpWeakCoverageOutdoor = itemView.findViewById(R.id.textview_recyclerview_item_problem_pWeakCoverageOutdoor);
+            textViewpWeakCoverageIndoor = itemView.findViewById(R.id.textview_recyclerview_item_problem_pWeakCoverageIndoor);
+            textViewpHighLoad = itemView.findViewById(R.id.textview_recyclerview_item_problem_pHighLoad);
+            textViewpHighInterference = itemView.findViewById(R.id.textview_recyclerview_item_problem_pHighInterference);
+            textViewpHighInterferenceFDD = itemView.findViewById(R.id.textview_recyclerview_item_problem_pHighInterferenceFDD);
+            textViewpHighInterferenceTDD = itemView.findViewById(R.id.textview_recyclerview_item_problem_pHighInterferenceTDD);
+            textViewpLowOm = itemView.findViewById(R.id.textview_recyclerview_item_problem_pLowOm);
+            textViewpHighDrop = itemView.findViewById(R.id.textview_recyclerview_item_problem_pHighDrop);
+            textViewpUpwardHighDrop = itemView.findViewById(R.id.textview_recyclerview_item_problem_pUpwardHighDrop);
+            textViewpDownHighDrop = itemView.findViewById(R.id.textview_recyclerview_item_problem_pDownHighDrop);
+            textViewpLowESRVCCSwitch = itemView.findViewById(R.id.textview_recyclerview_item_problem_pLowESRVCCSwitch);
+            textViewpLowCQI = itemView.findViewById(R.id.textview_recyclerview_item_problem_pLowCQI);
+            textViewpLongTimeWithdraw = itemView.findViewById(R.id.textview_recyclerview_item_problem_pLongTimeWithdraw);
+            textViewpMaintainSolve = itemView.findViewById(R.id.textview_recyclerview_item_problem_pMaintainSolve);
+            textViewp4GAvailable = itemView.findViewById(R.id.textview_recyclerview_item_problem_p4GAvailable);
+            textViewpIndoorZeroFlow = itemView.findViewById(R.id.textview_recyclerview_item_problem_pIndoorZeroFlow);
+            textViewpLongTimeWithdrawQuantity = itemView.findViewById(R.id.textview_recyclerview_item_problem_pLongTimeWithdrawQuantity);
+            textViewpCoverageProblemQuantity = itemView.findViewById(R.id.textview_recyclerview_item_problem_pCoverageProblemQuantity);
+            textViewpPerceptionProblemQuantity = itemView.findViewById(R.id.textview_recyclerview_item_problem_pPerceptionProblemQuantity);
+            textViewpInterferenceProblemQuantity = itemView.findViewById(R.id.textview_recyclerview_item_problem_pInterferenceProblemQuantity);
+            textViewpMaintainProblemQuantity = itemView.findViewById(R.id.textview_recyclerview_item_problem_pMaintainProblemQuantity);
+            textViewpOtherProblemQuantity = itemView.findViewById(R.id.textview_recyclerview_item_problem_pOtherProblemQuantity);
         }
     }
 }
